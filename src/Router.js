@@ -2,7 +2,7 @@ import React from "react";
 import { createDrawerNavigator, createStackNavigator } from 'react-navigation';
 
 //COMPONENTS
-import SideMenu from './components/SideMenu/SideMenu';
+import SideBar from './components/SideBar/SideBar';
 
 //SCREENS
 import SimpleList from "./screens/1SimpleList/SimpleList";
@@ -16,19 +16,19 @@ const Drawer = createDrawerNavigator
 (
   {
     Home: { screen: HomeScreen },
-    Page1: { screen: Page1 },
-    Page2: { screen: Page2 }
+    SimpleList: { screen: SimpleList },
+    ListDetails: { screen: ListDetails }
   },
   {
-    contentComponent: props => <SideMenu {...props} />
+    contentComponent: props => <SideBar {...props} />
   }
 );
 
-const AppNavigator = createStackNavigator(
-{
+const AppNavigator = createStackNavigator
+({
   Drawer: { screen: Drawer },
-
-  TwoDetails: { screen: Detail },
+  TwoDetailListDetails: { screen: ListDetails },
+  Detail: { screen: Detail }
 },
 {
   initialRouteName: "Drawer",

@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import Expo from "expo";
 
-import HomeScreen from "./Router";
+import HomeScreen from "app/src/Router";
 
-export default class AwesomeApp extends Component 
+export default class App extends Component 
 {
   constructor() 
   {
