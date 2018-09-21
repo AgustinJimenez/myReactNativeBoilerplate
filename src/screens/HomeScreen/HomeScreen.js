@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { Button, Container, Body, Content, Header, Title, Left, Icon, Right } from "native-base";
+import { Container, Content } from "native-base";
+import AppHeader from "app/src/components/AppHeader/AppHeader";
 
 export default class HomeScreen extends Component 
 {
@@ -7,17 +8,7 @@ export default class HomeScreen extends Component
   {
     return (
       <Container>
-        <Header>
-          <Left>
-            <Button transparent onPress={() => this.props.navigation.openDrawer() } >
-              <Icon name="menu"/>
-            </Button>
-          </Left>
-          <Body>
-            <Title>HomeScreen</Title>
-          </Body>
-          <Right />
-        </Header>
+        <AppHeader title="Inicio" {...this.props}/>
         <Content padder>
 
         </Content>

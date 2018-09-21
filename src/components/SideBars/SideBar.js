@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Image } from 'react-native';
 import { Container, Content, List, ListItem, Text, Left, Right, Icon, Item } from "native-base";
-import app_styles from "app/native-base-theme/variables/commonColor";//brandPrimary
+
+import styles from './styles';
 
 const routes = 
 [
@@ -18,8 +19,8 @@ export default class SideBar extends Component
   {
     return (
     <Container>
-      <Content style={{ flex: 1, backgroundColor: app_styles.brandPrimary, top: -1 }}>          
-        <Image source={ sidebar_top_img } style={{ height: 120, width: "100%", alignSelf: "stretch", position: "absolute" }} />
+      <Content style={ styles.content }>          
+        <Image source={ sidebar_top_img } style={ styles.sidebar_top_img } />
         
         <List primary dataArray={routes} contentContainerStyle={{ marginTop: 120 }} renderRow={route => 
         {
@@ -27,7 +28,7 @@ export default class SideBar extends Component
           return (
             <ListItem button onPress={() => this.props.navigation.navigate( route.route )} >
               <Left>
-                <Text style={{ color: app_styles.inverseTextColor }}>{route.title}</Text>
+                <Text style={ styles.text_color }>{route.title}</Text>
               </Left>
 
               <Right>

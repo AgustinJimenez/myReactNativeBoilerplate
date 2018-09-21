@@ -45,7 +45,7 @@ export default class ListDetails extends Component
                         <Container>
                                 <Header>
                                         <Left>
-                                                <Button transparent onPress={() => this.props.navigation.navigate("DrawerOpen")} >
+                                                <Button transparent onPress={() => this.props.navigation.openDrawer() } >
                                                         <Icon name="menu" />
                                                 </Button>
                                         </Left>
