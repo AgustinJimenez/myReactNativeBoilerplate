@@ -4,13 +4,6 @@ import { Container, Content, List, ListItem, Text, Left, Right, Icon, Item } fro
 
 import styles from './styles';
 
-const routes = 
-[
-  { title: "Home", route: "Home", icon: "home" },
-  { title: "1 - Simmple List", route: "SimpleList" },
-  { title: "2 - List Details", route: "TwoListDetails" },
-];
-
 const sidebar_top_img = require('app/assets/images/logo.png');
 
 export default class SideBar extends Component 
@@ -22,7 +15,7 @@ export default class SideBar extends Component
       <Content style={ styles.content }>          
         <Image source={ sidebar_top_img } style={ styles.sidebar_top_img } />
         
-        <List primary dataArray={routes} contentContainerStyle={{ marginTop: 120 }} renderRow={route => 
+        <List primary dataArray={ this.props.sidebar_routes } contentContainerStyle={{ marginTop: 120 }} renderRow={route => 
         {
             
           return (

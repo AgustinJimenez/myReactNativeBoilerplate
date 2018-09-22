@@ -10,6 +10,14 @@ import HomeScreen from "./screens/HomeScreen/HomeScreen";
 import ListDetails from "./screens/2ListDetails/ListDetails";
 import Detail from "./screens/2ListDetails/Detail";
 
+
+const sidebar_routes = 
+[
+  { title: "Home", route: "Home", icon: "home" },
+  { title: "1 - Simmple List", route: "SimpleList" },
+  { title: "2 - List Details", route: "ListDetails" },
+];
+
 const Drawer = createDrawerNavigator
 (
   {
@@ -18,7 +26,7 @@ const Drawer = createDrawerNavigator
     ListDetails: { screen: ListDetails }
   },
   {
-    contentComponent: props => <SideBar {...props} />
+    contentComponent: props => <SideBar sidebar_routes={sidebar_routes} {...props} />
   }
 );
 

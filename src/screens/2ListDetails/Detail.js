@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Container, Header, Body, Left, Right, Text, Button, Icon, Title, Content, Card, CardItem } from "native-base";
-
+import AppHeader from "app/src/components/AppHeader/AppHeader";
+import app_styles from "app/src/theme/variables/commonColor";
 const default_post = { title: "", body: "" };
 
 export default class ListDetails extends Component 
@@ -19,38 +20,31 @@ export default class ListDetails extends Component
  setDatas()
  {
     this.setState({post: this.props.navigation.getParam("post", default_post)});
-    console.log( this.state );
  }
 
  render()
  {
          return (
           <Container>
-            <Header>
-              <Left>
-                <Button transparent onPress={() => this.props.navigation.goBack()}>
-                  <Icon name="arrow-back" />
-                </Button>
-              </Left>
-              <Body>
-                <Title>2 - Detail</Title>
-              </Body>
-              <Right/>
-            </Header>
-              <Content>
-                <Card style={{flex: 0}}>
-                  <CardItem>
+      
+            <AppHeader title="2 - Detail" back_button={true} {...this.props}/>
+              <Content padder>
+                <Card>
+
+                  <CardItem style={{ backgroundColor: app_styles.brandPrimary }}>
                     <Left>
                       <Body>
-                        <Text>{this.state.post.title}</Text>
+                        <Text style={{ color: app_styles.inverseTextColor }}>{this.state.post.title}</Text>
                       </Body>
                     </Left>
                   </CardItem>
+
                   <CardItem>
                     <Body>
                       <Text>{this.state.post.body}</Text>
                     </Body>
                   </CardItem>
+
                 </Card>       
               </Content>
           </Container>

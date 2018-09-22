@@ -1,5 +1,7 @@
 import React, { Component } from "react";
-import { Container, Header, Body, Left, Right, Text, Button, Icon, Title, Content, List, ListItem, Spinner } from "native-base";
+import { Container, Left, Right, Text, Icon, Content, List, ListItem, Spinner } from "native-base";
+import AppHeader from "app/src/components/AppHeader/AppHeader";
+import app_styles from "app/src/theme/variables/commonColor";
 
 const site = 'https://jsonplaceholder.typicode.com/posts';
 
@@ -43,18 +45,8 @@ export default class ListDetails extends Component
         {
                 return (
                         <Container>
-                                <Header>
-                                        <Left>
-                                                <Button transparent onPress={() => this.props.navigation.openDrawer() } >
-                                                        <Icon name="menu" />
-                                                </Button>
-                                        </Left>
-                                        <Body>
-                                                <Title>2 - List with Detail</Title>
-                                        </Body>
-                                        <Right/>
-                                </Header>
-                                <Content>
+                                <AppHeader title="2 - List with Detail" {...this.props}/>
+                                <Content padder>
                                         { this.ShowContent() }
                                 </Content>
                         </Container>
@@ -67,11 +59,11 @@ export default class ListDetails extends Component
                         return <Spinner size="large" primary/>;
                 else
                         return (
-                                <List dataArray={this.state.data} renderRow={post => 
+                                <List  dataArray={this.state.data} renderRow={post => 
                                 {
                                 
                                         return (
-                                                <ListItem button onPress={() => this.props.navigation.push("TwoDetails", { post: post })}>
+                                                <ListItem button onPress={() => this.props.navigation.push("Detail", { post: post })}>
                                                         <Left>
                                                                 <Text>{post.title}</Text>
                                                         </Left>

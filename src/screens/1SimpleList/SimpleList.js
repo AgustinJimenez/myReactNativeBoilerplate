@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { Container, Header, Body, Left, Right, Text, Button, Icon, Title, Content, List, ListItem, Spinner } from "native-base";
+import { Container, Left, Right, Text, Icon, Content, List, ListItem, Spinner } from "native-base";
+import AppHeader from "app/src/components/AppHeader/AppHeader";
 
 const site = 'https://jsonplaceholder.typicode.com/users';
 
@@ -39,6 +40,19 @@ export default class SimpleList extends Component
                         console.error(error);
                 });
         }
+        
+
+        render()
+        {
+                return (
+                        <Container>
+                                <AppHeader title="1 - Simple List" {...this.props}/>
+                                <Content>
+                                        { this.ShowContent() }
+                                </Content>
+                        </Container>
+                );
+        }
 
         ShowContent()
         {
@@ -65,29 +79,6 @@ export default class SimpleList extends Component
                                 </List>
                         );
                 
-        }
-        
-
-        render()
-        {
-                return (
-                        <Container>
-                                <Header>
-                                        <Left>
-                                                <Button transparent onPress={() => this.props.navigation.openDrawer() } >
-                                                        <Icon name="menu" />
-                                                </Button>
-                                        </Left>
-                                        <Body>
-                                                <Title>1 - Simple List</Title>
-                                        </Body>
-                                        <Right/>
-                                </Header>
-                                <Content>
-                                        { this.ShowContent() }
-                                </Content>
-                        </Container>
-                );
         }
 
         
