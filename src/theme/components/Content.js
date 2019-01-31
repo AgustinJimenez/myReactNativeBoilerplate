@@ -1,4 +1,4 @@
-import variable from "./../variables/platform";
+import variable from "./../variables/platform"
 
 export default (variables = variable) => {
   const contentTheme = {
@@ -8,7 +8,7 @@ export default (variables = variable) => {
       borderWidth: 0,
       backgroundColor: "transparent"
     }
-  };
+  }
 
-  return contentTheme;
-};
+  return contentTheme
+}

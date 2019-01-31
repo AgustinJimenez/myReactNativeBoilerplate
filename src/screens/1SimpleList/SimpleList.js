@@ -1,8 +1,8 @@
-import React, { Component } from "react";
-import { Container, Left, Right, Text, Icon, Content, List, ListItem, Spinner } from "native-base";
-import AppHeader from "app/src/components/AppHeader/AppHeader";
+import React, { Component } from "react"
+import { Container, Left, Right, Text, Icon, Content, List, ListItem, Spinner } from "native-base"
+import AppHeader from "app/src/components/AppHeader/AppHeader"
 
-const site = 'https://jsonplaceholder.typicode.com/users';
+const site = 'https://jsonplaceholder.typicode.com/users'
 
 export default class SimpleList extends Component 
 {
@@ -10,16 +10,16 @@ export default class SimpleList extends Component
         {
                 data: [],
                 isLoading: true
-        };
+        }
 
         constructor(props)
         {
-                super(props);
+                super(props)
         }
 
         componentDidMount()
         {
-                this.getUsersDatas();
+                this.getUsersDatas()
         }
 
         getUsersDatas()
@@ -33,12 +33,12 @@ export default class SimpleList extends Component
                         ({
                                 isLoading: false,
                                 data: responseJson,
-                        });
+                        })
                 })
                 .catch((error) => 
                 {
-                        console.error(error);
-                });
+                        console.error(error)
+                })
         }
         
 
@@ -51,13 +51,13 @@ export default class SimpleList extends Component
                                         { this.ShowContent() }
                                 </Content>
                         </Container>
-                );
+                )
         }
 
         ShowContent()
         {
                 if( this.state.isLoading )
-                        return <Spinner size="large" primary/>;
+                        return <Spinner size="large" primary/>
                 else
                         return (
                                 <List dataArray={this.state.data} renderRow={user => 
@@ -73,11 +73,11 @@ export default class SimpleList extends Component
                                                         <Icon name="arrow-forward" />
                                                 </Right>
                                         </ListItem>
-                                        );
+                                        )
                 
                                 }}>                                 
                                 </List>
-                        );
+                        )
                 
         }
 

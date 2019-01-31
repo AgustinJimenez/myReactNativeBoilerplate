@@ -1,4 +1,4 @@
-import variable from "./../variables/platform";
+import variable from "./../variables/platform"
 
 export default (variables = variable) => {
   const textAreaTheme = {
@@ -17,7 +17,7 @@ export default (variables = variable) => {
     paddingRight: 5,
     fontSize: 15,
     textAlignVertical: "top"
-  };
+  }
 
-  return textAreaTheme;
-};
+  return textAreaTheme
+}

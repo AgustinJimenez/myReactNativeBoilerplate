@@ -1,7 +1,7 @@
-import variable from "./../variables/platform";
+import variable from "./../variables/platform"
 
 export default (variables = variable) => {
-  const platform = variables.platform;
+  const platform = variables.platform
 
   const theme = {
     "NativeBase.Item": {
@@ -82,7 +82,7 @@ export default (variables = variable) => {
       },
       marginLeft: 15
     }
-  };
+  }
 
-  return theme;
-};
+  return theme
+}

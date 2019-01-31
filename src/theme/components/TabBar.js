@@ -1,4 +1,4 @@
-import variable from "./../variables/platform";
+import variable from "./../variables/platform"
 
 export default (variables = variable) => {
   const tabBarTheme = {
@@ -49,7 +49,7 @@ export default (variables = variable) => {
     borderRightWidth: 0,
     borderBottomColor: "#ccc",
     backgroundColor: variables.tabBgColor
-  };
+  }
 
-  return tabBarTheme;
-};
+  return tabBarTheme
+}

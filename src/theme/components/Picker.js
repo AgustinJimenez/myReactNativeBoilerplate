@@ -1,4 +1,4 @@
-import variable from "./../variables/platform";
+import variable from "./../variables/platform"
 
 export default (variables = variable) => {
   const pickerTheme = {
@@ -8,7 +8,7 @@ export default (variables = variable) => {
     // width: 90,
     marginRight: -4,
     flexGrow: 1
-  };
+  }
 
-  return pickerTheme;
-};
+  return pickerTheme
+}

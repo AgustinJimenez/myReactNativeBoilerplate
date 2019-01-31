@@ -1,8 +1,8 @@
-import React, { Component } from "react";
-import { Container, Content, Text } from "native-base";
-import AppHeader from "app/src/components/AppHeader/AppHeader";
+import React, { Component } from "react"
+import { Container, Content, Text } from "native-base"
+import AppHeader from "app/src/components/AppHeader/AppHeader"
 
-const title = "Home";
+const title = "Home"
 export default class HomeScreen extends Component 
 {
   render() 
@@ -14,6 +14,6 @@ export default class HomeScreen extends Component
           <Text>Hello World</Text>
         </Content>
       </Container>
-    );
+    )
   }
 }

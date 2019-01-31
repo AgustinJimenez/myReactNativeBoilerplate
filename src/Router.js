@@ -1,14 +1,14 @@
-import React from "react";
-import { createDrawerNavigator, createStackNavigator } from 'react-navigation';
+import React from "react"
+import { createDrawerNavigator, createStackNavigator } from 'react-navigation'
 
 //COMPONENTS
-import SideBar from './components/SideBars/SideBar';
+import SideBar from './components/SideBars/SideBar'
 
 //SCREENS
-import SimpleList from "./screens/1SimpleList/SimpleList";
-import HomeScreen from "./screens/HomeScreen/HomeScreen";
-import ListDetails from "./screens/2ListDetails/ListDetails";
-import Detail from "./screens/2ListDetails/Detail";
+import SimpleList from "./screens/1SimpleList/SimpleList"
+import HomeScreen from "./screens/HomeScreen/HomeScreen"
+import ListDetails from "./screens/2ListDetails/ListDetails"
+import Detail from "./screens/2ListDetails/Detail"
 
 
 const sidebar_routes = 
@@ -16,7 +16,7 @@ const sidebar_routes =
   { title: "Home", route: "Home", icon: "home" },
   { title: "1 - Simmple List", route: "SimpleList" },
   { title: "2 - List Details", route: "ListDetails" },
-];
+]
 
 const Drawer = createDrawerNavigator
 (
@@ -28,7 +28,7 @@ const Drawer = createDrawerNavigator
   {
     contentComponent: props => <SideBar sidebar_routes={sidebar_routes} {...props} />
   }
-);
+)
 
 const AppNavigator = createStackNavigator
 ({
@@ -39,5 +39,5 @@ const AppNavigator = createStackNavigator
 {
   initialRouteName: "Drawer",
   headerMode: "none"
-});
-export default AppNavigator;
+})
+export default AppNavigator

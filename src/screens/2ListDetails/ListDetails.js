@@ -1,9 +1,9 @@
-import React, { Component } from "react";
-import { Container, Left, Right, Text, Icon, Content, List, ListItem, Spinner } from "native-base";
-import AppHeader from "app/src/components/AppHeader/AppHeader";
-import app_styles from "app/src/theme/variables/commonColor";
+import React, { Component } from "react"
+import { Container, Left, Right, Text, Icon, Content, List, ListItem, Spinner } from "native-base"
+import AppHeader from "app/src/components/AppHeader/AppHeader"
+import app_styles from "app/src/theme/variables/commonColor"
 
-const site = 'https://jsonplaceholder.typicode.com/posts';
+const site = 'https://jsonplaceholder.typicode.com/posts'
 
 export default class ListDetails extends Component 
 {
@@ -11,16 +11,16 @@ export default class ListDetails extends Component
         {
                 data: [],
                 isLoading: true
-        };
+        }
 
         constructor(props)
         {
-                super(props);
+                super(props)
         }
 
         componentDidMount()
         {
-                this.getPostsDatas();
+                this.getPostsDatas()
         }
 
         getPostsDatas()
@@ -33,12 +33,12 @@ export default class ListDetails extends Component
                         ({
                                 isLoading: false,
                                 data: responseJson,
-                        });
+                        })
                 })
                 .catch((error) => 
                 {
-                        console.error(error);
-                });
+                        console.error(error)
+                })
         }
 
         render()
@@ -50,13 +50,13 @@ export default class ListDetails extends Component
                                         { this.ShowContent() }
                                 </Content>
                         </Container>
-                );
+                )
         }
 
         ShowContent()
         {
                 if( this.state.isLoading )
-                        return <Spinner size="large" primary/>;
+                        return <Spinner size="large" primary/>
                 else
                         return (
                                 <List  dataArray={this.state.data} renderRow={post => 
@@ -72,11 +72,11 @@ export default class ListDetails extends Component
                                                                 <Icon name="arrow-forward" />
                                                         </Right>
                                                 </ListItem>
-                                        );
+                                        )
                 
                                 }}>                       
                                 </List>
-                        );
+                        )
                 
         }
 

@@ -1,13 +1,13 @@
-import color from "color";
+import color from "color"
 
-import { Platform, Dimensions, PixelRatio } from "react-native";
+import { Platform, Dimensions, PixelRatio } from "react-native"
 
-const deviceHeight = Dimensions.get("window").height;
-const deviceWidth = Dimensions.get("window").width;
-const platform = Platform.OS;
-const platformStyle = undefined;
+const deviceHeight = Dimensions.get("window").height
+const deviceWidth = Dimensions.get("window").width
+const platform = Platform.OS
+const platformStyle = undefined
 const isIphoneX =
-  platform === "ios" && (deviceHeight === 812 || deviceWidth === 812);
+  platform === "ios" && (deviceHeight === 812 || deviceWidth === 812)
 
 export default {
   platformStyle,
@@ -36,52 +36,52 @@ export default {
   btnDisabledBg: "#b5b5b5",
   buttonPadding: 6,
   get btnPrimaryBg() {
-    return this.brandPrimary;
+    return this.brandPrimary
   },
   get btnPrimaryColor() {
-    return this.inverseTextColor;
+    return this.inverseTextColor
   },
   get btnInfoBg() {
-    return this.brandInfo;
+    return this.brandInfo
   },
   get btnInfoColor() {
-    return this.inverseTextColor;
+    return this.inverseTextColor
   },
   get btnSuccessBg() {
-    return this.brandSuccess;
+    return this.brandSuccess
   },
   get btnSuccessColor() {
-    return this.inverseTextColor;
+    return this.inverseTextColor
   },
   get btnDangerBg() {
-    return this.brandDanger;
+    return this.brandDanger
   },
   get btnDangerColor() {
-    return this.inverseTextColor;
+    return this.inverseTextColor
   },
   get btnWarningBg() {
-    return this.brandWarning;
+    return this.brandWarning
   },
   get btnWarningColor() {
-    return this.inverseTextColor;
+    return this.inverseTextColor
   },
   get btnTextSize() {
-    return platform === "ios" ? this.fontSizeBase * 1.1 : this.fontSizeBase - 1;
+    return platform === "ios" ? this.fontSizeBase * 1.1 : this.fontSizeBase - 1
   },
   get btnTextSizeLarge() {
-    return this.fontSizeBase * 1.5;
+    return this.fontSizeBase * 1.5
   },
   get btnTextSizeSmall() {
-    return this.fontSizeBase * 0.8;
+    return this.fontSizeBase * 0.8
   },
   get borderRadiusLarge() {
-    return this.fontSizeBase * 3.8;
+    return this.fontSizeBase * 3.8
   },
   get iconSizeLarge() {
-    return this.iconFontSize * 1.5;
+    return this.iconFontSize * 1.5
   },
   get iconSizeSmall() {
-    return this.iconFontSize * 0.6;
+    return this.iconFontSize * 0.6
   },
 
   // Card
@@ -120,13 +120,13 @@ export default {
   fontFamily: platform === "ios" ? "System" : "Roboto",
   fontSizeBase: 15,
   get fontSizeH1() {
-    return this.fontSizeBase * 1.8;
+    return this.fontSizeBase * 1.8
   },
   get fontSizeH2() {
-    return this.fontSizeBase * 1.6;
+    return this.fontSizeBase * 1.6
   },
   get fontSizeH3() {
-    return this.fontSizeBase * 1.4;
+    return this.fontSizeBase * 1.4
   },
 
   // Footer
@@ -156,12 +156,12 @@ export default {
   get statusBarColor() {
     return color(this.toolbarDefaultBg)
       .darken(0.2)
-      .hex();
+      .hex()
   },
   get darkenHeader() {
     return color(this.tabBgColor)
       .darken(0.03)
-      .hex();
+      .hex()
   },
 
   // Icon
@@ -176,10 +176,10 @@ export default {
   inputErrorBorderColor: "#ed2f2f",
   inputHeightBase: 50,
   get inputColor() {
-    return this.textColor;
+    return this.textColor
   },
   get inputColorPlaceholder() {
-    return "#575757";
+    return "#575757"
   },
 
   // Line Height
@@ -208,7 +208,7 @@ export default {
   radioSelectedColorAndroid: "#3F51B5",
   radioBtnLineHeight: platform === "ios" ? 29 : 24,
   get radioColor() {
-    return this.brandPrimary;
+    return this.brandPrimary
   },
 
   // Segment
@@ -239,7 +239,7 @@ export default {
   inverseTextColor: "#fff",
   noteFontSize: 14,
   get defaultTextColor() {
-    return this.textColor;
+    return this.textColor
   },
 
   // Title
@@ -275,4 +275,4 @@ export default {
       bottomInset: 21
     }
   }
-};
+}

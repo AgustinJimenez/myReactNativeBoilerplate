@@ -1,4 +1,4 @@
-import variable from "./../variables/platform";
+import variable from "./../variables/platform"
 
 export default (variables = variable) => {
   const textTheme = {
@@ -9,7 +9,7 @@ export default (variables = variable) => {
       color: "#a7a7a7",
       fontSize: variables.noteFontSize
     }
-  };
+  }
 
-  return textTheme;
-};
+  return textTheme
+}

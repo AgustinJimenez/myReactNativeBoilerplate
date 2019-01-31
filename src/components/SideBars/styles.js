@@ -1,4 +1,4 @@
-import app_styles from "app/native-base-theme/variables/commonColor";//brandPrimary
+import app_styles from "app/native-base-theme/variables/commonColor"//brandPrimary
 
 export default
 {

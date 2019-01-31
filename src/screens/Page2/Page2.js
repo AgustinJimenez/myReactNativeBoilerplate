@@ -1,5 +1,5 @@
-import React from 'react';
-import { Text, View } from 'react-native';
+import React from 'react'
+import { Text, View } from 'react-native'
 
 export default class App extends React.Component 
 {
@@ -9,6 +9,6 @@ export default class App extends React.Component
       <View>
        <Text>PAGE 2</Text>
       </View>
-    );
+    )
   }
 }

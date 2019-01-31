@@ -1,10 +1,10 @@
-import { Platform, PixelRatio } from "react-native";
+import { Platform, PixelRatio } from "react-native"
 
-import pickerTheme from "./Picker";
-import variable from "./../variables/platform";
+import pickerTheme from "./Picker"
+import variable from "./../variables/platform"
 
 export default (variables = variable) => {
-  const platform = variables.platform;
+  const platform = variables.platform
   const selectedStyle = {
     "NativeBase.Text": {
       color: variables.listItemSelected
@@ -12,7 +12,7 @@ export default (variables = variable) => {
     "NativeBase.Icon": {
       color: variables.listItemSelected
     }
-  };
+  }
 
   const listItemTheme = {
     "NativeBase.InputGroup": {
@@ -434,7 +434,7 @@ export default (variables = variable) => {
     borderBottomWidth: 1 / PixelRatio.getPixelSizeForLayoutSize(1),
     backgroundColor: variables.listBg,
     borderColor: variables.listBorderColor
-  };
+  }
 
-  return listItemTheme;
-};
+  return listItemTheme
+}

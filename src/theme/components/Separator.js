@@ -1,4 +1,4 @@
-import variable from './../variables/platform';
+import variable from './../variables/platform'
 
 export default (variables = variable) => {
 	const theme = {
@@ -41,7 +41,7 @@ export default (variables = variable) => {
 		flex: 1,
 		justifyContent: 'center',
 		paddingLeft: variables.listItemPadding + 5,
-	};
+	}
 
-	return theme;
-};
+	return theme
+}

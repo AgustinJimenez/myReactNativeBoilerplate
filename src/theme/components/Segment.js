@@ -1,7 +1,7 @@
-import variable from "./../variables/platform";
+import variable from "./../variables/platform"
 
 export default (variables = variable) => {
-  const platform = variables.platform;
+  const platform = variables.platform
 
   const segmentTheme = {
     height: 45,
@@ -48,7 +48,7 @@ export default (variables = variable) => {
         color: variables.segmentTextColor
       }
     }
-  };
+  }
 
-  return segmentTheme;
-};
+  return segmentTheme
+}

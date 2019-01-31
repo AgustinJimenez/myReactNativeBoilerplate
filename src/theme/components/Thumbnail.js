@@ -1,4 +1,4 @@
-import variable from './../variables/platform';
+import variable from './../variables/platform'
 
 export default (variables = variable) => {
 	const thumbnailTheme = {
@@ -34,7 +34,7 @@ export default (variables = variable) => {
 		width: 56,
 		height: 56,
 		borderRadius: 28,
-	};
+	}
 
-	return thumbnailTheme;
-};
+	return thumbnailTheme
+}

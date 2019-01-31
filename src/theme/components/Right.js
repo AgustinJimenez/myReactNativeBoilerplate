@@ -1,4 +1,4 @@
-import variable from './../variables/platform';
+import variable from './../variables/platform'
 
 export default (variables = variable) => {
 	const rightTheme = {
@@ -8,7 +8,7 @@ export default (variables = variable) => {
 		flex: 1,
 		alignSelf: 'center',
 		alignItems: 'flex-end',
-	};
+	}
 
-	return rightTheme;
-};
+	return rightTheme
+}

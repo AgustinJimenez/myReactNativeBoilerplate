@@ -1,4 +1,4 @@
-import variable from "./../variables/platform";
+import variable from "./../variables/platform"
 
 export default (variables = variable) => {
   const inputGroupTheme = {
@@ -124,7 +124,7 @@ export default (variables = variable) => {
     backgroundColor: "transparent",
     flexDirection: "row",
     alignItems: "center"
-  };
+  }
 
-  return inputGroupTheme;
-};
+  return inputGroupTheme
+}

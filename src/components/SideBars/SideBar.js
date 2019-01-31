@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import { Image } from 'react-native';
-import { Container, Content, List, ListItem, Text, Left, Right, Icon, Item } from "native-base";
+import React, { Component } from 'react'
+import { Image } from 'react-native'
+import { Container, Content, List, ListItem, Text, Left, Right, Icon, Item } from "native-base"
 
-import styles from './styles';
+import styles from './styles'
 
-const sidebar_top_img = require('app/assets/images/logo.png');
+const sidebar_top_img = require('app/assets/images/logo.png')
 
 export default class SideBar extends Component 
 {
@@ -29,11 +29,11 @@ export default class SideBar extends Component
               </Right>
 
             </ListItem>
-            );
+            )
 
         }}/>
 
       </Content>
-    </Container>);
+    </Container>)
   }
 }

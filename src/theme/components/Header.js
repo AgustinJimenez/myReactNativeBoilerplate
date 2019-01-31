@@ -1,10 +1,10 @@
-import { PixelRatio, StatusBar } from "react-native";
+import { PixelRatio, StatusBar } from "react-native"
 
-import variable from "./../variables/platform";
+import variable from "./../variables/platform"
 
 export default (variables = variable) => {
-  const platformStyle = variables.platformStyle;
-  const platform = variables.platform;
+  const platformStyle = variables.platformStyle
+  const platform = variables.platform
 
   const headerTheme = {
     ".span": {
@@ -392,7 +392,7 @@ export default (variables = variable) => {
     top: 0,
     left: 0,
     right: 0
-  };
+  }
 
-  return headerTheme;
-};
+  return headerTheme
+}

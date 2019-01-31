@@ -1,25 +1,25 @@
-import React, { Component } from "react";
-import { Container, Header, Body, Left, Right, Text, Button, Icon, Title, Content, Card, CardItem } from "native-base";
-import AppHeader from "app/src/components/AppHeader/AppHeader";
-import app_styles from "app/src/theme/variables/commonColor";
-const default_post = { title: "", body: "" };
+import React, { Component } from "react"
+import { Container, Header, Body, Left, Right, Text, Button, Icon, Title, Content, Card, CardItem } from "native-base"
+import AppHeader from "app/src/components/AppHeader/AppHeader"
+import app_styles from "app/src/theme/variables/commonColor"
+const default_post = { title: "", body: "" }
 
 export default class ListDetails extends Component 
 {
 
  constructor(props)
  {
-  super(props);
-  this.state = {post: default_post};
+  super(props)
+  this.state = {post: default_post}
  }
  componentDidMount()
  {
-  this.setDatas();
+  this.setDatas()
  }
 
  setDatas()
  {
-    this.setState({post: this.props.navigation.getParam("post", default_post)});
+    this.setState({post: this.props.navigation.getParam("post", default_post)})
  }
 
  render()
@@ -48,7 +48,7 @@ export default class ListDetails extends Component
                 </Card>       
               </Content>
           </Container>
-         );
+         )
  }
 
 }

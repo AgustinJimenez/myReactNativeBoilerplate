@@ -1,4 +1,4 @@
-import variable from "./../variables/platform";
+import variable from "./../variables/platform"
 
 export default (variables = variable) => {
 	const swipeRowTheme = {
@@ -40,7 +40,7 @@ export default (variables = variable) => {
 			alignSelf: "stretch",
 			borderRadius: 0,
 		},
-	};
+	}
 
-	return swipeRowTheme;
-};
+	return swipeRowTheme
+}

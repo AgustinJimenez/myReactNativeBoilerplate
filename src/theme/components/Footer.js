@@ -1,24 +1,24 @@
-import variable from "./../variables/platform";
+import variable from "./../variables/platform"
 
 export default (variables = variable) => {
-  const platformStyle = variables.platformStyle;
-  const platform = variables.platform;
+  const platformStyle = variables.platformStyle
+  const platform = variables.platform
 
   const iconCommon = {
     "NativeBase.Icon": {
       color: variables.tabBarActiveTextColor
     }
-  };
+  }
   const iconNBCommon = {
     "NativeBase.IconNB": {
       color: variables.tabBarActiveTextColor
     }
-  };
+  }
   const textCommon = {
     "NativeBase.Text": {
       color: variables.tabBarActiveTextColor
     }
-  };
+  }
   const footerTheme = {
     "NativeBase.Left": {
       "NativeBase.Button": {
@@ -111,6 +111,6 @@ export default (variables = variable) => {
     elevation: 3,
     left: 0,
     right: 0
-  };
-  return footerTheme;
-};
+  }
+  return footerTheme
+}

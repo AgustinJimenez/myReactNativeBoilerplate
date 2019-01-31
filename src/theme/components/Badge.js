@@ -1,4 +1,4 @@
-import variable from "./../variables/platform";
+import variable from "./../variables/platform"
 
 export default (variables = variable) => {
   const badgeTheme = {
@@ -31,6 +31,6 @@ export default (variables = variable) => {
     justifyContent: variables.platform === "ios" ? "center" : undefined,
     borderRadius: 13.5,
     height: 27
-  };
-  return badgeTheme;
-};
+  }
+  return badgeTheme
+}
