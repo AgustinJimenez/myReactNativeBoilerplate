@@ -1,10 +1,10 @@
 import React from "react";
-import Setup from "app/src/boot/setup";
+import AplicationSetup from "app/src/boot/AplicationSetup";
 
 export default class App extends React.Component 
 {
   render() 
   {
-    return <Setup />;
+    return <AplicationSetup/>;
   }
 }

@@ -1,11 +1,11 @@
 import React, { Component } from "react"
 import { StyleProvider } from "native-base"
 import * as Expo from "expo"
-import App from "../App"
 import getTheme from "../theme/components"
 import variables from "../theme/variables/commonColor"
+import NavigationContainer from "app/src/Router"
 
-export default class Setup extends Component 
+export default class AplicationSetup extends Component 
 {
   constructor() 
   {
@@ -33,9 +33,17 @@ export default class Setup extends Component
       return <Expo.AppLoading />
 
     return (
-      <StyleProvider style={getTheme(variables)}>
-        <App/>
-      </StyleProvider>
+      <StyleProvider 
+      style={getTheme(variables)}
+      children=
+      {
+        <NavigationContainer/>
+      }
+      />
     )
+
+
+
+    
   }
 }

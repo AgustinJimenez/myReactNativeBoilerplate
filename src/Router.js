@@ -1,5 +1,6 @@
 import React from "react"
-import { createDrawerNavigator, createStackNavigator } from 'react-navigation'
+import { createDrawerNavigator, createStackNavigator, createAppContainer } from 'react-navigation'
+
 
 //COMPONENTS
 import SideBar from './components/SideBars/SideBar'
@@ -26,11 +27,11 @@ const Drawer = createDrawerNavigator
     ListDetails: { screen: ListDetails }
   },
   {
-    contentComponent: props => <SideBar sidebar_routes={sidebar_routes} {...props} />
+    contentComponent: props => <SideBar sidebar_routes={ sidebar_routes } {...props} />
   }
 )
 
-const AppNavigator = createStackNavigator
+const StackNavigator = createStackNavigator
 ({
   Drawer: { screen: Drawer },
   TwoDetailListDetails: { screen: ListDetails },
@@ -40,4 +41,7 @@ const AppNavigator = createStackNavigator
   initialRouteName: "Drawer",
   headerMode: "none"
 })
-export default AppNavigator
+
+let NavigationContainer = createAppContainer( StackNavigator )
+
+export default NavigationContainer
