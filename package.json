@@ -6,7 +6,7 @@
     "start": "react-native start",
     "test": "jest",
     "lint": "eslint .",
-    "reinstall": "rm -rf node_modules && cd ios && pod install && cd .. && cp docs/android/build.gradle android/app/build.gradle && cp docs/android/MainActivity.java android/app/src/main/java/com/proyectone/MainActivity.java"
+    "reset": "rm -rf node_modules ios android && npm i && react-native upgrade --legacy && react-native link && cd ios && pod install && cd .."
   },
   "dependencies": {
     "native-base": "^2.13.8",

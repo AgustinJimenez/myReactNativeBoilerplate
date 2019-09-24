@@ -2,12 +2,11 @@
 - npm i
 
 ### RELINK LIBS
-- rm -rf ios android
-- react-native eject
-- react-native link react-native-reanimated
-- react-native link react-native-gesture-handler
-- react-native link react-native-vector-icons
-- react-native link 
+- rm -rf node_modules ios android &&
+  npm i &&
+  react-native upgrade --legacy &&
+  react-native link &&
+  cd ios && pod install && cd ..
 
 ### RUN SERVER (CONSOLE 1)
 -npm start
