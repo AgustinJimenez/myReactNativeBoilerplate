@@ -1,4 +1,4 @@
-package com.proyectone;
+package com.app;
 
 import android.app.Application;
 import android.util.Log;
