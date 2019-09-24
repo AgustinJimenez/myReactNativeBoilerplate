@@ -6,7 +6,9 @@
   npm i &&
   react-native upgrade --legacy &&
   react-native link &&
-  cd ios && pod install && cd ..
+  cd ios && pod install && cd .. &&
+  cp documentation/android_files/build.gradle android/app/build.gradle && 
+  cp documentation/android_files/MainActivity.java android/app/src/main/java/com/app/MainActivity.java
 
 ### RUN SERVER (CONSOLE 1)
 -npm start
