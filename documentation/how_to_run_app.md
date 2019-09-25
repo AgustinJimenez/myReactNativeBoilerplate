@@ -14,4 +14,4 @@
 -npm start
 
 ### RUN APP (CONSOLE 2)
--react-native run-ios --simulator='iPhone 5s'
+-npm ios
