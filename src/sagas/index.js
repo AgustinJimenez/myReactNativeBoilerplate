@@ -3,7 +3,6 @@ import { FETCH, FETCH_SUCCESS, FETCH_ERROR } from '../actions/types'
 import axios from 'axios'
 
 function* fetch({ options }) {
-
     try {
         let { data, status, statusText } = yield call(axios, { ...options })
         //console.log('SAGAS-FETCH', { data })
@@ -17,7 +16,5 @@ function* actionWatcher() {
     yield takeLatest(FETCH, fetch)
 }
 export default function* rootSaga() {
-    yield all([
-        actionWatcher(),
-    ])
+    yield all([actionWatcher()])
 }
