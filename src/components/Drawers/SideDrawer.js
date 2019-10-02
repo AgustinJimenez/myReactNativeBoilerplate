@@ -1,22 +1,13 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Drawer } from 'native-base'
 import SideBar from '../SideBars/SideBar'
-export default class SideDrawer extends Component {
-    render() {
-        closeDrawer = () => {
-            this.drawer._root.close()
-        }
-        openDrawer = () => {
-            this.drawer._root.open()
-        }
-        return (
-            <Drawer
-                ref={ref => {
-                    this.drawer = ref
-                }}
-                content={<SideBar navigator={this.navigator} />}
-                onClose={() => this.closeDrawer()}
-            />
-        )
-    }
+
+let SideDrawer = props => {
+    var closeDrawer = _ => this.drawer._root.close()
+    //var openDrawer = _ => this.drawer._root.open()
+    var setRef = ref => (this.drawer = ref)
+
+    return <Drawer ref={setRef} content={<SideBar navigator={this.navigator} />} onClose={closeDrawer} />
 }
+
+export default SideDrawer

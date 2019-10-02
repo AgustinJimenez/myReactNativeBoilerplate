@@ -1,5 +1,5 @@
-import { put, takeLatest, all, call } from 'redux-saga/effects'
-import { FETCH, FETCH_SUCCESS, FETCH_ERROR } from '../actions/types'
+import { put, call } from 'redux-saga/effects'
+import { FETCH_SUCCESS, FETCH_ERROR } from '../actions/types'
 import axios from 'axios'
 
 function* fetch({ options }) {
@@ -12,9 +12,4 @@ function* fetch({ options }) {
         yield put({ type: FETCH_ERROR, error })
     }
 }
-function* actionWatcher() {
-    yield takeLatest(FETCH, fetch)
-}
-export default function* rootSaga() {
-    yield all([actionWatcher()])
-}
+export default fetch

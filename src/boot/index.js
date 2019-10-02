@@ -5,12 +5,12 @@ import variables from '../theme/variables/commonColor'
 import NavigationContainer from '../Router'
 
 import { Provider as ReduxProvider } from 'react-redux'
-import { store, persistor } from '../store'
+import { store, persistor } from './store'
 import { PersistGate } from 'redux-persist/integration/react'
 
 import Splash from '../components/Splash'
 
-export default () => (
+let App = _ => (
     <ReduxProvider store={store}>
         <PersistGate loading={Splash} persistor={persistor}>
             <StyleProvider style={getTheme(variables)}>
@@ -19,3 +19,5 @@ export default () => (
         </PersistGate>
     </ReduxProvider>
 )
+
+export default App
