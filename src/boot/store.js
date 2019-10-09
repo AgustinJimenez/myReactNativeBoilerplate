@@ -8,9 +8,9 @@ import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2'
 
 import { createLogger } from 'redux-logger'
 // Imports: Redux Root Reducer
-import rootReducer from './reducers'
+import rootReducer from './rootReducer'
 // Imports: Redux Root Saga
-import rootSagas from './sagas'
+import rootSagas from './rootSagas'
 // Middleware: Redux Sagas
 const sagaMiddleware = createSagaMiddleware()
 // Redux: Store
@@ -18,10 +18,10 @@ const sagaMiddleware = createSagaMiddleware()
 import { composeWithDevTools } from 'redux-devtools-extension'
 
 const persistConfig = {
-	key: 'root',
-	storage,
-	stateReconciler: autoMergeLevel2,
-	blacklist: [ 'navigation' ] // navigation will not be persisted
+    key: 'root',
+    storage,
+    stateReconciler: autoMergeLevel2,
+    blacklist: ['navigation'], // navigation will not be persisted
 }
 const persistedReducer = persistReducer(persistConfig, rootReducer)
 const store = createStore(persistedReducer, composeWithDevTools(applyMiddleware(sagaMiddleware, createLogger())))

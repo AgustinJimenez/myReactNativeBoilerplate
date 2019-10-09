@@ -1,15 +1,17 @@
 import React from 'react'
-import { createAppContainer } from 'react-navigation'
+import { createAppContainer, createSwitchNavigator } from 'react-navigation'
 import { createDrawerNavigator } from 'react-navigation-drawer'
 import { createStackNavigator } from 'react-navigation-stack'
 //COMPONENTS
 import SideBar from './components/SideBars/SideBar'
 
 //SCREENS
+import AuthLoadingScreen from './screens/AuthLoadingScreen'
 import SimpleList from './screens/1SimpleList/SimpleList'
 import HomeScreen from './screens/HomeScreen/HomeScreen'
 import ListDetails from './screens/2ListDetails/ListDetails'
 import Detail from './screens/2ListDetails/Detail'
+import LoginScreen from './screens/LoginScreen'
 
 const sidebar_routes = [
     { title: 'Home', route: 'Home', icon: 'home' },
@@ -19,6 +21,7 @@ const sidebar_routes = [
 
 const Drawer = createDrawerNavigator(
     {
+        Login: { screen: LoginScreen },
         Home: { screen: HomeScreen },
         SimpleList: { screen: SimpleList },
         ListDetails: { screen: ListDetails },
@@ -27,8 +30,8 @@ const Drawer = createDrawerNavigator(
         contentComponent: props => <SideBar sidebar_routes={sidebar_routes} {...props} />,
     },
 )
-
-const StackNavigator = createStackNavigator(
+const AuthStack = createStackNavigator({ Login: LoginScreen })
+const AppStack = createStackNavigator(
     {
         Drawer: { screen: Drawer },
         TwoDetailListDetails: { screen: ListDetails },
@@ -40,6 +43,17 @@ const StackNavigator = createStackNavigator(
     },
 )
 
-let NavigationContainer = createAppContainer(StackNavigator)
+const NavigationStacks = createSwitchNavigator(
+    {
+        AuthLoading: AuthLoadingScreen,
+        App: AppStack,
+        Auth: AuthStack,
+    },
+    {
+        initialRouteName: 'AuthLoading',
+    },
+)
+
+let NavigationContainer = createAppContainer(NavigationStacks)
 
 export default NavigationContainer

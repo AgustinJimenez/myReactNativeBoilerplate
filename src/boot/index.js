@@ -10,10 +10,12 @@ import { PersistGate } from 'redux-persist/integration/react'
 
 import Splash from '../components/Splash'
 
+let theme = getTheme(variables)
+
 let App = _ => (
     <ReduxProvider store={store}>
-        <PersistGate loading={Splash} persistor={persistor}>
-            <StyleProvider style={getTheme(variables)}>
+        <PersistGate loading={<Splash />} persistor={persistor}>
+            <StyleProvider style={theme}>
                 <NavigationContainer />
             </StyleProvider>
         </PersistGate>

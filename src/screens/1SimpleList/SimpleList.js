@@ -1,49 +1,53 @@
 import React from 'react'
 import { Container, Left, Right, Text, Icon, Content, List, ListItem, Spinner } from 'native-base'
 import AppHeader from '../../../src/components/AppHeader/AppHeader'
-import { useSelector, useDispatch } from 'react-redux'
+import { connect } from 'react-redux'
 import { fetchUsers } from '../../actions'
-//import JSONTree from 'react-native-json-tree'
 import { usersSelector } from '../../selectors/datasetsSelector'
+//import JSONTree from 'react-native-json-tree'
+class SimpleList extends React.Component {
+    constructor(props) {
+        super(props)
+        props.fetchUsers()
+    }
 
-const renderLoading = (loading, data) => loading && !data && <Spinner size='large' primary />
-const renderList = (loading, data) =>
-    !loading &&
-    data && (
-        <List
-            dataArray={data}
-            renderRow={(user, _, key) => (
-                <ListItem button key={key}>
-                    <Left>
-                        <Text>{user.name}</Text>
-                    </Left>
+    render() {
+        return (
+            <Container>
+                <AppHeader title='1 - Simple List' />
+                <Content>
+                    {this.props.userSelector.loading && !this.props.userSelector.data && <Spinner size='large' primary />}
+                    {!this.props.userSelector.loading && this.props.userSelector.data && (
+                        <List
+                            dataArray={this.props.userSelector.data}
+                            renderRow={(user, _, key) => (
+                                <ListItem button key={key}>
+                                    <Left>
+                                        <Text>{user.name}</Text>
+                                    </Left>
 
-                    <Right>
-                        <Icon name='arrow-forward' />
-                    </Right>
-                </ListItem>
-            )}
-        />
-    )
-
-const SimpleList = props => {
-    const dispatch = useDispatch()
-    let { data, loading, error } = useSelector(usersSelector)
-
-    React.useEffect(_ => {
-        dispatch(fetchUsers)
-    }, [])
-
-    return (
-        <Container>
-            <AppHeader title='1 - Simple List' />
-            <Content>
-                {renderLoading(loading, data)}
-                {renderList(loading, data)}
-                {/* <JSONTree data={{ props, selector, data, loading, error }} /> */}
-            </Content>
-        </Container>
-    )
+                                    <Right>
+                                        <Icon name='arrow-forward' />
+                                    </Right>
+                                </ListItem>
+                            )}
+                        />
+                    )}
+                    {/* <JSONTree data={{ props: this.props, helo: 'there' }} /> */}
+                </Content>
+            </Container>
+        )
+    }
 }
 
-export default SimpleList
+const mapStateToProps = state => ({
+    userSelector: usersSelector(state),
+})
+const mapDispatchToProps = {
+    fetchUsers,
+}
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps,
+)(SimpleList)
