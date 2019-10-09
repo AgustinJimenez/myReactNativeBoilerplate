@@ -1,66 +1,49 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Container, Left, Right, Text, Icon, Content, List, ListItem, Spinner } from 'native-base'
-import AppHeader from 'app/src/components/AppHeader/AppHeader'
-import { connect } from 'react-redux'
-import { fetch } from '../../actions'
-import JSONTree from 'react-native-json-tree'
+import AppHeader from '../../../src/components/AppHeader/AppHeader'
+import { useSelector, useDispatch } from 'react-redux'
+import { fetchUsers } from '../../actions'
+//import JSONTree from 'react-native-json-tree'
+import { usersSelector } from '../../selectors/datasetsSelector'
 
-class SimpleList extends Component {
-    state = {}
+const renderLoading = (loading, data) => loading && !data && <Spinner size='large' primary />
+const renderList = (loading, data) =>
+    !loading &&
+    data && (
+        <List
+            dataArray={data}
+            renderRow={(user, _, key) => (
+                <ListItem button key={key}>
+                    <Left>
+                        <Text>{user.name}</Text>
+                    </Left>
 
-    constructor(props) {
-        super(props)
-        props.fetch({ lol: 'usuarios' })
-    }
+                    <Right>
+                        <Icon name='arrow-forward' />
+                    </Right>
+                </ListItem>
+            )}
+        />
+    )
 
-    static getDerivedStateFromProps(props, state) {
-        state.data = props.data
-        state.error = props.error
-        state.loading = props.loading
+const SimpleList = props => {
+    const dispatch = useDispatch()
+    let { data, loading, error } = useSelector(usersSelector)
 
-        return state
-    }
+    React.useEffect(_ => {
+        dispatch(fetchUsers)
+    }, [])
 
-    render() {
-        return (
-            <Container>
-                <AppHeader title="1 - Simple List" {...this.props} />
-                <Content>
-                    {this.state.loading && !this.state.data ? (
-                        <Spinner size="large" primary />
-                    ) : (
-                        <List
-                            dataArray={this.state.data}
-                            renderRow={(user, _, key) => {
-                                return (
-                                    <ListItem button key={key}>
-                                        <Left>
-                                            <Text>{user.name}</Text>
-                                        </Left>
-
-                                        <Right>
-                                            <Icon name="arrow-forward" />
-                                        </Right>
-                                    </ListItem>
-                                )
-                            }}
-                        />
-                    )}
-                    <JSONTree data={{ props: this.props, state: this.state }} />
-                </Content>
-            </Container>
-        )
-    }
+    return (
+        <Container>
+            <AppHeader title='1 - Simple List' />
+            <Content>
+                {renderLoading(loading, data)}
+                {renderList(loading, data)}
+                {/* <JSONTree data={{ props, selector, data, loading, error }} /> */}
+            </Content>
+        </Container>
+    )
 }
-const mapStateToProps = ({ data, loading, error }) => ({
-    data,
-    loading,
-    error,
-})
-const mapDispatchToProps = {
-    fetch,
-}
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps,
-)(SimpleList)
+
+export default SimpleList

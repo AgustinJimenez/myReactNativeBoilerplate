@@ -55,15 +55,15 @@ export default class AgendaScreen extends Component {
                 />
                 <Fab
                     active={this.state.active}
-                    direction="up"
+                    direction='up'
                     containerStyle={{}}
                     style={{ backgroundColor: '#1565c0' }}
-                    position="bottomRight"
+                    position='bottomRight'
                     onPress={() => this.setState({ active: !this.state.active })}
                 >
-                    <Icon name="dots-vertical" type="MaterialCommunityIcons" />
+                    <Icon name='dots-vertical' type='MaterialCommunityIcons' />
                     <Button onPress={() => navigate('Form')} style={{ backgroundColor: '#34A34F' }}>
-                        <Icon name="add" />
+                        <Icon name='add' />
                     </Button>
                 </Fab>
             </View>
@@ -96,7 +96,7 @@ export default class AgendaScreen extends Component {
                 items: newItems,
             })
         }, 1000)
-        // console.log(`Load Items for ${day.year}-${day.month}`);
+        //console.log(`Load Items for ${day.year}-${day.month}`);
     }
 
     renderItem = item => {

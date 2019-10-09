@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Container, Left, Right, Text, Icon, Content, List, ListItem, Spinner } from 'native-base'
-import AppHeader from 'app/src/components/AppHeader/AppHeader'
-import app_styles from 'app/src/theme/variables/commonColor'
+import AppHeader from '../../../src/components/AppHeader/AppHeader'
+import app_styles from '../../../src/theme/variables/commonColor'
 
 const site = 'https://jsonplaceholder.typicode.com/posts'
 
@@ -33,14 +33,14 @@ export default class ListDetails extends Component {
     render() {
         return (
             <Container>
-                <AppHeader title="2 - List with Detail" {...this.props} />
+                <AppHeader title='2 - List with Detail' {...this.props} />
                 <Content padder>{this.ShowContent()}</Content>
             </Container>
         )
     }
 
     ShowContent() {
-        if (this.state.isLoading) return <Spinner size="large" primary />
+        if (this.state.isLoading) return <Spinner size='large' primary />
         else
             return (
                 <List
@@ -53,7 +53,7 @@ export default class ListDetails extends Component {
                                 </Left>
 
                                 <Right>
-                                    <Icon name="arrow-forward" />
+                                    <Icon name='arrow-forward' />
                                 </Right>
                             </ListItem>
                         )

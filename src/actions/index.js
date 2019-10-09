@@ -1,8 +1,9 @@
-import { FETCH } from './types'
+import { SIMPLE_FETCH } from './types'
 
-export const fetch = _ => ({
-    type: FETCH,
+export const fetchUsers = {
+    type: SIMPLE_FETCH,
+    dataset_name: 'users',
     options: {
         url: 'https://jsonplaceholder.typicode.com/users',
     },
-})
+}

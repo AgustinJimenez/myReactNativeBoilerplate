@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Container, Content, Text } from 'native-base'
-import AppHeader from 'app/src/components/AppHeader/AppHeader'
+import AppHeader from '../../../src/components/AppHeader/AppHeader'
 
 const title = 'Home'
 export default class HomeScreen extends Component {

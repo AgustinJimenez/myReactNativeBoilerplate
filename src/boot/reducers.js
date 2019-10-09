@@ -1,17 +1,6 @@
-import { FETCH, FETCH_SUCCESS, FETCH_ERROR } from '../actions/types'
+import { combineReducers } from 'redux'
+import { fetchToDataset } from '../reducers/datasetReducer'
 
-const reducers = (state = {}, action) => {
-    let { type, data, error } = action
-    //console.warn('REDUCERS ===> ', { state, action, error })
-    switch (type) {
-        case FETCH:
-            return { ...state, loading: true, error: false }
-        case FETCH_SUCCESS:
-            return { ...state, data, loading: false, error: false }
-        case FETCH_ERROR:
-            return { ...state, loading: false, error }
-        default:
-            return state
-    }
-}
-export default reducers
+export default combineReducers({
+    datasets: fetchToDataset,
+})

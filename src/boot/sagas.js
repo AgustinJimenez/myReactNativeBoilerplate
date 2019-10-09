@@ -1,9 +1,9 @@
-import { FETCH } from '../actions/types'
-import { takeLatest, all } from 'redux-saga/effects'
-import fetch from '../sagas/fetch'
+import { SIMPLE_FETCH } from '../actions/types'
+import { takeLatest, /* takeEvery ,*/ all } from 'redux-saga/effects'
+import simpleFetch from '../sagas/simpleFetch'
 
 function* actionWatcher() {
-    yield takeLatest(FETCH, fetch)
+    yield takeLatest(SIMPLE_FETCH, simpleFetch)
 }
 function* rootSaga() {
     yield all([actionWatcher()])

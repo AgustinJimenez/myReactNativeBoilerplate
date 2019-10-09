@@ -10,5 +10,5 @@
   "arrowParens": "avoid",
   "jsxSingleQuote": true,
   "parser": "babel",
-  "proseWrap": "never"
+  "proseWrap": "never",
 }
