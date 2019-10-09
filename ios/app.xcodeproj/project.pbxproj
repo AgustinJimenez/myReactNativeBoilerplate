@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		0084D81C36414CE3B722D576 /* FontAwesome5_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A4304C1CFDAC4C4AB041CAA3 /* FontAwesome5_Regular.ttf */; };
 		00E356F31AD99517003FC87E /* appTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* appTests.m */; };
@@ -39,6 +38,19 @@
 		E8677031E4CB43C1835A9629 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2046C91F8FF3465DAFC286F2 /* Ionicons.ttf */; };
 		E9C0F7A8094641BAA9E1A4B3 /* Fontisto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 06E516E454754B0D9FB50643 /* Fontisto.ttf */; };
 		EDEDCE4B4B604DC28CA97424 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C58093837BBF4CFD8A711425 /* MaterialCommunityIcons.ttf */; };
+		B2BDCAB310724644B9FD3AF2 /* SpaceMono-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 301DE98109744ED1B2787960 /* SpaceMono-Regular.ttf */; };
+		D0CC563119DB4D9F96F2348C /* dls_logo.orig.png in Resources */ = {isa = PBXBuildFile; fileRef = 418D674011E04C019AF1D598 /* dls_logo.orig.png */; };
+		F29CE0694ACE443290254F56 /* dls_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 34B10BBCE1284492B4DFAA6E /* dls_logo.png */; };
+		2C8A6D06733A4DD5ADB0D339 /* icon.orig.png in Resources */ = {isa = PBXBuildFile; fileRef = B080A417EEDA46BA8BDCDC66 /* icon.orig.png */; };
+		9951B436051C4389B4B7EB49 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = B3332075ADFA42F99F892FF2 /* icon.png */; };
+		A88C98957EE840BE91E7207D /* login.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79696A28C1244254ACEB05AE /* login.jpg */; };
+		0A544700E337411BA2560EF5 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 55887B25E5BE45EA8DDD6E37 /* logo.png */; };
+		9CFD15C98F674A37A9887A5E /* robot-dev.orig.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E699AE5C85A49AFA7827A84 /* robot-dev.orig.png */; };
+		ACECF196BFD54CA6BCF7F5D9 /* robot-dev.png in Resources */ = {isa = PBXBuildFile; fileRef = B19C3CFDDE0C4368A910829F /* robot-dev.png */; };
+		5609E422683B420DB6A5C966 /* robot-prod.orig.png in Resources */ = {isa = PBXBuildFile; fileRef = F5E61EF20E0E4B6E85D8488A /* robot-prod.orig.png */; };
+		97B51F28300547D992004AF4 /* robot-prod.png in Resources */ = {isa = PBXBuildFile; fileRef = EAB41E912D6E4E0F9992863F /* robot-prod.png */; };
+		EF027DBEF91548A0BF207200 /* splash.orig.png in Resources */ = {isa = PBXBuildFile; fileRef = CAD2AADB78124CB4829A582A /* splash.orig.png */; };
+		82625BFC5C08446EB9E9CC77 /* splash.png in Resources */ = {isa = PBXBuildFile; fileRef = 9538BB636AEB4FCAA1EB1921 /* splash.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -105,6 +117,19 @@
 		F65EE1993F22214D3D0F7B86 /* Pods-app.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-app.debug.xcconfig"; path = "Target Support Files/Pods-app/Pods-app.debug.xcconfig"; sourceTree = "<group>"; };
 		F812B7E1542644E982AC0F84 /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/native-base/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
 		F934B13477EBB2250900D883 /* libPods-app-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-app-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		301DE98109744ED1B2787960 /* SpaceMono-Regular.ttf */ = {isa = PBXFileReference; name = "SpaceMono-Regular.ttf"; path = "../src/assets/fonts/SpaceMono-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		418D674011E04C019AF1D598 /* dls_logo.orig.png */ = {isa = PBXFileReference; name = "dls_logo.orig.png"; path = "../src/assets/images/dls_logo.orig.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		34B10BBCE1284492B4DFAA6E /* dls_logo.png */ = {isa = PBXFileReference; name = "dls_logo.png"; path = "../src/assets/images/dls_logo.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		B080A417EEDA46BA8BDCDC66 /* icon.orig.png */ = {isa = PBXFileReference; name = "icon.orig.png"; path = "../src/assets/images/icon.orig.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		B3332075ADFA42F99F892FF2 /* icon.png */ = {isa = PBXFileReference; name = "icon.png"; path = "../src/assets/images/icon.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		79696A28C1244254ACEB05AE /* login.jpg */ = {isa = PBXFileReference; name = "login.jpg"; path = "../src/assets/images/login.jpg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		55887B25E5BE45EA8DDD6E37 /* logo.png */ = {isa = PBXFileReference; name = "logo.png"; path = "../src/assets/images/logo.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		4E699AE5C85A49AFA7827A84 /* robot-dev.orig.png */ = {isa = PBXFileReference; name = "robot-dev.orig.png"; path = "../src/assets/images/robot-dev.orig.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		B19C3CFDDE0C4368A910829F /* robot-dev.png */ = {isa = PBXFileReference; name = "robot-dev.png"; path = "../src/assets/images/robot-dev.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		F5E61EF20E0E4B6E85D8488A /* robot-prod.orig.png */ = {isa = PBXFileReference; name = "robot-prod.orig.png"; path = "../src/assets/images/robot-prod.orig.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		EAB41E912D6E4E0F9992863F /* robot-prod.png */ = {isa = PBXFileReference; name = "robot-prod.png"; path = "../src/assets/images/robot-prod.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		CAD2AADB78124CB4829A582A /* splash.orig.png */ = {isa = PBXFileReference; name = "splash.orig.png"; path = "../src/assets/images/splash.orig.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		9538BB636AEB4FCAA1EB1921 /* splash.png */ = {isa = PBXFileReference; name = "splash.png"; path = "../src/assets/images/splash.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,6 +207,19 @@
 				ED4F9DAF91F748489AABE8E4 /* rubicon-icon-font.ttf */,
 				5E7D996D1C584BDFBF759DEC /* SimpleLineIcons.ttf */,
 				9408ECA500284CFC82E7D766 /* Zocial.ttf */,
+				301DE98109744ED1B2787960 /* SpaceMono-Regular.ttf */,
+				418D674011E04C019AF1D598 /* dls_logo.orig.png */,
+				34B10BBCE1284492B4DFAA6E /* dls_logo.png */,
+				B080A417EEDA46BA8BDCDC66 /* icon.orig.png */,
+				B3332075ADFA42F99F892FF2 /* icon.png */,
+				79696A28C1244254ACEB05AE /* login.jpg */,
+				55887B25E5BE45EA8DDD6E37 /* logo.png */,
+				4E699AE5C85A49AFA7827A84 /* robot-dev.orig.png */,
+				B19C3CFDDE0C4368A910829F /* robot-dev.png */,
+				F5E61EF20E0E4B6E85D8488A /* robot-prod.orig.png */,
+				EAB41E912D6E4E0F9992863F /* robot-prod.png */,
+				CAD2AADB78124CB4829A582A /* splash.orig.png */,
+				9538BB636AEB4FCAA1EB1921 /* splash.png */,
 			);
 			name = Resources;
 			path = "";
@@ -423,6 +461,19 @@
 				234B0EBA73E541F9B097940B /* rubicon-icon-font.ttf in Resources */,
 				E41AFCF4B3474EE291DE7C3A /* SimpleLineIcons.ttf in Resources */,
 				D884C12710C64B159E6C95AD /* Zocial.ttf in Resources */,
+				B2BDCAB310724644B9FD3AF2 /* SpaceMono-Regular.ttf in Resources */,
+				D0CC563119DB4D9F96F2348C /* dls_logo.orig.png in Resources */,
+				F29CE0694ACE443290254F56 /* dls_logo.png in Resources */,
+				2C8A6D06733A4DD5ADB0D339 /* icon.orig.png in Resources */,
+				9951B436051C4389B4B7EB49 /* icon.png in Resources */,
+				A88C98957EE840BE91E7207D /* login.jpg in Resources */,
+				0A544700E337411BA2560EF5 /* logo.png in Resources */,
+				9CFD15C98F674A37A9887A5E /* robot-dev.orig.png in Resources */,
+				ACECF196BFD54CA6BCF7F5D9 /* robot-dev.png in Resources */,
+				5609E422683B420DB6A5C966 /* robot-prod.orig.png in Resources */,
+				97B51F28300547D992004AF4 /* robot-prod.png in Resources */,
+				EF027DBEF91548A0BF207200 /* splash.orig.png in Resources */,
+				82625BFC5C08446EB9E9CC77 /* splash.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

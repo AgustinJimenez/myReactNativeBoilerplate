@@ -40,7 +40,7 @@ class LoginScreen extends React.Component {
                                 <CardItem>
                                     <Body style={styles.body}>
                                         <Image source={dlsLogoImg} style={styles.welcomeImage} />
-                                        <Text>{text.subtitle}</Text>
+                                        <Text /* style={{ fontFamily: 'SpaceMono-Regular' }} */>{text.subtitle}</Text>
                                     </Body>
                                 </CardItem>
                                 <CardItem>
