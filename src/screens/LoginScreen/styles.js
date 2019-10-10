@@ -1,9 +1,14 @@
 import { Platform, StyleSheet } from 'react-native'
+import commonStyles from '../../theme/variables/commonStyles'
 
 export default StyleSheet.create({
+    ...commonStyles,
     container: {
         flex: 1,
         backgroundColor: '#efef',
+    },
+    darkOpacity: {
+        backgroundColor: 'rgba(0,0,0,0.65)',
     },
     developmentModeText: {
         marginBottom: 20,
@@ -93,7 +98,7 @@ export default StyleSheet.create({
         marginVertical: 20,
         marginBottom: 10,
     },
-    body: {
+    center: {
         justifyContent: 'center',
         alignItems: 'center',
     },

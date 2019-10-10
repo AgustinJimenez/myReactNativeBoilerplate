@@ -1,11 +1,15 @@
-import { SIMPLE_FETCH } from '../actions/types'
+import { SIMPLE_FETCH, LOGIN } from '../actions/types'
 import { takeLatest, /* takeEvery ,*/ all } from 'redux-saga/effects'
-import simpleFetch from '../sagas/simpleFetch'
+import simpleFetchSagas from '../sagas/simpleFetchSagas'
+import authSagas from '../sagas/authSagas'
 
-function* actionWatcher() {
-    yield takeLatest(SIMPLE_FETCH, simpleFetch)
+function* simpleFetch() {
+    yield takeLatest(SIMPLE_FETCH, simpleFetchSagas)
+}
+function* login() {
+    yield takeLatest(LOGIN, authSagas)
 }
 function* rootSaga() {
-    yield all([actionWatcher()])
+    yield all([simpleFetch(), login()])
 }
 export default rootSaga

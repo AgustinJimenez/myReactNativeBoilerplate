@@ -1,8 +1,10 @@
 import React from 'react'
 import { Image, ScrollView, View, ImageBackground } from 'react-native'
-import { Container, Card, CardItem, Body, Text, Item, Label, Input, Button } from 'native-base'
+import { Form, Container, Card, CardItem, Body, Text, Item, Label, Input, Button } from 'native-base'
 import { connect } from 'react-redux'
+import { login } from '../../actions'
 import styles from './styles'
+//import JSONTree from 'react-native-json-tree'
 
 const loginBackgroundImg = require('../../assets/images/login.jpg')
 const dlsLogoImg = require('../../assets/images/dls_logo.png')
@@ -14,49 +16,75 @@ const text = {
 }
 
 class LoginScreen extends React.Component {
+    state = {
+        username: '',
+        password: '',
+    }
+
     static navigationOptions = {
         header: null,
+    }
+
+    loginButtonIsDisabled = _ => {
+        if (this.getUsername().trim() === '' || this.getPassword().trim() === '') return true
+
+        return false
+    }
+    getUsername = _ => this.state.username || ''
+    getPassword = _ => this.state.password || ''
+
+    onPasswordChange = password => this.setState({ password })
+    onUsernameChange = username => this.setState({ username })
+    getParams = _ => ({
+        username: this.getUsername(),
+        password: this.getPassword(),
+    })
+
+    submit = _ => {
+        this.props.login(this.getParams())
     }
 
     render() {
         return (
             <Container>
-                <ImageBackground
-                    resizeMode='cover'
-                    source={loginBackgroundImg}
-                    style={{
-                        ...styles.container,
-                    }}
-                >
-                    <ScrollView
-                        style={{
-                            ...styles.container,
-                            backgroundColor: 'rgba(0,0,0,0.65)',
-                        }}
-                        contentContainerStyle={styles.contentContainer}
-                    >
+                <ImageBackground resizeMode='cover' source={loginBackgroundImg} style={styles.container}>
+                    <ScrollView style={[styles.container, styles.darkOpacity]} contentContainerStyle={styles.contentContainer}>
                         <View style={styles.cardContainer}>
                             <Card>
                                 <CardItem>
-                                    <Body style={styles.body}>
+                                    <Body style={styles.center}>
                                         <Image source={dlsLogoImg} style={styles.welcomeImage} />
                                         <Text /* style={{ fontFamily: 'SpaceMono-Regular' }} */>{text.subtitle}</Text>
                                     </Body>
                                 </CardItem>
                                 <CardItem>
-                                    <Body style={styles.body}>
-                                        <Item inlineLabel>
-                                            <Label>{text.userNamePlaceholder}</Label>
-                                            <Input />
-                                        </Item>
+                                    <Body style={styles.center}>
+                                        <Form style={styles.center}>
+                                            <Item floatingLabel>
+                                                <Label>{text.userNamePlaceholder}</Label>
+                                                <Input
+                                                    //placeholder={text.userNamePlaceholder}
+                                                    onChangeText={this.onUsernameChange}
+                                                    value={this.getUsername()}
+                                                    autoCapitalize='none'
+                                                    autoCorrect={false}
+                                                    autoFocus
+                                                />
+                                            </Item>
 
-                                        <Item inlineLabel>
-                                            <Label>{text.passwordPlaceholder}</Label>
-                                            <Input secureTextEntry={true} />
-                                        </Item>
+                                            <Item floatingLabel>
+                                                <Label>{text.passwordPlaceholder}</Label>
+                                                <Input
+                                                    //placeholder={text.passwordPlaceholder}
+                                                    onChangeText={this.onPasswordChange}
+                                                    value={this.getPassword()}
+                                                    secureTextEntry={true}
+                                                />
+                                            </Item>
+                                        </Form>
 
                                         <View style={styles.loginButtonContainer}>
-                                            <Button onPress={() => navigate('Links')}>
+                                            <Button full disabled={this.loginButtonIsDisabled()} onPress={this.submit}>
                                                 <Text>{text.loginButtonText}</Text>
                                             </Button>
                                         </View>
@@ -64,6 +92,7 @@ class LoginScreen extends React.Component {
                                 </CardItem>
                             </Card>
                         </View>
+                        {/* <JSONTree data={{ props: this.props, state: this.state }} /> */}
                     </ScrollView>
                 </ImageBackground>
             </Container>
@@ -75,7 +104,7 @@ const mapStateToProps = state => ({
     //userSelector: usersSelector(state),
 })
 const mapDispatchToProps = {
-    //fetchUsers,
+    login,
 }
 
 export default connect(

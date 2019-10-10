@@ -13,13 +13,13 @@ import ListDetails from './screens/2ListDetails/ListDetails'
 import Detail from './screens/2ListDetails/Detail'
 import LoginScreen from './screens/LoginScreen'
 
-const sidebar_routes = [
+let sidebar_routes = [
     { title: 'Home', route: 'Home', icon: 'home' },
     { title: '1 - Simmple List', route: 'SimpleList' },
     { title: '2 - List Details', route: 'ListDetails' },
 ]
 
-const Drawer = createDrawerNavigator(
+let Drawer = createDrawerNavigator(
     {
         Login: { screen: LoginScreen },
         Home: { screen: HomeScreen },
@@ -30,8 +30,8 @@ const Drawer = createDrawerNavigator(
         contentComponent: props => <SideBar sidebar_routes={sidebar_routes} {...props} />,
     },
 )
-const AuthStack = createStackNavigator({ Login: LoginScreen })
-const AppStack = createStackNavigator(
+let AuthStack = createStackNavigator({ Login: LoginScreen })
+let AppStack = createStackNavigator(
     {
         Drawer: { screen: Drawer },
         TwoDetailListDetails: { screen: ListDetails },
@@ -43,7 +43,7 @@ const AppStack = createStackNavigator(
     },
 )
 
-const NavigationStacks = createSwitchNavigator(
+let NavigationStacks = createSwitchNavigator(
     {
         AuthLoading: AuthLoadingScreen,
         App: AppStack,

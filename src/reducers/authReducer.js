@@ -1,21 +1,26 @@
-//import {  } from '../actions/types'
+import { LOGIN, LOGIN_SUCCESS, LOGIN_ERROR } from '../actions/types'
 
 let dataSetsInitialState = {
     token: null,
+    login: {
+        loading: false,
+        error: false,
+    },
 }
 
 let authReducer = (state = dataSetsInitialState, action) => {
-    let { type } = action
+    let { type, error, data } = action
+    //console.log('AUTH-REDUCER ===> ', { action })
     switch (type) {
-        /* case SIMPLE_FETCH:
-            state[dataset_name] = { ...state[dataset_name], loading: true, error: false }
-            return { ...state }
-        case SIMPLE_FETCH_SUCCESS:
-            state[dataset_name] = { ...state[dataset_name], data, loading: false, error: false }
-            return { ...state }
-        case SIMPLE_FETCH_ERROR:
-            state[dataset_name] = { ...state[dataset_name], loading: false, error }
-            return { ...state } */
+        case LOGIN:
+            return { ...state, login: { loading: true, error: false } }
+
+        case LOGIN_SUCCESS:
+            return { ...state, login: { loading: false, error: false }, token: data.token }
+
+        case LOGIN_ERROR:
+            return { ...state, login: { loading: false, error }, token: null }
+
         default:
             return state
     }

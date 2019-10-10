@@ -1,3 +1,7 @@
 export const SIMPLE_FETCH = 'SIMPLE_FETCH'
 export const SIMPLE_FETCH_SUCCESS = 'SIMPLE_FETCH_SUCCESS'
 export const SIMPLE_FETCH_ERROR = 'SIMPLE_FETCH_ERROR'
+
+export const LOGIN = 'LOGIN'
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
+export const LOGIN_ERROR = 'LOGIN_ERROR'
