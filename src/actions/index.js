@@ -1,4 +1,4 @@
-import { SIMPLE_FETCH, LOGIN } from './types'
+import { SIMPLE_FETCH, LOGIN, LOGOUT } from './types'
 import { loginRoute } from '../api/routes'
 
 export const fetchUsers = _ => ({
@@ -16,4 +16,8 @@ export const login = params => ({
         params,
         method: 'POST',
     },
+})
+
+export const logout = _ => ({
+    type: LOGOUT,
 })

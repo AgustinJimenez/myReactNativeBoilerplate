@@ -1,31 +1,28 @@
 import React, { Component } from 'react'
-import { Text, StyleSheet } from 'react-native'
+import { Text } from 'react-native'
 import { Agenda } from 'react-native-calendars'
-
+import DrawerIcon from '../../components/DrawerIcon'
+import { Container, Button, View, Icon, Fab } from 'native-base'
+import styles from './styles'
+import { withNavigation } from 'react-navigation'
 const vacation = { key: 'vacation', color: 'red', selectedDotColor: 'blue' }
 const massage = { key: 'massage', color: 'blue', selectedDotColor: 'blue' }
 const workout = { key: 'workout', color: 'green' }
 
-import { Container, Header, View, Button, Icon, Fab } from 'native-base'
-
-export default class AgendaScreen extends Component {
+class HomeScreen extends Component {
     static navigationOptions = {
         title: 'Agenda de citas',
-        headerBackTitle: 'Atrás',
+        headerLeft: <DrawerIcon />,
     }
 
-    constructor(props) {
-        super(props)
-        this.state = {
-            items: {},
-            active: false,
-        }
+    state = {
+        items: {},
+        active: false,
     }
 
     render() {
-        const { navigate } = this.props.navigation
         return (
-            <View style={{ flex: 1 }}>
+            <Container>
                 <Agenda
                     items={this.state.items}
                     loadItemsForMonth={this.loadItems.bind(this)}
@@ -35,21 +32,20 @@ export default class AgendaScreen extends Component {
                     rowHasChanged={this.rowHasChanged.bind(this)}
                     // markingType={'period'}
                     /*markedDates={{
-          //    '2017-05-08': {textColor: '#666'},
-          //    '2017-05-09': {textColor: '#666'},
-          //    '2017-05-14': {startingDay: true, endingDay: true, color: 'blue'},
-          "2017-05-21": {
-            dots: [vacation, massage, workout],
-            selected: true
-          }
-          //    '2017-05-22': {endingDay: true, color: 'gray'},
-          //    '2017-05-24': {startingDay: true, color: 'gray'},
-          //    '2017-05-25': {color: 'gray'},
-          //    '2017-05-26': {endingDay: true, color: 'gray'}
-        }}*/
+                    //'2017-05-08': {textColor: '#666'},
+                    //'2017-05-09': {textColor: '#666'},
+                    //'2017-05-14': {startingDay: true, endingDay: true, color: 'blue'},
+                    "2017-05-21": {
+                        dots: [vacation, massage, workout],
+                        selected: true
+                    }
+                    //'2017-05-22': {endingDay: true, color: 'gray'},
+                    //'2017-05-24': {startingDay: true, color: 'gray'},
+                    //'2017-05-25': {color: 'gray'},
+                    //'2017-05-26': {endingDay: true, color: 'gray'}
+                    }}*/
                     // monthFormat={'yyyy'}
                     //markingType={"multi-dot"}
-
                     // theme={{calendarBackground: 'red', agendaKnobColor: 'green'}}
                     //renderDay={(day, item) => (<Text>{day ? day.day: 'item'}</Text>)}
                 />
@@ -62,13 +58,14 @@ export default class AgendaScreen extends Component {
                     onPress={() => this.setState({ active: !this.state.active })}
                 >
                     <Icon name='dots-vertical' type='MaterialCommunityIcons' />
-                    <Button onPress={() => navigate('Form')} style={{ backgroundColor: '#34A34F' }}>
+                    <Button onPress={this.goToAgendaForm} style={{ backgroundColor: '#34A34F' }}>
                         <Icon name='add' />
                     </Button>
                 </Fab>
-            </View>
+            </Container>
         )
     }
+    goToAgendaForm = _ => this.props.navigation.push('AgendaForm')
 
     loadItems(day) {
         setTimeout(() => {
@@ -80,7 +77,7 @@ export default class AgendaScreen extends Component {
                     const numItems = Math.floor(Math.random() * 5)
                     for (let j = 0; j < numItems; j++) {
                         this.state.items[strTime].push({
-                            name: 'Cita para ' + strTime,
+                            name: `Cita para ${strTime} en Mariano`,
                             height: Math.max(50, Math.floor(Math.random() * 150)),
                             dots: [vacation, massage, workout],
                         })
@@ -100,10 +97,9 @@ export default class AgendaScreen extends Component {
     }
 
     renderItem = item => {
-        const { navigate } = this.props.navigation
         return (
             <View style={[styles.item, { height: item.height }]}>
-                <Text onPress={() => navigate('Settings')}>{item.name}</Text>
+                <Text onPress={() => this.props.navigation.navigate('Settings')}>{item.name}</Text>
             </View>
         )
     }
@@ -126,18 +122,4 @@ export default class AgendaScreen extends Component {
     }
 }
 
-const styles = StyleSheet.create({
-    item: {
-        backgroundColor: 'white',
-        flex: 1,
-        borderRadius: 5,
-        padding: 10,
-        marginRight: 10,
-        marginTop: 17,
-    },
-    emptyDate: {
-        height: 15,
-        flex: 1,
-        paddingTop: 30,
-    },
-})
+export default withNavigation(HomeScreen)

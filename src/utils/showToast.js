@@ -1,7 +1,8 @@
 import { Toast } from 'native-base'
 const showToast = (text, options) => {
+    //console.log('showToast ===> ', { text, options })
     let defaultOptions = {
-        buttonText: null,
+        buttonText: 'OK',
         type: 'none' || 'warning' || 'danger' || 'success',
         duration: 3000,
         position: 'top' || 'bottom',

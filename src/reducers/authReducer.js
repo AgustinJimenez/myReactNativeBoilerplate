@@ -1,4 +1,4 @@
-import { LOGIN, LOGIN_SUCCESS, LOGIN_ERROR } from '../actions/types'
+import { LOGIN, LOGIN_SUCCESS, LOGIN_ERROR, LOGOUT } from '../actions/types'
 
 let dataSetsInitialState = {
     token: null,
@@ -20,6 +20,9 @@ let authReducer = (state = dataSetsInitialState, action) => {
 
         case LOGIN_ERROR:
             return { ...state, login: { loading: false, error }, token: null }
+
+        case LOGOUT:
+            return { ...state, token: null }
 
         default:
             return state

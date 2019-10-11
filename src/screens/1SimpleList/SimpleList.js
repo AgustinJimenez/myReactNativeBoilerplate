@@ -1,11 +1,16 @@
 import React from 'react'
 import { Container, Left, Right, Text, Icon, Content, List, ListItem, Spinner } from 'native-base'
-import AppHeader from '../../../src/components/AppHeader/AppHeader'
 import { connect } from 'react-redux'
 import { fetchUsers } from '../../actions'
 import { usersSelector } from '../../selectors/datasetsSelector'
+import DrawerIcon from '../../components/DrawerIcon'
 //import JSONTree from 'react-native-json-tree'
 class SimpleList extends React.Component {
+    static navigationOptions = {
+        title: 'Simple List',
+        headerLeft: <DrawerIcon />,
+    }
+
     constructor(props) {
         super(props)
         props.fetchUsers()
@@ -14,7 +19,6 @@ class SimpleList extends React.Component {
     render() {
         return (
             <Container>
-                <AppHeader title='1 - Simple List' />
                 <Content>
                     {this.props.userSelector.loading && !this.props.userSelector.data && <Spinner size='large' primary />}
                     {!this.props.userSelector.loading && this.props.userSelector.data && (

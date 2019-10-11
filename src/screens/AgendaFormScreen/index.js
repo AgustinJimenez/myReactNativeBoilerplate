@@ -1,17 +1,13 @@
 import React from 'react'
-import { ExpoConfigView } from '@expo/samples'
-
-import { Platform, ScrollView, StyleSheet, View } from 'react-native'
-
+import { ScrollView, View } from 'react-native'
 import { Card, CardItem, Body, Item, Text, Input, Button } from 'native-base'
 import DateTimePicker from 'react-native-modal-datetime-picker'
-
 import MapView, { Marker, ProviderPropType } from 'react-native-maps'
+import styles from './styles'
 
-export default class SettingsScreen extends React.Component {
+class AgendaForm extends React.Component {
     static navigationOptions = {
         title: 'Formulario',
-        headerBackTitle: 'Atrás',
     }
 
     state = {
@@ -33,9 +29,6 @@ export default class SettingsScreen extends React.Component {
     }
 
     render = () => {
-        const { navigate } = this.props.navigation
-        /* Go ahead and delete ExpoConfigView and replace it with your
-         * content, we just wanted to give you a quick view of your config */
         return (
             <View
                 style={{
@@ -57,10 +50,10 @@ export default class SettingsScreen extends React.Component {
                                 }}
                             >
                                 <Item>
-                                    <Input placeholder="Cliente" autoFocus />
+                                    <Input placeholder='Cliente' autoFocus />
                                 </Item>
                                 <Item last>
-                                    <Input placeholder="Motivo" />
+                                    <Input placeholder='Motivo' />
                                 </Item>
 
                                 <CardItem>
@@ -71,8 +64,8 @@ export default class SettingsScreen extends React.Component {
 
                                 <DateTimePicker
                                     hideTitleContainerIOS
-                                    confirmTextIOS="Aceptar"
-                                    cancelTextIOS="Cancelar"
+                                    confirmTextIOS='Aceptar'
+                                    cancelTextIOS='Cancelar'
                                     isVisible={this.state.isDateTimePickerVisible}
                                     onConfirm={this.handleDatePicked}
                                     onCancel={this.hideDateTimePicker}
@@ -87,7 +80,7 @@ export default class SettingsScreen extends React.Component {
                                     alignItems: 'center',
                                 }}
                             >
-                                <Button full onPress={_ => navigate('Links')}>
+                                <Button full onPress={_ => this.props.navigation.navigate('Links')}>
                                     <Text>Agendar</Text>
                                 </Button>
                             </Body>
@@ -99,89 +92,4 @@ export default class SettingsScreen extends React.Component {
     }
 }
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-    },
-    developmentModeText: {
-        marginBottom: 20,
-        color: 'rgba(0,0,0,0.4)',
-        fontSize: 14,
-        lineHeight: 19,
-        textAlign: 'center',
-    },
-    contentContainer: {},
-    welcomeContainer: {
-        alignItems: 'center',
-        marginTop: 10,
-        marginBottom: 20,
-    },
-    welcomeImage: {
-        width: 250,
-        height: 80,
-        resizeMode: 'contain',
-        marginTop: 3,
-        marginLeft: -10,
-    },
-    getStartedContainer: {
-        alignItems: 'center',
-        marginHorizontal: 50,
-    },
-    homeScreenFilename: {
-        marginVertical: 7,
-    },
-    codeHighlightText: {
-        color: 'rgba(96,100,109, 0.8)',
-    },
-    codeHighlightContainer: {
-        backgroundColor: 'rgba(0,0,0,0.05)',
-        borderRadius: 3,
-        paddingHorizontal: 4,
-    },
-    getStartedText: {
-        fontSize: 17,
-        color: 'rgba(96,100,109, 1)',
-        lineHeight: 24,
-        textAlign: 'center',
-    },
-    tabBarInfoContainer: {
-        position: 'absolute',
-        bottom: 0,
-        left: 0,
-        right: 0,
-        ...Platform.select({
-            ios: {
-                shadowColor: 'black',
-                shadowOffset: { height: -3 },
-                shadowOpacity: 0.1,
-                shadowRadius: 3,
-            },
-            android: {
-                elevation: 20,
-            },
-        }),
-        alignItems: 'center',
-        backgroundColor: '#fbfbfb',
-        paddingVertical: 20,
-    },
-    tabBarInfoText: {
-        fontSize: 17,
-        color: 'rgba(96,100,109, 1)',
-        textAlign: 'center',
-    },
-    navigationFilename: {
-        marginTop: 5,
-    },
-    helpContainer: {
-        marginTop: 15,
-        alignItems: 'center',
-    },
-    helpLink: {
-        paddingVertical: 15,
-    },
-    helpLinkText: {
-        fontSize: 14,
-        color: '#2e78b7',
-    },
-})
+export default AgendaForm

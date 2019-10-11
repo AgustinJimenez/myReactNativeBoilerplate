@@ -1,7 +1,15 @@
 import app_styles from '../../theme/variables/commonColor' //brandPrimary
+import { StyleSheet } from 'react-native'
 
-export default {
-    content: { flex: 1, backgroundColor: app_styles.brandPrimary, top: -1 },
-    sidebar_top_img: { height: 120, width: '100%', alignSelf: 'stretch', position: 'absolute' },
-    text_color: { color: app_styles.inverseTextColor },
-}
+export default StyleSheet.create({
+    content: {},
+    sidebar_top_img: {
+        alignSelf: 'center',
+        justifyContent: 'center',
+    },
+
+    list: {},
+    listItemIcon: {
+        color: 'black',
+    },
+})

@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		00C90F6049E84296965172C6 /* robot-dev.png in Resources */ = {isa = PBXBuildFile; fileRef = 763DCB76869E4EF994926916 /* robot-dev.png */; };
 		00E356F31AD99517003FC87E /* appTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* appTests.m */; };
