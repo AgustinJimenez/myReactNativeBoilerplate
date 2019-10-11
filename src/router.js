@@ -8,11 +8,15 @@ import AuthLoadingScreen from './screens/AuthLoadingScreen'
 import HomeScreen from './screens/HomeScreen'
 import LoginScreen from './screens/LoginScreen'
 import AgendaFormScreen from './screens/AgendaFormScreen'
+import SettingsScreen from './screens/SettingsScreen'
+import AppointmentScreen from './screens/AppointmentScreen'
 
 let AppStack = createStackNavigator(
     {
-        Home: { screen: HomeScreen },
+        Home: HomeScreen,
         AgendaForm: AgendaFormScreen,
+        Settings: SettingsScreen,
+        Appointment: AppointmentScreen,
     },
     {
         defaultNavigationOptions: {
