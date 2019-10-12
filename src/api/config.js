@@ -1,1 +1,3 @@
-export const domain = 'http://localhost:80/api/v1'
+import { API_DOMAIN } from 'react-native-dotenv'
+
+export const domain = API_DOMAIN

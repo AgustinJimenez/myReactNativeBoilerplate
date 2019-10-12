@@ -4,3 +4,4 @@ const getDataset = (state, datasetName) => {
     return dataset
 }
 export const usersSelector = state => getDataset(state, 'users')
+export const appointmentsSelector = state => getDataset(state, 'appointments')

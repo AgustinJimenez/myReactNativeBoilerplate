@@ -1,11 +1,19 @@
 import { SIMPLE_FETCH, LOGIN, LOGOUT } from './types'
-import { loginRoute } from '../api/routes'
+import { loginRoute, appointmentRoute } from '../api/routes'
 
 export const fetchUsers = _ => ({
     type: SIMPLE_FETCH,
     dataset_name: 'users',
     options: {
         url: 'https://jsonplaceholder.typicode.com/users',
+    },
+})
+
+export const fetchAppointments = _ => ({
+    type: SIMPLE_FETCH,
+    dataset_name: 'appointments',
+    options: {
+        url: appointmentRoute,
     },
 })
 

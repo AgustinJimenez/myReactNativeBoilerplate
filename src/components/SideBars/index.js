@@ -8,8 +8,8 @@ import { connect } from 'react-redux'
 import { logout } from '../../actions'
 
 class SideBar extends React.Component {
-    getSidebarRoutes = _ => {
-        return [
+    state = {
+        routes: [
             { title: 'Home', icon: 'home', route: 'Home' },
             { title: 'Settings', icon: 'settings', route: 'Settings' },
             {
@@ -27,8 +27,9 @@ class SideBar extends React.Component {
             },
             //{ title: '1 - Simmple List', route: 'SimpleList' },
             //{ title: '2 - List Details', route: 'ListDetails' },
-        ]
+        ],
     }
+    getSidebarRoutes = _ => this.state.routes || []
 
     render() {
         var sidebar_routes = this.getSidebarRoutes()

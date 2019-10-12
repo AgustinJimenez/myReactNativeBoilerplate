@@ -4,7 +4,6 @@ import { Container, Button, Content, Icon, Fab, View } from 'native-base'
 import styles from './styles'
 import { withNavigation } from 'react-navigation'
 import Agenda from './components/Agenda'
-
 class HomeScreen extends React.Component {
     state = {
         active: false,
