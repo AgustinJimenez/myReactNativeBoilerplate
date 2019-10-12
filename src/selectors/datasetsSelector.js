@@ -1,5 +1,10 @@
 const getDataset = (state, datasetName) => {
-    let dataset = state['datasets'][datasetName]
+    let dataset = {
+        error: state['datasets']['_error'][datasetName],
+        loading: state['datasets']['_loading'][datasetName],
+        data: state['datasets'][datasetName],
+    }
+
     //console.log('SELECTOR getDataset ===> ', { state, datasetName, dataset })
     return dataset
 }
