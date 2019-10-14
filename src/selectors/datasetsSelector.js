@@ -10,3 +10,4 @@ const getDataset = (state, datasetName) => {
 }
 export const usersSelector = state => getDataset(state, 'users')
 export const appointmentsSelector = state => getDataset(state, 'appointments')
+export const authSelector = state => getDataset(state, 'auth')

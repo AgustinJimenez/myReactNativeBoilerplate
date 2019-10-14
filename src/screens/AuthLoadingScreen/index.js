@@ -1,5 +1,5 @@
 import React from 'react'
-import { authTokenSelector } from '../../selectors/authSelector'
+import { authSelector } from '../../selectors/datasetsSelector'
 import { connect } from 'react-redux'
 import LoadingScreen from '../LoadingScreen'
 
@@ -7,7 +7,7 @@ class AuthLoadingScreen extends React.Component {
     constructor(props) {
         super(props)
         //console.log('_bootstrapAsync ===> ', { token: props.token })
-        props.navigation.navigate(!!props.token ? 'App' : 'Login')
+        props.navigation.navigate(!!props.auth.token ? 'App' : 'Login')
     }
 
     // Render any loading content that you like here
@@ -17,7 +17,7 @@ class AuthLoadingScreen extends React.Component {
 }
 
 const mapStateToProps = state => ({
-    token: authTokenSelector(state),
+    auth: authSelector(state),
 })
 const mapDispatchToProps = {
     //fetchUsers,

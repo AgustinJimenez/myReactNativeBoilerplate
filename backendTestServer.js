@@ -9,7 +9,7 @@ app.set('PORT', PORT)
 app.get('/', (request, response) => response.send('Hello World!'))
 app.post('/api/v1/auth', (request, response) => {
     let { username, password } = request.query
-
+    console.table(request.query)
     if (username === 'dlsadmin' && password === 'prueba123') return response.status(200).send({ message: 'Bienvenido!!!', token: 'ABC-LONG-TOKEN' })
 
     return response.status(401).send({ message: 'Credenciales Invalidas !!!' })

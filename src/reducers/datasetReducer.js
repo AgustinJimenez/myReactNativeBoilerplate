@@ -1,14 +1,19 @@
-import { SIMPLE_FETCH, SIMPLE_FETCH_SUCCESS, SIMPLE_FETCH_ERROR } from '../actions/types'
+import { SIMPLE_FETCH, SIMPLE_FETCH_SUCCESS, SIMPLE_FETCH_ERROR, SET_ON_DATASET } from '../actions/types'
 
 let dataSetsInitialState = {
     _loading: {
         users: false,
+        appointments: false,
+        auth: false,
     },
     _error: {
         users: null,
+        appointments: null,
+        auth: null,
     },
     users: [],
     appointments: [],
+    auth: {},
 }
 
 let datasetReducer = (state = dataSetsInitialState, action) => {
@@ -25,11 +30,15 @@ let datasetReducer = (state = dataSetsInitialState, action) => {
         case SIMPLE_FETCH_SUCCESS:
             state['_loading'][dataset_name] = false
             state['_error'][dataset_name] = false
-            state[dataset_name] = data
+
             return { ...state }
         case SIMPLE_FETCH_ERROR:
             state['_loading'][dataset_name] = false
             state['_error'][dataset_name] = error
+            return { ...state }
+
+        case SET_ON_DATASET:
+            state[dataset_name] = { ...state[dataset_name], ...data }
             return { ...state }
         default:
             return state

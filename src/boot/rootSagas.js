@@ -1,19 +1,12 @@
-import { SIMPLE_FETCH, LOGIN, LOGOUT } from '../actions/types'
-import { takeLatest, /* takeEvery, */ all } from 'redux-saga/effects'
+import { SIMPLE_FETCH, LOGOUT } from '../actions/types'
+import { /*  takeLatest,  */ takeEvery, all } from 'redux-saga/effects'
 import simpleFetchSagas from '../sagas/simpleFetchSagas'
-import { loginSagas, logoutSagas } from '../sagas/authSagas'
 
 function* simpleFetch() {
-    yield takeLatest(SIMPLE_FETCH, simpleFetchSagas)
-}
-function* login() {
-    yield takeLatest(LOGIN, loginSagas)
-}
-function* logout() {
-    yield takeLatest(LOGOUT, logoutSagas)
+    yield takeEvery(SIMPLE_FETCH, simpleFetchSagas)
 }
 
 function* rootSaga() {
-    yield all([simpleFetch(), login(), logout()])
+    yield all([simpleFetch()])
 }
 export default rootSaga

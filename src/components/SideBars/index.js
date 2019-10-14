@@ -6,6 +6,7 @@ import styles from './styles'
 import sidebar_top_img from '../../assets/images/dls_logo.png'
 import { connect } from 'react-redux'
 import { logout } from '../../actions'
+import { StackActions } from 'react-navigation'
 
 class SideBar extends React.Component {
     state = {
@@ -21,7 +22,13 @@ class SideBar extends React.Component {
                         {
                             text: 'NO',
                         },
-                        { text: 'SI', onPress: this.props.logout },
+                        {
+                            text: 'SI',
+                            onPress: async _ => {
+                                this.props.logout()
+                                this.props.navigation.navigate('Login')
+                            },
+                        },
                     ])
                 },
             },
