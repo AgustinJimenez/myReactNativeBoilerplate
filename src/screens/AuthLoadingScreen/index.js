@@ -6,8 +6,8 @@ import LoadingScreen from '../LoadingScreen'
 class AuthLoadingScreen extends React.Component {
     constructor(props) {
         super(props)
-        //console.log('_bootstrapAsync ===> ', { token: props.token })
-        props.navigation.navigate(!!props.auth.token ? 'App' : 'Login')
+        //console.log('_bootstrapAsync ===> ', { token: props.auth.data.token, props: this.props })
+        props.navigation.navigate(!!props.auth.data.token ? 'App' : 'Login')
     }
 
     // Render any loading content that you like here

@@ -1,0 +1,14 @@
+{
+    "appointment_schedule": {
+        "en": "Appointment Schedule",
+        "es": "Agenda de citas"
+    },
+    "app.helloWorld": {
+        "en": "Hello World",
+        "es": "Hola mundo"
+    },
+    "app.learnReact": {
+        "en": "Learn React.",
+        "es": "Aprende React."
+    }
+}

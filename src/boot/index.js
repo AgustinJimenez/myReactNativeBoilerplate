@@ -11,6 +11,7 @@ import { PersistGate } from 'redux-persist/integration/react'
 import { Root } from 'native-base'
 import LoadingScreen from '../screens/LoadingScreen'
 import NavigationMiddleware from './navigationScreenMiddleware'
+import './i18n'
 
 let theme = getTheme(variables)
 

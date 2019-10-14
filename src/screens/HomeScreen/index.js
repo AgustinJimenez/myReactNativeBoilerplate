@@ -1,16 +1,18 @@
 import React from 'react'
 import DrawerIcon from '../../components/DrawerIcon'
-import { Container, Button, Content, Icon, Fab, View } from 'native-base'
+import { Container, Button, Icon, Fab, Text } from 'native-base'
 import styles from './styles'
 import { withNavigation } from 'react-navigation'
 import Agenda from './components/Agenda'
+import HeaderTitle from '../../components/HeaderTitle'
 class HomeScreen extends React.Component {
     state = {
         active: false,
     }
 
     static navigationOptions = {
-        title: 'Agenda de citas',
+        headerTitle: HeaderTitle('appointment_schedule'),
+        //title: 'Agenda de citas',
         headerLeft: <DrawerIcon />,
     }
 
