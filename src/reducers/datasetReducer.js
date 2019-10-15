@@ -14,11 +14,12 @@ let dataSetsInitialState = {
     users: [],
     appointments: [],
     auth: {},
+    lang: 'es',
 }
 
 let datasetReducer = (state = dataSetsInitialState, action) => {
     let { type, data, error, dataset_name } = action
-    //console.log('REDUCERS - datasetReducer ===> ', { state, action, dataset_name })
+    console.log('REDUCERS - datasetReducer ===> ', { state, action, dataset_name })
     if (!dataset_name) {
         //console.warn('REDUCER FETCH NAME IS REQUIRED', { state, action, dataset_name })
         return state
@@ -30,19 +31,24 @@ let datasetReducer = (state = dataSetsInitialState, action) => {
             state['_loading'][dataset_name] = true
             state['_error'][dataset_name] = false
             return { ...state }
+
         case SIMPLE_FETCH_SUCCESS:
             state['_loading'][dataset_name] = false
             state['_error'][dataset_name] = false
             state[dataset_name] = { ...state[dataset_name], ...data }
             return { ...state }
+
         case SIMPLE_FETCH_ERROR:
             state['_loading'][dataset_name] = false
             state['_error'][dataset_name] = error
             return { ...state }
 
         case SET_ON_DATASET:
-            state[dataset_name] = { ...state[dataset_name], ...data }
+            if (typeof data === 'object') state[dataset_name] = { ...state[dataset_name], ...data }
+            else state[dataset_name] = data
+
             return { ...state }
+
         default:
             return state
     }

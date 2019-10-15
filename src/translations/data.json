@@ -7,6 +7,26 @@
         "en": "Settings",
         "es": "Configuraciones"
     },
+    "select_lang": {
+        "en": "Select language",
+        "es": "Seleccionar lenguaje"
+    },
+    "language": {
+        "en": "Language",
+        "es": "Idioma"
+    },
+    "change_language": {
+        "en": "Change Language",
+        "es": "Cambiar Idioma"
+    },
+    "english": {
+        "en": "English",
+        "es": "Inglés"
+    },
+    "spanish": {
+        "en": "Spanish",
+        "es": "Español"
+    },
     "crm_system": {
         "en": "CRM System",
         "es": "Sistema CRM"

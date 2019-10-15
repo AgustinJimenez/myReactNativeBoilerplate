@@ -38,3 +38,9 @@ export const logout = _ => ({
     dataset_name: 'auth',
     data: { token: null },
 })
+
+export const setLang = lang_id => ({
+    type: SET_ON_DATASET,
+    dataset_name: 'lang',
+    data: lang_id,
+})

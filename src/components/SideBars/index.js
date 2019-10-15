@@ -7,35 +7,34 @@ import sidebar_top_img from '../../assets/images/dls_logo.png'
 import { connect } from 'react-redux'
 import { logout } from '../../actions'
 import { withTranslation } from 'react-i18next'
+import { StackActions, NavigationActions } from 'react-navigation'
+
 class SideBar extends React.Component {
-    state = {
-        routes: [
-            { title: this.props.t('home'), icon: 'home', route: 'Home' },
-            { title: this.props.t('settings'), icon: 'settings', route: 'Settings' },
-            {
-                title: this.props.t('logout'),
-                type: 'MaterialCommunityIcons',
-                icon: 'exit-to-app',
-                onPress: _ => {
-                    Alert.alert(this.props.t('warning'), this.props.t('sure_want_leave'), [
-                        {
-                            text: this.props.t('no'),
+    getSidebarRoutes = _ => [
+        { title: this.props.t('home'), icon: 'home', route: 'Home' },
+        { title: this.props.t('settings'), icon: 'settings', route: 'Settings' },
+        {
+            title: this.props.t('logout'),
+            type: 'MaterialCommunityIcons',
+            icon: 'exit-to-app',
+            onPress: _ => {
+                Alert.alert(this.props.t('warning'), this.props.t('sure_want_leave'), [
+                    {
+                        text: this.props.t('no'),
+                    },
+                    {
+                        text: this.props.t('yes'),
+                        onPress: async _ => {
+                            await this.props.logout()
+                            this.props.navigation.navigate('Login')
                         },
-                        {
-                            text: this.props.t('yes'),
-                            onPress: async _ => {
-                                await this.props.logout()
-                                this.props.navigation.navigate('Login')
-                            },
-                        },
-                    ])
-                },
+                    },
+                ])
             },
-            //{ title: '1 - Simmple List', route: 'SimpleList' },
-            //{ title: '2 - List Details', route: 'ListDetails' },
-        ],
-    }
-    getSidebarRoutes = _ => this.state.routes || []
+        },
+        //{ title: '1 - Simmple List', route: 'SimpleList' },
+        //{ title: '2 - List Details', route: 'ListDetails' },
+    ]
 
     render() {
         var sidebar_routes = this.getSidebarRoutes()
@@ -62,7 +61,13 @@ class SideBar extends React.Component {
                                     button
                                     onPress={_ => {
                                         if (!!sidebar_route.onPress) sidebar_route.onPress()
-                                        else this.props.navigation.navigate(sidebar_route.route)
+                                        else {
+                                            let resetAction = StackActions.reset({
+                                                index: 0,
+                                                actions: [NavigationActions.navigate({ routeName: sidebar_route.route })],
+                                            })
+                                            this.props.navigation.dispatch(resetAction)
+                                        }
                                     }}
                                 >
                                     <Left>

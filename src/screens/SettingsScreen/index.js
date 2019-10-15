@@ -1,25 +1,29 @@
 import React from 'react'
-import { Image, Platform, ScrollView, StyleSheet, TextInput, View } from 'react-native'
-
-import { Card, CardItem, Body, Item, Label, Text, Input, Button } from 'native-base'
-
-import MapView, { Marker, ProviderPropType } from 'react-native-maps'
+import { Container, Content, Form, List } from 'native-base'
 import styles from './styles'
+import HeaderTitle from '../../components/HeaderTitle'
+import DrawerIcon from '../../components/DrawerIcon'
+import LangInput from './components/LangInput'
 
-export default class SettingsScreen extends React.Component {
+class SettingsScreen extends React.Component {
     static navigationOptions = {
-        title: 'Settings',
+        headerLeft: <DrawerIcon />,
+        headerTitle: <HeaderTitle trans_id='settings' />,
     }
-
-    state = {}
 
     render = () => {
         return (
-            <View
-                style={{
-                    ...styles.container,
-                }}
-            ></View>
+            <Container>
+                <Content>
+                    <Form>
+                        <List>
+                            <LangInput />
+                        </List>
+                    </Form>
+                </Content>
+            </Container>
         )
     }
 }
+
+export default SettingsScreen
