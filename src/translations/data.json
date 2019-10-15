@@ -31,6 +31,10 @@
         "en": "CRM System",
         "es": "Sistema CRM"
     },
+    "welcome": {
+        "en": "Welcome",
+        "es": "Bienvenido"
+    },
     "form": {
         "en": "Form",
         "es": "Formulario"

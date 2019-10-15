@@ -13,7 +13,7 @@ function* simpleFetchSagas(params) {
         status = response.status
         statusText = response.statusText
         if (!!response.data.message && showResponseMessage) showToast(response.data.message, { type: 'success' })
-        //console.log('SAGAS-FETCH', { data })
+        //console.log('SAGAS-FETCH', { response })
         if (!!onSuccess) onSuccess()
         if (!!parseData) data = parseData(data)
 

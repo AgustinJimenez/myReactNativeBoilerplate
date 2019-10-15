@@ -5,11 +5,13 @@ let dataSetsInitialState = {
         users: false,
         appointments: false,
         auth: false,
+        lang: false,
     },
     _error: {
         users: null,
         appointments: null,
         auth: null,
+        lang: null,
     },
     users: [],
     appointments: [],
@@ -19,7 +21,7 @@ let dataSetsInitialState = {
 
 let datasetReducer = (state = dataSetsInitialState, action) => {
     let { type, data, error, dataset_name } = action
-    console.log('REDUCERS - datasetReducer ===> ', { state, action, dataset_name })
+    //console.log('REDUCERS - datasetReducer ===> ', { type, state, error, action, dataset_name })
     if (!dataset_name) {
         //console.warn('REDUCER FETCH NAME IS REQUIRED', { state, action, dataset_name })
         return state
