@@ -11,7 +11,7 @@
 		"prettify": "prettier --write 'src/**/*.js'",
 		"backend": "node backendTestServer.js",
 		"android": "react-native run-android",
-		"reset": "rm -rf node_modules ios android package-lock.json && npm i && react-native upgrade --legacy && react-native link && rm -rf .eslintrc.js && rm -rf .prettierrc.js && cd ios && pod install && cd .. && cp documentation/android_files/build.gradle android/app/build.gradle && cp documentation/android_files/MainActivity.java android/app/src/main/java/com/app/MainActivity.java"
+		"rebuild": "watchman watch-del-all && rm -rf node_modules ios android package-lock.json && npm i && rm -rf /tmp/metro-bundler-cache-* && rm -rf /tmp/haste-map-react-native-packager-* && react-native upgrade --legacy && react-native link && rm -rf .eslintrc.js && rm -rf .prettierrc.js && cd ios && pod install && cd .. && cp documentation/android_files/build.gradle android/app/build.gradle && cp documentation/android_files/MainActivity.java android/app/src/main/java/com/app/MainActivity.java && npm start --reset-cache"
 	},
 	"dependencies": {
 		"@react-native-community/async-storage": "^1.6.2",
