@@ -3,6 +3,70 @@
         "en": "Appointment Schedule",
         "es": "Agenda de citas"
     },
+    "settings": {
+        "en": "Settings",
+        "es": "Configuraciones"
+    },
+    "crm_system": {
+        "en": "CRM System",
+        "es": "Sistema CRM"
+    },
+    "form": {
+        "en": "Form",
+        "es": "Formulario"
+    },
+    "back": {
+        "en": "Back",
+        "es": "Atrás"
+    },
+    "client": {
+        "en": "Client",
+        "es": "Cliente"
+    },
+    "schedule": {
+        "en": "Schedule",
+        "es": "Agendar"
+    },
+    "reason": {
+        "en": "Reason",
+        "es": "Motivo"
+    },
+    "warning": {
+        "en": "Warning",
+        "es": "Aviso"
+    },
+    "username": {
+        "en": "Username",
+        "es": "Nombre de Usuario"
+    },
+    "password": {
+        "en": "Password",
+        "es": "Contraseña"
+    },
+    "login": {
+        "en": "Login",
+        "es": "Login"
+    },
+    "sure_want_leave": {
+        "en": "Are you sure you want to leave?",
+        "es": "Esta seguro de que desea salir?"
+    },
+    "home": {
+        "en": "Home",
+        "es": "Inicio"
+    },
+    "logout": {
+        "en": "Logout",
+        "es": "Salir"
+    },
+    "yes": {
+        "en": "Yes",
+        "es": "Si"
+    },
+    "no": {
+        "en": "No",
+        "es": "No"
+    },
     "app.helloWorld": {
         "en": "Hello World",
         "es": "Hola mundo"
@@ -11,4 +75,6 @@
         "en": "Learn React.",
         "es": "Aprende React."
     }
+
+
 }

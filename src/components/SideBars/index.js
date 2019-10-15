@@ -6,26 +6,25 @@ import styles from './styles'
 import sidebar_top_img from '../../assets/images/dls_logo.png'
 import { connect } from 'react-redux'
 import { logout } from '../../actions'
-import { StackActions } from 'react-navigation'
-
+import { withTranslation } from 'react-i18next'
 class SideBar extends React.Component {
     state = {
         routes: [
-            { title: 'Home', icon: 'home', route: 'Home' },
-            { title: 'Settings', icon: 'settings', route: 'Settings' },
+            { title: this.props.t('home'), icon: 'home', route: 'Home' },
+            { title: this.props.t('settings'), icon: 'settings', route: 'Settings' },
             {
-                title: 'Logout',
+                title: this.props.t('logout'),
                 type: 'MaterialCommunityIcons',
                 icon: 'exit-to-app',
                 onPress: _ => {
-                    Alert.alert('AVISO', 'Esta seguro de que desea salir?', [
+                    Alert.alert(this.props.t('warning'), this.props.t('sure_want_leave'), [
                         {
-                            text: 'NO',
+                            text: this.props.t('no'),
                         },
                         {
-                            text: 'SI',
+                            text: this.props.t('yes'),
                             onPress: async _ => {
-                                this.props.logout()
+                                await this.props.logout()
                                 this.props.navigation.navigate('Login')
                             },
                         },
@@ -90,7 +89,9 @@ const mapDispatchToProps = {
     logout,
 }
 
+SideBar = withNavigation(SideBar)
+SideBar = withTranslation()(SideBar)
 export default connect(
     mapStateToProps,
     mapDispatchToProps,
-)(withNavigation(SideBar))
+)(SideBar)

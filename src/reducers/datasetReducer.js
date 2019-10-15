@@ -18,8 +18,11 @@ let dataSetsInitialState = {
 
 let datasetReducer = (state = dataSetsInitialState, action) => {
     let { type, data, error, dataset_name } = action
-    //console.log('REDUCERS ===> ', { state, action })
-    if (!dataset_name) return state
+    //console.log('REDUCERS - datasetReducer ===> ', { state, action, dataset_name })
+    if (!dataset_name) {
+        //console.warn('REDUCER FETCH NAME IS REQUIRED', { state, action, dataset_name })
+        return state
+    }
     //throw 'REDUCER FETCH NAME IS REQUIRED'
 
     switch (type) {
@@ -30,7 +33,7 @@ let datasetReducer = (state = dataSetsInitialState, action) => {
         case SIMPLE_FETCH_SUCCESS:
             state['_loading'][dataset_name] = false
             state['_error'][dataset_name] = false
-
+            state[dataset_name] = { ...state[dataset_name], ...data }
             return { ...state }
         case SIMPLE_FETCH_ERROR:
             state['_loading'][dataset_name] = false

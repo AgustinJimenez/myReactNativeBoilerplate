@@ -35,5 +35,6 @@ export const fetchAuth = params => ({
 
 export const logout = _ => ({
     type: SET_ON_DATASET,
+    dataset_name: 'auth',
     data: { token: null },
 })

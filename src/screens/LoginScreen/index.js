@@ -4,16 +4,11 @@ import { Form, Container, Card, CardItem, Body, Text, Item, Label, Input, Button
 import { connect } from 'react-redux'
 import { fetchAuth } from '../../actions'
 import styles from './styles'
+import { withTranslation } from 'react-i18next'
 //import JSONTree from 'react-native-json-tree'
 
 const loginBackgroundImg = require('../../assets/images/login.jpg')
 const dlsLogoImg = require('../../assets/images/dls_logo.png')
-const text = {
-    subtitle: 'Sistema CRM',
-    userNamePlaceholder: 'Usuario*',
-    passwordPlaceholder: 'Contraseña*',
-    loginButtonText: 'Ingresar',
-}
 
 class LoginScreen extends React.Component {
     usernameRef = null
@@ -57,14 +52,14 @@ class LoginScreen extends React.Component {
                                 <CardItem>
                                     <Body style={styles.center}>
                                         <Image source={dlsLogoImg} style={styles.welcomeImage} />
-                                        <Text /* style={{ fontFamily: 'SpaceMono-Regular' }} */>{text.subtitle}</Text>
+                                        <Text /* style={{ fontFamily: 'SpaceMono-Regular' }} */>{this.props.t('crm_system')}</Text>
                                     </Body>
                                 </CardItem>
                                 <CardItem>
                                     <Body style={styles.center}>
                                         <Form style={styles.center}>
                                             <Item floatingLabel>
-                                                <Label>{text.userNamePlaceholder}</Label>
+                                                <Label>{this.props.t('username') + '*'}</Label>
                                                 <Input
                                                     getRef={ref => (this.usernameRef = ref)}
                                                     onChangeText={this.onUsernameChange}
@@ -78,7 +73,7 @@ class LoginScreen extends React.Component {
                                             </Item>
 
                                             <Item floatingLabel>
-                                                <Label>{text.passwordPlaceholder}</Label>
+                                                <Label>{this.props.t('password') + '*'}</Label>
                                                 <Input
                                                     getRef={ref => (this.passwordRef = ref)}
                                                     onChangeText={this.onPasswordChange}
@@ -91,7 +86,7 @@ class LoginScreen extends React.Component {
 
                                         <View style={styles.loginButtonContainer}>
                                             <Button full disabled={this.loginButtonIsDisabled()} onPress={this.login}>
-                                                <Text>{text.loginButtonText}</Text>
+                                                <Text>{this.props.t('login')}</Text>
                                             </Button>
                                         </View>
                                     </Body>
@@ -112,7 +107,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
     fetchAuth,
 }
-
+LoginScreen = withTranslation()(LoginScreen)
 export default connect(
     mapStateToProps,
     mapDispatchToProps,

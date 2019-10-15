@@ -3,11 +3,14 @@ import { ScrollView, View } from 'react-native'
 import { Card, CardItem, Body, Item, Text, Input, Button } from 'native-base'
 import DateTimePicker from 'react-native-modal-datetime-picker'
 import MapView, { Marker, ProviderPropType } from 'react-native-maps'
+import HeaderTitle from '../../components/HeaderTitle'
 import styles from './styles'
+import { withNavigation } from 'react-navigation'
+import { withTranslation } from 'react-i18next'
 
 class AgendaForm extends React.Component {
     static navigationOptions = {
-        title: 'Formulario',
+        headerTitle: HeaderTitle('form'),
     }
 
     state = {
@@ -50,10 +53,10 @@ class AgendaForm extends React.Component {
                                 }}
                             >
                                 <Item>
-                                    <Input placeholder='Cliente' autoFocus />
+                                    <Input placeholder={this.props.t('client')} autoFocus />
                                 </Item>
                                 <Item last>
-                                    <Input placeholder='Motivo' />
+                                    <Input placeholder={this.props.t('reason')} />
                                 </Item>
 
                                 <CardItem>
@@ -81,7 +84,7 @@ class AgendaForm extends React.Component {
                                 }}
                             >
                                 <Button full onPress={_ => this.props.navigation.navigate('Links')}>
-                                    <Text>Agendar</Text>
+                                    <Text>{this.props.t('schedule')}</Text>
                                 </Button>
                             </Body>
                         </CardItem>
@@ -91,5 +94,6 @@ class AgendaForm extends React.Component {
         )
     }
 }
-
+AgendaForm = withNavigation(AgendaForm)
+AgendaForm = withTranslation()(AgendaForm)
 export default AgendaForm
