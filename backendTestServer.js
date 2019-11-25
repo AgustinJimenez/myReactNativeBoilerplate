@@ -10,7 +10,7 @@ app.get('/', (request, response) => response.send('Hello World!'))
 app.post('/api/v1/auth', (request, response) => {
     let { username, password } = request.query
     console.table(request.query)
-    if (username === 'dlsadmin' && password === 'prueba123') return response.status(200).send({ message: 'Bienvenido!!!', token: 'ABC-LONG-TOKEN' })
+    if (username === 'admin' && password === 'prueba123') return response.status(200).send({ message: 'Bienvenido!!!', token: 'ABC-LONG-TOKEN' })
 
     return response.status(401).send({ message: 'Credenciales Invalidas !!!' })
 })
@@ -29,7 +29,7 @@ app.get('/api/v1/appointments', (request, response) => {
 app.listen(PORT, () =>
     console.log(
         `\n=============================================================\n` +
-            `Express app listening on port http://${ip.address()}:${PORT} !` +
-            `\n=============================================================\n`,
+        `Express app listening on port http://${ip.address()}:${PORT} !` +
+        `\n=============================================================\n`,
     ),
 )

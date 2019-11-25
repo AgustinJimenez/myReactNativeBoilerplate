@@ -1,3 +1,3 @@
-import { API_DOMAIN } from 'react-native-dotenv'
+import { API_DOMAIN } from '../../env'
 
 export const domain = API_DOMAIN

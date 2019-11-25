@@ -95,7 +95,7 @@ export default StyleSheet.create({
     loginButtonContainer: {
         justifyContent: 'center',
         alignItems: 'center',
-        marginVertical: 20,
+        marginTop: 20,
         marginBottom: 10,
     },
     center: {

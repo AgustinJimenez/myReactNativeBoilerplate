@@ -1,8 +1,9 @@
 import { StyleSheet } from 'react-native'
+import { colors } from '../../theme/variables/commonStyles'
 
 export default StyleSheet.create({
-    fab: { backgroundColor: '#1565c0' },
+    fab: { backgroundColor: colors.btnPrimaryBg },
     agendaFormButton: {
-        backgroundColor: '#34A34F',
+        backgroundColor: colors.brandPrimary,
     },
 })

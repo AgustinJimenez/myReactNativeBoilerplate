@@ -1,11 +1,13 @@
 import React from 'react'
-import { Image, ScrollView, View, ImageBackground, KeyboardAvoidingView } from 'react-native'
-import { Form, Container, Card, CardItem, Body, Text, Item, Label, Input, Button } from 'native-base'
+import { Image, ImageBackground, KeyboardAvoidingView } from 'react-native'
+import { Form, Container, Content, Card, CardItem, Body, Text, Item, Label, Input, Button, Spinner } from 'native-base'
 import { connect } from 'react-redux'
-import { fetchAuth } from '../../actions'
+import { fetchAuth, setOthers } from '../../actions'
 import styles from './styles'
 import { withTranslation } from 'react-i18next'
-//import JSONTree from 'react-native-json-tree'
+import { authSelector, othersSelector } from '../../selectors/datasetsSelector'
+/* import JSONTree from 'react-native-json-tree' */
+import { API_DOMAIN } from '../../../env'
 
 const loginBackgroundImg = require('../../assets/images/login.jpg')
 const dlsLogoImg = require('../../assets/images/dls_logo.png')
@@ -24,17 +26,17 @@ class LoginScreen extends React.Component {
     }
 
     loginButtonIsDisabled = _ => {
-        if (this.getUsername().trim() === '' || this.getPassword().trim() === '') return true
+        if (this.getUsername().trim() === '' || this.getPassword().trim() === '' || this.getPassword().trim().length < 3) return true
 
         return false
     }
-    getUsername = _ => this.state.username || ''
+    getUsername = _ => this.props.others.data.username || ''
     getPassword = _ => this.state.password || ''
 
     onPasswordChange = password => this.setState({ password })
-    onUsernameChange = username => this.setState({ username })
+    onUsernameChange = username => this.props.setOthers({ username })
     getParams = _ => ({
-        username: this.getUsername(),
+        name: this.getUsername(),
         password: this.getPassword(),
     })
 
@@ -46,7 +48,7 @@ class LoginScreen extends React.Component {
         return (
             <Container>
                 <ImageBackground resizeMode='cover' source={loginBackgroundImg} style={styles.container}>
-                    <ScrollView style={[styles.container, styles.darkOpacity]} contentContainerStyle={styles.contentContainer}>
+                    <Content style={[styles.container, styles.darkOpacity]} contentContainerStyle={styles.contentContainer}>
                         <KeyboardAvoidingView behavior='position' style={styles.cardContainer}>
                             <Card>
                                 <CardItem>
@@ -66,7 +68,7 @@ class LoginScreen extends React.Component {
                                                     value={this.getUsername()}
                                                     autoCapitalize='none'
                                                     autoCorrect={false}
-                                                    autoFocus
+                                                    autoFocus={!this.getUsername()}
                                                     returnKeyType='next'
                                                     onSubmitEditing={_ => this.passwordRef._root.focus()}
                                                 />
@@ -75,26 +77,25 @@ class LoginScreen extends React.Component {
                                             <Item floatingLabel>
                                                 <Label>{this.props.t('password') + '*'}</Label>
                                                 <Input
+                                                    autoFocus={!!this.getUsername()}
                                                     getRef={ref => (this.passwordRef = ref)}
                                                     onChangeText={this.onPasswordChange}
                                                     value={this.getPassword()}
                                                     secureTextEntry={true}
+                                                    autoCapitalize='none'
                                                     returnKeyType='done'
                                                 />
                                             </Item>
                                         </Form>
-
-                                        <View style={styles.loginButtonContainer}>
-                                            <Button full disabled={this.loginButtonIsDisabled()} onPress={this.login}>
-                                                <Text>{this.props.t('login')}</Text>
-                                            </Button>
-                                        </View>
+                                        <Button block disabled={this.loginButtonIsDisabled()} onPress={this.login} style={styles.loginButtonContainer}>
+                                            {this.props.auth.loading ? <Spinner color='white' /> : <Text>{this.props.t('login')}</Text>}
+                                        </Button>
                                     </Body>
                                 </CardItem>
                             </Card>
                         </KeyboardAvoidingView>
-                        {/* <JSONTree data={{ props: this.props, state: this.state }} /> */}
-                    </ScrollView>
+                        {/* <JSONTree data={this.props} /> */}
+                    </Content>
                 </ImageBackground>
             </Container>
         )
@@ -102,13 +103,12 @@ class LoginScreen extends React.Component {
 }
 
 const mapStateToProps = state => ({
-    //userSelector: usersSelector(state),
+    auth: authSelector(state),
+    others: othersSelector(state),
 })
 const mapDispatchToProps = {
     fetchAuth,
+    setOthers,
 }
 LoginScreen = withTranslation()(LoginScreen)
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps,
-)(LoginScreen)
+export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen)

@@ -1,10 +1,10 @@
 import React from 'react'
-import { Picker, Icon, ListItem, Left, Body, Text } from 'native-base'
+import { Picker, ListItem, Left, Body, Text } from 'native-base'
 import { connect } from 'react-redux'
-import { langSelector } from '../../../selectors/datasetsSelector'
+import { langSelector, othersSelector } from '../../../selectors/datasetsSelector'
 import { setLang } from '../../../actions'
 import { withTranslation } from 'react-i18next'
-
+import Select from '../../../components/utils/Select'
 class LangInput extends React.Component {
     state = {
         langs: [{ label_id: 'english', value: 'en' }, { label_id: 'spanish', value: 'es' }],
@@ -20,35 +20,35 @@ class LangInput extends React.Component {
 
     render() {
         return (
-            <ListItem>
-                <Left>
-                    <Text>{this.props.t('language') + ':'}</Text>
-                </Left>
-                <Body>
-                    <Picker
-                        mode='dropdown'
-                        iosHeader={this.props.t('select_lang')}
-                        iosIcon={<Icon name='arrow-down' />}
-                        placeholder={this.getSelectedLangLabel()}
-                        selectedValue={this.props.lang.data}
-                        headerBackButtonText={this.props.t('back')}
-                        onValueChange={lang_id => {
-                            this.props.i18n.changeLanguage(lang_id)
-                            this.props.setLang(lang_id)
-                        }}
-                    >
-                        {this.state.langs.map((lang, key) => (
-                            <Picker.Item key={key} label={this.props.t(lang.label_id)} value={lang.value} />
-                        ))}
-                    </Picker>
-                </Body>
-            </ListItem>
+            <React.Fragment>
+                <ListItem>
+                    <Left>
+                        <Text>{this.props.t('language') + ':'}</Text>
+                    </Left>
+                    <Body>
+                        <Select
+                            iosHeader='select_lang'
+                            placeholder={this.getSelectedLangLabel()}
+                            selectedValue={this.props.lang.data}
+                            onValueChange={lang_id => {
+                                this.props.i18n.changeLanguage(lang_id)
+                                this.props.setLang(lang_id)
+                            }}
+                        >
+                            {this.state.langs.map((lang, key) => (
+                                <Picker.Item key={key} label={this.props.t(lang.label_id)} value={lang.value} />
+                            ))}
+                        </Select>
+                    </Body>
+                </ListItem>
+            </React.Fragment>
         )
     }
 }
 
 const mapStateToProps = state => ({
     lang: langSelector(state),
+    others: othersSelector(state)
 })
 const mapDispatchToProps = {
     setLang,

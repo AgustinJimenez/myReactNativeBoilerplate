@@ -3,13 +3,105 @@
         "en": "Appointment Schedule",
         "es": "Agenda de citas"
     },
+    "ECONNABORTED": {
+        "en": "Cannot connect...",
+        "es": "No se puede conectar..."
+    },
+    "new_appointment": {
+        "en": "New Appointment",
+        "es": "Nueva Cita"
+    },
+    "appointment": {
+        "en": "Appointment",
+        "es": "Cita"
+    },
+    "appointment_notification": {
+        "en": "Appointment notification",
+        "es": "Notificacion de cita"
+    },
+    "select_hour": {
+        "en": "Select hour",
+        "es": "Seleccionar hora"
+    },
+    "count_of_hours_before": {
+        "en": "Count of hour(s) before",
+        "es": "Cantidad de hora(s) antes"
+    },
+    "hours_before": {
+        "en": "Hour(s) Before",
+        "es": "Hora(s) Antes"
+    },
+    "appointment_place_was_assigned": {
+        "en": "Appointment place was assigned",
+        "es": "Se asigno el lugar de la cita"
+    },
+    "appointment_was_finished": {
+        "en": "Appointment was finished",
+        "es": "Se finalizo la cita"
+    },
+    "no_data": {
+        "en": "No Data...",
+        "es": "Sin Datos..."
+    },
+    "empty_data": {
+        "en": "Empty Data...",
+        "es": "Datos Vacios..."
+    },
+    "check_in": {
+        "en": "Check In",
+        "es": "Check In"
+    },
+    "add_new_appointment": {
+        "en": "Add new appointment",
+        "es": "Agregar nueva cita"
+    },
+    "interesed": {
+        "en": "Interesed",
+        "es": "Interesado"
+    },
+    "not_interesed": {
+        "en": "Not interesed",
+        "es": "Sin interesado"
+    },
+    "appointment_checked": {
+        "en": "Appointment was checked",
+        "es": "Se asigno el lugar de la cita"
+    },
+    "update": {
+        "en": "Update",
+        "es": "Actualizar"
+    },
+    "sure_want_delete_record": {
+        "en": "¿Are you sure that you want to delete the record?",
+        "es": "¿Está seguro de que desea eliminar el registro?"
+    },
+    "accept": {
+        "en": "Accept",
+        "es": "Aceptar"
+    },
+    "date": {
+        "en": "Date",
+        "es": "Fecha"
+    },
+    "location": {
+        "en": "Location",
+        "es": "Ubicacion"
+    },
+    "cancel": {
+        "en": "Cancel",
+        "es": "Cancelar"
+    },
     "settings": {
         "en": "Settings",
         "es": "Configuraciones"
     },
     "select_lang": {
-        "en": "Select language",
-        "es": "Seleccionar lenguaje"
+        "en": "Select Language",
+        "es": "Seleccionar Lenguaje"
+    },
+    "select_client": {
+        "en": "Select Client",
+        "es": "Seleccionar Cliente"
     },
     "language": {
         "en": "Language",

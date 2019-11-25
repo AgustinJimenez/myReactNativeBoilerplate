@@ -1,40 +1,57 @@
 import React from 'react'
 import DrawerIcon from '../../components/DrawerIcon'
-import { Container, Button, Icon, Fab } from 'native-base'
+import { Container, Icon, Fab } from 'native-base'
 import styles from './styles'
 import { withNavigation } from 'react-navigation'
 import Agenda from './components/Agenda'
 import HeaderTitle from '../../components/HeaderTitle'
+import { setOthers } from '../../actions'
+import { othersSelector } from '../../selectors/datasetsSelector'
+//import JSONTree from 'react-native-json-tree'
+//import { connect } from 'react-redux'
+import PermissionsChecker from '../../app/PermissionsChecker'
+
 class HomeScreen extends React.Component {
     state = {
-        active: false,
     }
-
+    agendaRef = null
     static navigationOptions = {
         headerTitle: <HeaderTitle trans_id='appointment_schedule' />,
         headerLeft: <DrawerIcon />,
     }
 
     render() {
+        //console.log('RENDER Homescreen ==>', this.state)
         return (
             <Container>
                 <Agenda />
                 <Fab
-                    active={this.state.active}
-                    direction='up'
+                    active={true}
                     style={styles.fab}
                     position='bottomRight'
-                    onPress={() => this.setState({ active: !this.state.active })}
+                    onPress={_ => this.props.navigation.push('AppointmentForm')}
                 >
-                    <Icon name={this.state.active ? 'dots-horizontal' : 'dots-vertical'} type='MaterialCommunityIcons' />
-                    <Button onPress={this.goToAgendaForm} style={styles.agendaFormButton}>
-                        <Icon name='add' />
-                    </Button>
+                    <Icon name='add' />
                 </Fab>
+                {/* <JSONTree data={this.state} /> */}
+                <PermissionsChecker />
             </Container>
         )
     }
-    goToAgendaForm = _ => this.props.navigation.push('AgendaForm')
+
+}
+
+const mapStateToProps = state => ({
+    others: othersSelector(state),
+})
+const mapDispatchToProps = {
+    setOthers,
 }
 
 export default withNavigation(HomeScreen)
+/*
+connect(
+    mapStateToProps,
+    mapDispatchToProps,
+)(withNavigation(HomeScreen))
+*/

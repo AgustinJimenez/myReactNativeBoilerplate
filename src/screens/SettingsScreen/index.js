@@ -1,9 +1,12 @@
 import React from 'react'
-import { Container, Content, Form, List } from 'native-base'
-import styles from './styles'
+import { Container, Content, Form, List, Body, ListItem } from 'native-base'
 import HeaderTitle from '../../components/HeaderTitle'
 import DrawerIcon from '../../components/DrawerIcon'
+import { connect } from 'react-redux'
+import { othersSelector } from '../../selectors/datasetsSelector'
 import LangInput from './components/LangInput'
+import AppointmentNotificationInput from './components/AppointmentNotificationInput'
+import JSONTree from 'react-native-json-tree'
 
 class SettingsScreen extends React.Component {
     static navigationOptions = {
@@ -18,6 +21,13 @@ class SettingsScreen extends React.Component {
                     <Form>
                         <List>
                             <LangInput />
+                            <AppointmentNotificationInput />
+
+                            <ListItem>
+                                <Body>
+                                    <JSONTree data={this.props.others.data.logs} />
+                                </Body>
+                            </ListItem>
                         </List>
                     </Form>
                 </Content>
@@ -26,4 +36,12 @@ class SettingsScreen extends React.Component {
     }
 }
 
-export default SettingsScreen
+
+const mapStateToProps = state => ({
+    others: othersSelector(state)
+})
+
+export default connect(
+    mapStateToProps,
+)(SettingsScreen)
+

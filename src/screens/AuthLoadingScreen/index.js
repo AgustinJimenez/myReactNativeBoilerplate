@@ -1,20 +1,48 @@
 import React from 'react'
-import { authSelector } from '../../selectors/datasetsSelector'
+import { authSelector, langSelector } from '../../selectors/datasetsSelector'
 import { connect } from 'react-redux'
+import { Container } from 'native-base'
 import LoadingScreen from '../LoadingScreen'
 import { withTranslation } from 'react-i18next'
-import { langSelector } from '../../selectors/datasetsSelector'
+import { resetAppLoadings, resetAppErrors } from '../../actions'
+import * as Animatable from 'react-native-animatable'
 
 class AuthLoadingScreen extends React.Component {
+
+    animationContainer = null
+
     constructor(props) {
         super(props)
-        if (props.lang.data !== props.i18n.language) props.i18n.changeLanguage(props.lang.data)
-        props.navigation.navigate(!!props.auth.data.token ? 'App' : 'Login')
+        props.resetAppLoadings()
+        props.resetAppErrors()
+        if (props.lang.data !== props.i18n.language)
+            props.i18n.changeLanguage(props.lang.data)
     }
 
-    // Render any loading content that you like here
+    continue = async _ => {
+        //await this.animationContainer.fadeOut(500)
+        setTimeout(_ => this.props.navigation.navigate(!!this.props.auth.data.token ? 'App' : 'Login'), 300)
+    }
+
     render() {
-        return <LoadingScreen />
+        return (
+            <Animatable.View
+                style={{
+                    flex: 1
+                }}
+                animation="fadeIn"
+                delay={200}
+                //onTransitionEnd={this.continue}
+                onAnimationEnd={this.continue}
+                ref={ref => {
+                    if (ref)
+                        this.animationContainer = ref
+                }}
+            //useNativeDriver={true}
+            >
+                <LoadingScreen />
+            </Animatable.View>
+        )
     }
 }
 
@@ -23,7 +51,8 @@ const mapStateToProps = state => ({
     lang: langSelector(state),
 })
 const mapDispatchToProps = {
-    //fetchUsers,
+    resetAppLoadings,
+    resetAppErrors,
 }
 
 AuthLoadingScreen = withTranslation()(AuthLoadingScreen)
