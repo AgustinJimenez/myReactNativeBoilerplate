@@ -2,12 +2,13 @@ import React from 'react'
 import { Image, ImageBackground, KeyboardAvoidingView } from 'react-native'
 import { Form, Container, Content, Card, CardItem, Body, Text, Item, Label, Input, Button, Spinner } from 'native-base'
 import { connect } from 'react-redux'
-import { fetchAuth, setOthers } from '../../actions'
+import { authAction, setOthersDatasetAction } from '../../actions'
 import styles from './styles'
 import { withTranslation } from 'react-i18next'
 import { authSelector, othersSelector } from '../../selectors/datasetsSelector'
 /* import JSONTree from 'react-native-json-tree' */
 import { API_DOMAIN } from '../../../env'
+import { withNavigation } from 'react-navigation'
 
 const loginBackgroundImg = require('../../assets/images/login.jpg')
 const dlsLogoImg = require('../../assets/images/dls_logo.png')
@@ -19,29 +20,47 @@ class LoginScreen extends React.Component {
     state = {
         username: '',
         password: '',
+        submiting: false,
+        timer: 1000,
+        controlTimeEnabled: true,
     }
 
     static navigationOptions = {
         header: null,
     }
 
-    loginButtonIsDisabled = _ => {
-        if (this.getUsername().trim() === '' || this.getPassword().trim() === '' || this.getPassword().trim().length < 3) return true
+    loginButtonIsDisabled = () => {
+        if (
+            (this.state.submiting && this.getUsername().trim() === '') ||
+            this.getPassword().trim() === '' ||
+            this.getPassword().trim().length < 3 ||
+            !this.state.controlTimeEnabled
+        )
+            return true
 
         return false
     }
-    getUsername = _ => this.props.others.data.username || ''
-    getPassword = _ => this.state.password || ''
+    getUsername = () => this.props.others.username || ''
+    getPassword = () => this.state.password || ''
 
     onPasswordChange = password => this.setState({ password })
     onUsernameChange = username => this.props.setOthers({ username })
-    getParams = _ => ({
+    getParams = () => ({
         name: this.getUsername(),
         password: this.getPassword(),
     })
 
-    login = _ => {
-        this.props.fetchAuth(this.getParams())
+    login = async () => {
+        await this.setState({ submiting: true, controlTimeEnabled: false })
+        clearTimeout(this.timer)
+        this.timer = setTimeout(() => {
+            this.props.authAction(this.getParams(), _ => this.setState({ submiting: false }))
+            this.setState(state => {
+                state.timer = state.timer * 1.5
+                state.controlTimeEnabled = true
+                return state
+            })
+        }, this.state.timer)
     }
 
     render() {
@@ -70,7 +89,7 @@ class LoginScreen extends React.Component {
                                                     autoCorrect={false}
                                                     autoFocus={!this.getUsername()}
                                                     returnKeyType='next'
-                                                    onSubmitEditing={_ => this.passwordRef._root.focus()}
+                                                    onSubmitEditing={() => this.passwordRef._root.focus()}
                                                 />
                                             </Item>
 
@@ -88,7 +107,7 @@ class LoginScreen extends React.Component {
                                             </Item>
                                         </Form>
                                         <Button block disabled={this.loginButtonIsDisabled()} onPress={this.login} style={styles.loginButtonContainer}>
-                                            {this.props.auth.loading ? <Spinner color='white' /> : <Text>{this.props.t('login')}</Text>}
+                                            {this.state.submiting ? <Spinner color='white' /> : <Text>{this.props.t('login')}</Text>}
                                         </Button>
                                     </Body>
                                 </CardItem>
@@ -107,8 +126,9 @@ const mapStateToProps = state => ({
     others: othersSelector(state),
 })
 const mapDispatchToProps = {
-    fetchAuth,
-    setOthers,
+    authAction,
+    setOthers: setOthersDatasetAction,
 }
 LoginScreen = withTranslation()(LoginScreen)
+LoginScreen = withNavigation(LoginScreen)
 export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen)

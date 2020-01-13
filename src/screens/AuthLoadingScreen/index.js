@@ -1,10 +1,8 @@
 import React from 'react'
 import { authSelector, langSelector } from '../../selectors/datasetsSelector'
 import { connect } from 'react-redux'
-import { Container } from 'native-base'
 import LoadingScreen from '../LoadingScreen'
 import { withTranslation } from 'react-i18next'
-import { resetAppLoadings, resetAppErrors } from '../../actions'
 import * as Animatable from 'react-native-animatable'
 
 class AuthLoadingScreen extends React.Component {
@@ -13,15 +11,13 @@ class AuthLoadingScreen extends React.Component {
 
     constructor(props) {
         super(props)
-        props.resetAppLoadings()
-        props.resetAppErrors()
-        if (props.lang.data !== props.i18n.language)
-            props.i18n.changeLanguage(props.lang.data)
+        if (props.lang !== props.i18n.language)
+            props.i18n.changeLanguage(props.lang)
     }
 
-    continue = async _ => {
+    continue = async () => {
         //await this.animationContainer.fadeOut(500)
-        setTimeout(_ => this.props.navigation.navigate(!!this.props.auth.data.token ? 'App' : 'Login'), 300)
+        setTimeout(() => this.props.navigation.navigate(!!this.props.auth.token ? 'App' : 'Login'), 300)
     }
 
     render() {
@@ -51,8 +47,6 @@ const mapStateToProps = state => ({
     lang: langSelector(state),
 })
 const mapDispatchToProps = {
-    resetAppLoadings,
-    resetAppErrors,
 }
 
 AuthLoadingScreen = withTranslation()(AuthLoadingScreen)

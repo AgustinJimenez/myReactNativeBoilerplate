@@ -3,9 +3,13 @@ import commonStyles from '../../../../theme/variables/commonStyles'
 import Colors from '../../../../theme/variables/commonColor'
 import Platform from '../../../../theme/variables/platform'
 
+export const primaryColor = Colors.btnPrimaryBg
 export default StyleSheet.create({
     successColor: {
-        color: Colors.btnSuccessBg
+        color: Colors.btnSuccessBg,
+    },
+    warningColor: {
+        color: Colors.btnWarningBg,
     },
     emptyDate: {
         flex: 1,
@@ -21,7 +25,7 @@ export default StyleSheet.create({
     buttonsContainer: {
         flex: 1,
         alignSelf: 'flex-end',
-        flexDirection: 'row'
+        flexDirection: 'row',
     },
     item: {
         flex: 1,
@@ -35,8 +39,8 @@ export default StyleSheet.create({
         marginTop: 5,
         //...commonStyles.elevationLow
     },
-    itemTextContainer: { flex: 0.8, alignItems: 'flex-start' },
-    itemIconContainer: { flex: 0.2 },
+    itemTextContainer: { flex: 0.7, alignItems: 'flex-start', flexDirection: 'row' },
+    itemIconContainer: { flex: 0.3 },
     button: {
         width: Platform.deviceWidth * 0.14,
         height: Platform.deviceWidth * 0.12,
@@ -59,9 +63,5 @@ export default StyleSheet.create({
         color: 'gray',
     },
     buttonIcon: { color: 'white' },
-    noData: {
-        flex: 0.5,
-        ...commonStyles.center,
-    },
-    ...commonStyles
+    ...commonStyles,
 })

@@ -12,9 +12,8 @@ class AppointmentNotificationInput extends React.Component {
         range: [1, 2, 3, 4, 5, 6, 7, 8]
     }
 
-    getSelectedValue = _ => {
-        console.log('getSelectedValue ===> ', this.props)
-        return this.props.hours_before_appointment_notification.data
+    getSelectedValue = () => {
+        return this.props.hours_before_appointment_notification
     }
 
     render() {
@@ -33,11 +32,13 @@ class AppointmentNotificationInput extends React.Component {
                             onValueChange={hours => {
                                 this.props.setHoursBeforeAppointmentNotification(hours)
                             }}
-                        >
-                            {this.state.range.map((hours, key) => (
-                                <Picker.Item key={key} label={hours + ' ' + this.props.t('hours_before')} value={hours} />
-                            ))}
-                        </Select>
+                            items={
+                                this.state.range.map((hours, key) => ({
+                                    label: `${hours}  ${this.props.t('hours_before')}`,
+                                    value: hours
+                                }))
+                            }
+                        />
                     </Body>
                 </ListItem>
             </React.Fragment>

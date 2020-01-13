@@ -4,6 +4,7 @@ require_relative '../node_modules/@react-native-community/cli-platform-ios/nativ
 target 'app' do
   permissions_path = '../node_modules/react-native-permissions/ios'
 
+  # Pods for app
   pod 'FBLazyVector', :path => "../node_modules/react-native/Libraries/FBLazyVector"
   pod 'FBReactNativeSpec', :path => "../node_modules/react-native/Libraries/FBReactNativeSpec"
   pod 'RCTRequired', :path => "../node_modules/react-native/Libraries/RCTRequired"
@@ -36,7 +37,11 @@ target 'app' do
   pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
   pod 'react-native-geolocation', path: '../node_modules/@react-native-community/geolocation'
-  pod 'Permission-LocationWhenInUse', :path => "#{permissions_path}/LocationWhenInUse.podspec"  
+  pod 'Permission-LocationWhenInUse', :path => "#{permissions_path}/LocationWhenInUse.podspec"
+
+
+
+  pod 'RNDeviceInfo', :path => '../node_modules/react-native-device-info'
 
   target 'appTests' do
     inherit! :search_paths

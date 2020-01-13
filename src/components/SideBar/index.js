@@ -1,34 +1,38 @@
 import React from 'react'
 import { Image, Alert, ScrollView, SafeAreaView } from 'react-native'
-import { Container, Header, Content, Card, CardItem, Thumbnail, Body, List, ListItem, Text, Left, Right, Icon, View } from 'native-base'
+import { CardItem, Thumbnail, Body, List, ListItem, Text, Left, Right, Icon, View, Label } from 'native-base'
 import { withNavigation } from 'react-navigation'
 import styles from './styles'
 import sidebar_top_img from '../../assets/images/dls_logo.png'
 import { connect } from 'react-redux'
-import { logout } from '../../actions'
+import { logoutAction } from '../../actions'
 import { withTranslation } from 'react-i18next'
 import { StackActions, NavigationActions } from 'react-navigation'
 import { authSelector } from '../../selectors/datasetsSelector'
 import capitalize from '../../utils/capitalize'
+import userImage from '../../assets/images/user.png'
+import { getVersion, getBuildNumber } from 'react-native-device-info'
 
 class SideBar extends React.Component {
-    getSidebarRoutes = _ => [
+    state = {}
+
+    getSidebarRoutes = () => [
         { title: this.props.t('home'), icon: 'home', route: 'Home' },
+        { title: this.props.t('appointment_notifications'), icon: 'notifications', route: 'Notifications', type: 'MaterialIcons' },
         { title: this.props.t('settings'), icon: 'settings', route: 'Settings' },
         {
             title: this.props.t('logout'),
             type: 'MaterialCommunityIcons',
             icon: 'exit-to-app',
-            onPress: _ => {
+            onPress: () => {
                 Alert.alert(this.props.t('warning'), this.props.t('sure_want_leave'), [
                     {
                         text: this.props.t('no'),
                     },
                     {
                         text: this.props.t('yes'),
-                        onPress: async _ => {
-                            await this.props.logout()
-                            this.props.navigation.navigate('Login')
+                        onPress: () => {
+                            this.props.logoutAction()
                         },
                     },
                 ])
@@ -38,21 +42,23 @@ class SideBar extends React.Component {
         //{ title: '2 - List Details', route: 'ListDetails' },
     ]
 
+    renderAvatarImage = () => {
+        return <Thumbnail progressiveRenderingEnabled defaultSource={userImage} source={{ uri: this.props.auth.avatar }} />
+    }
+
     render() {
         let routes = this.getSidebarRoutes()
         return (
-            <SafeAreaView style={styles.content}>
+            <SafeAreaView style={{ flex: 1 }}>
                 <CardItem bordered style={styles.logotop}>
                     <Image source={sidebar_top_img} style={styles.sidebar_top_img} />
                 </CardItem>
                 <CardItem bordered>
                     <Left>
-                        <View style={styles.avatar}>
-                            <Thumbnail source={{ uri: this.props.auth.data.avatar }} />
-                        </View>
+                        <View style={styles.avatar}>{this.renderAvatarImage()}</View>
                         <Body>
-                            <Text>{capitalize(this.props.auth.data.username)}</Text>
-                            <Text note>{this.props.auth.data.branch_name}</Text>
+                            <Text>{capitalize(this.props.auth.username)}</Text>
+                            <Text note>{this.props.auth.branch_name}</Text>
                         </Body>
                     </Left>
                 </CardItem>
@@ -70,7 +76,7 @@ class SideBar extends React.Component {
                                     last={routes.length === key + 1}
                                     button
                                     style={{ marginLeft: 0, paddingLeft: 20 }}
-                                    onPress={_ => {
+                                    onPress={() => {
                                         if (!!sidebar_route.onPress) sidebar_route.onPress()
                                         else {
                                             let resetAction = StackActions.reset({
@@ -93,6 +99,19 @@ class SideBar extends React.Component {
                         })}
                     </List>
                 </ScrollView>
+
+                <List style={{ alignSefl: 'flex-end' }}>
+                    <ListItem key={100}>
+                        <Body style={{ flexDirection: 'row' }}>
+                            <Label>Version:</Label>
+                            <Text>{getVersion()}</Text>
+                        </Body>
+                        <Body style={{ flexDirection: 'row' }}>
+                            <Label>Build:</Label>
+                            <Text>{getBuildNumber()}</Text>
+                        </Body>
+                    </ListItem>
+                </List>
             </SafeAreaView>
         )
     }
@@ -102,7 +121,7 @@ const mapStateToProps = state => ({
     auth: authSelector(state),
 })
 const mapDispatchToProps = {
-    logout,
+    logoutAction,
 }
 
 SideBar = withNavigation(SideBar)

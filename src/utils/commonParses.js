@@ -1,1 +1,0 @@
-export const minutesToMiliseconds = minutes => minutes * 60000

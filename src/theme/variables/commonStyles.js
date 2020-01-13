@@ -7,6 +7,14 @@ export default StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
+    closeIcon: {
+        position: 'absolute',
+        alignSelf: 'flex-end',
+        fontSize: 30,
+        overflow: 'hidden',
+        paddingLeft: 15,
+        paddingBottom: 15,
+    },
     colorPrimary: {
         color: commonColor.btnPrimaryBg, // brandPrimary
     },

@@ -1,108 +1,44 @@
-import { DELETE_DATASET_LIST, UPDATE_TO_DATASET_LIST, PUSH_TO_DATASET_LIST, SIMPLE_FETCH, SIMPLE_FETCH_SUCCESS, SIMPLE_FETCH_ERROR, SET_ON_DATASET, default as ACTION_TYPES } from '../actions/types'
-
-export let loadingDatasetInitialState = {
-    users: false,
-    appointments: false,
-    auth: false,
-    lang: false
-}
-export let errorsDatasetInitialState = {
-    users: null,
-    appointments: null,
-    auth: null,
-    lang: null,
-}
-export let appDatasetInitialState = {
-    users: [],
-    appointments: [],
-    auth: {
-        token: null,
-        avatar: null,
-        username: null,
-        branch_name: null,
-    },
-    lang: 'es',
-    hours_before_appointment_notification: 4,
-    others: {
-        logs: [],
-        username: '',
-        appointmentsAreSynchronizing: false,
-        network: {
-            isConnected: false,
-            type: null,
-            isInternetReachable: false,
-            details: {
-                ipAddress: null,
-                isConnectionExpensive: false,
-                subnet: null,
-            },
-        },
-    },
-}
-let dataSetsInitialState = {
-    _loading: loadingDatasetInitialState,
-    _error: errorsDatasetInitialState,
-    ...appDatasetInitialState,
-}
-
-let datasetReducer = (state = dataSetsInitialState, action) => {
-    let { type, data, error, dataset_name } = action
-    //console.log('REDUCERS - datasetReducer ===> ', { type, state, error, action, dataset_name })
-    if (!dataset_name && !!ACTION_TYPES[type]) {
-        console.error('DATASET NAME NAME IS REQUIRED', { type })
-        return state
-    }
+import { DELETE_DATASET_LIST_REDUCER, UPDATE_TO_DATASET_LIST_REDUCER, PUSH_TO_DATASET_LIST_REDUCER, SET_ON_DATASET_REDUCER } from '../actions/types'
+import initialState from './initialState'
+const debug = false
+let datasetReducer = (state = initialState, action) => {
+    let { type, data, dataset_name } = action
+    if (debug) console.log('REDUCERS - datasetReducer ===> ', { action })
     //throw 'REDUCER FETCH NAME IS REQUIRED'
 
     switch (type) {
-        case SIMPLE_FETCH:
-            state['_loading'][dataset_name] = true
-            state['_error'][dataset_name] = false
-            return { ...state }
-
-        case SIMPLE_FETCH_SUCCESS:
-            state['_loading'][dataset_name] = false
-            state['_error'][dataset_name] = false
-            state[dataset_name] = { ...state[dataset_name], ...data }
-            return { ...state }
-
-        case SIMPLE_FETCH_ERROR:
-            state['_loading'][dataset_name] = false
-            state['_error'][dataset_name] = error
-            return { ...state }
-
-        case SET_ON_DATASET:
-            if (typeof data === 'object') {
+        case SET_ON_DATASET_REDUCER:
+            if (typeof data !== 'object' || Array.isArray(data)) state[dataset_name] = data
+            else {
                 state[dataset_name] = { ...state[dataset_name], ...data }
-            } else {
-                state[dataset_name] = data
             }
-            return { ...state }
-        case PUSH_TO_DATASET_LIST:
+
+            state = { ...state }
+            break
+
+        case PUSH_TO_DATASET_LIST_REDUCER:
             state[dataset_name].push(data)
-            return { ...state }
+            state = { ...state }
+            break
 
-        case UPDATE_TO_DATASET_LIST:
+        case UPDATE_TO_DATASET_LIST_REDUCER:
             state[dataset_name] = state[dataset_name].map(datasetData => {
-
-                if (datasetData['id_on_device'] === data['id_on_device'])
+                if (datasetData['id_on_device'] === data['id_on_device']) {
+                    //console.log('UPDATING HERE =====> ', { data, datasetData })
                     datasetData = data
-
+                }
                 return datasetData
             })
-            return { ...state }
+            state = { ...state }
+            break
+        case DELETE_DATASET_LIST_REDUCER:
+            state[dataset_name] = state[dataset_name].filter(datasetData => datasetData['id_on_device'] !== data['id_on_device'])
 
-        case DELETE_DATASET_LIST:
-
-            state[dataset_name] = state[dataset_name].filter(datasetData =>
-                datasetData['id_on_device'] !== data['id_on_device']
-            )
-
-            return { ...state }
-
-        default:
-            return state
+            state = { ...state }
+            break
     }
+    return state
 }
 
+//export default Reducer(datasetReducer)
 export default datasetReducer

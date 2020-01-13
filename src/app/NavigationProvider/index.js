@@ -13,8 +13,9 @@ import LoginScreen from '../../screens/LoginScreen'
 import AppointmentFormScreen from '../../screens/AppointmentFormScreen'
 import SettingsScreen from '../../screens/SettingsScreen'
 import AppointmentScreen from '../../screens/AppointmentScreen'
-import AppointmentCheckInScreen from '../../screens/AppointmentCheckInScreen'
+import AppointmentStepsScreen from '../../screens/AppointmentStepsScreen'
 import BlankTransitionScreen from '../../screens/BlankTransitionScreen'
+import NotificationsScreen from '../../screens/NotificationsScreen'
 import { headerStyle, headerBackTitleStyle } from './styles'
 
 let AppStack = createStackNavigator(
@@ -23,13 +24,14 @@ let AppStack = createStackNavigator(
         AppointmentForm: AppointmentFormScreen,
         Settings: SettingsScreen,
         Appointment: AppointmentScreen,
-        AppointmentCheckIn: AppointmentCheckInScreen,
+        AppointmentSteps: AppointmentStepsScreen,
         BlankTransition: BlankTransitionScreen,
+        Notifications: NotificationsScreen,
     },
     {
         defaultNavigationOptions: {
             headerBackImage: <GoBack />,
-            headerBackTitle: '  ',//'Atrás',
+            headerBackTitle: '  ', //'Atrás',
             headerBackTitleStyle,
             headerRight: <RightIcon />,
             headerStyle,

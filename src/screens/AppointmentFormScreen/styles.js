@@ -7,4 +7,8 @@ export default StyleSheet.create({
     labelPadder: {
         ...CommonStyles.padVertical5,
     },
+    closeIcon: { ...CommonStyles.closeIcon },
+    colorPrimary: {
+        color: brandPrimary,
+    },
 })

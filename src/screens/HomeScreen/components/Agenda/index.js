@@ -1,18 +1,20 @@
 import React from 'react'
-import { Text, View, Icon, Right, Body } from 'native-base'
+import { Text, View, Icon, Right, Body, Spinner } from 'native-base'
 import { TouchableOpacity, Alert, Platform } from 'react-native'
 import { Agenda, LocaleConfig, calendarTheme } from 'react-native-calendars'
 import { withNavigation } from 'react-navigation'
 //import JSONTree from 'react-native-json-tree'
-import { fetchAppointments, deleteItemFromDatasetList } from '../../../../actions'
-import { appointmentsSelector } from '../../../../selectors/datasetsSelector'
+import { fetchAppointmentsAction, deleteItemFromDatasetList, fetchClientsAction, syncAppointmentAction, fetchReasonsAction } from '../../../../actions'
+import { appointmentsWithClientSelector } from '../../../../selectors/datasetsSelector'
 import { connect } from 'react-redux'
 import { withTranslation } from 'react-i18next'
 //import app_styles, { colors } from '../../../theme/variables/commonStyles'
-import styles from './styles'
-import { SwipeRow } from 'react-native-swipe-list-view'
-import { getAppointmentTitleLimited, getAppointments, getTimeFromDatetime, parseAppointmentsForAgenda } from './methods'
-
+import styles, { primaryColor } from './styles'
+import NoDataLabel from '../../../../components/NoDataLabel'
+import limitStr from '../../../../utils/limitStr'
+import { getAppointments, parseAppointmentsForAgenda } from './methods'
+import RotatingIcon from '../../../../components/utils/RotatingIcon'
+import { STEPS } from '../../../../constants'
 const setCalendarLanguage = (lang = 'es') => {
     LocaleConfig.locales['es'] = {
         monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
@@ -28,17 +30,55 @@ class AgendaWrapper extends React.Component {
     constructor(props) {
         super(props)
         if (props.i18n.language === 'es') setCalendarLanguage(props.i18n.language)
-        this.setNavigationListeners()
+        //this.setNavigationListeners()
     }
-
-    setNavigationListeners = _ => {
-        this.props.navigation.addListener('willFocus', payload => {
-            this.props.fetchAppointments()
-        })
-    }
+    timer
     agendaRef
-    state = {}
+    state = {
+        isLoadingDatas: false,
+        isRefreshingCalendar: false,
+        userHasTappedAppointmentRecently: false,
+    }
+    /* 
+    setNavigationListeners = () => {
+        this.props.navigation.addListener('willFocus', payload => {  })
+    }
+    */
+    componentDidMount = () => {
+        this.loadDatas()
+    }
+    getLocalClientsIds = () => {
+        let localExistingClientsIds = {}
+        this.props.appointments.map(({ client_id }) => {
+            localExistingClientsIds[client_id] = null
+        })
+        return Object.keys(localExistingClientsIds) || []
+    }
+    getLocalReasonsIds = () => {
+        let localExistingReasonsIds = {}
+        this.props.appointments.map(({ reasons }) => {
+            reasons.map(reason_id => {
+                localExistingReasonsIds[reason_id] = null
+            })
+        })
+        return Object.keys(localExistingReasonsIds) || []
+    }
+    loadDatas = async () => {
+        await this.setState({ isLoadingDatas: true, isRefreshingCalendar: true })
+        let onFinishCallback = () =>
+            this.props.fetchAppointmentsAction(() => {
+                this.props.fetchReasonsAction({
+                    ids: this.getLocalReasonsIds(),
+                })
+                this.setState({ isLoadingDatas: false })
+            })
+        this.props.fetchClientsAction({ onFinishCallback, clientsIds: this.getLocalClientsIds() })
 
+        clearTimeout(this.timer)
+        this.timer = setTimeout(() => {
+            this.setState({ isRefreshingCalendar: false })
+        }, 600)
+    }
     deleteButtonWasTapped = appointment => {
         Alert.alert(this.props.t('warning'), this.props.t('sure_want_delete_record'), [
             {
@@ -46,122 +86,122 @@ class AgendaWrapper extends React.Component {
             },
             {
                 text: this.props.t('yes'),
-                onPress: async _ => {
+                onPress: async () => {
                     this.props.deleteItemFromDatasetList(appointment, 'appointments')
                 },
             },
         ])
     }
 
-    renderEmptyData = _ => (
-        <View style={styles.emptyDate}>
-            <Text style={styles.itemTextGray}>{this.props.t('empty_data')}</Text>
-        </View>
-    )
+    renderEmptyData = () => {
+        return (
+            <View style={styles.emptyDate}>
+                <Text style={styles.itemTextGray}>{this.props.t('empty_data')}</Text>
+            </View>
+        )
+    }
+    renderNoData = () => {
+        if (this.state.isLoadingDatas && !this.props.appointments.length) return <Spinner color={primaryColor} />
+
+        return <NoDataLabel />
+    }
 
     calendarOffset() {
         const offset = Platform.OS === 'ios' ? 90 : 100
         return offset - this.viewHeight / 2
     }
 
+    goToCheckInScreen = async appointment => {
+        await this.setState({ userHasTappedAppointmentRecently: true })
+        this.props.navigation.push('AppointmentSteps', { appointment })
+        setTimeout(() => {
+            this.setState({ userHasTappedAppointmentRecently: false })
+        }, 2000)
+    }
+
     render() {
         let appointments = getAppointments(this.props)
         let parsedAppointments = parseAppointmentsForAgenda(appointments)
-        let hasData = !!Object.keys(parsedAppointments)[0]
-        //console.log('HERE ===> ', { noData: !hasData, appointments, parsedAppointments })
-
-        if (!hasData)
-            return (
-                <View style={styles.noData}>
-                    <Text>{this.props.t('no_data')}</Text>
-                    {/* <JSONTree data={{ state: this.state, props: this.props }} /> */}
-                </View>
-            )
+        let firstDateOfData = Object.keys(parsedAppointments)[0]
+        if (!firstDateOfData) return this.renderNoData()
         return (
-            <Agenda
-                //refreshing
-                selected={Platform.OS === 'android' ? Object.keys(parsedAppointments)[0] : undefined}
-                items={parsedAppointments}
-                rowHasChanged={(appointmnet1, appointment2) => {
-                    let hasChanged = JSON.stringify(appointmnet1.getDatas()) !== JSON.stringify(appointment2.getDatas())
-                    //if (hasChanged)
-                    //console.log('rowHasChanged ===> ', { hasChanged, appointmnet1: appointmnet1.getDatas(), appointment2: appointment2.getDatas() })
-                    return hasChanged
-                }}
-                renderKnob={() => {
-                    return <Icon success name='drag-horizontal' fontSize={18} type='MaterialCommunityIcons' style={{ color: '#777777' }} />
-                }}
-                theme={{
-                    ...calendarTheme,
-                    agendaDayTextColor: 'rgba(202, 41, 42, 1)',
-                    agendaDayNumColor: 'rgba(202, 41, 42, 1)',
-                    todayTextColor: 'rgba(202, 41, 42, 1)',
-                    agendaKnobColor: '#777777',
-                    dotColor: 'rgba(202, 41, 42, 1)',
-                    selectedDotColor: '#ffffff',
-                    selectedDayBackgroundColor: 'rgba(202, 41, 42, 1)',
-                    textSectionTitleColor: 'rgba(202, 41, 42, 1)',
-                    textMonthFontWeight: 'bold',
-                }}
-                renderEmptyData={this.renderEmptyData}
-                renderItem={appointment => {
-                    return (
-                        <SwipeRow closeOnRowPress disableRightSwipe disableLeftSwipe={appointment.isFinished()} stopRightSwipe={-180} rightOpenValue={-180}>
-                            <View style={styles.buttonsContainer}>
-                                {!appointment.isCheckedIn() && (
-                                    <TouchableOpacity onPress={_ => this.deleteButtonWasTapped(appointment)} style={[styles.button, styles.bgDanger]}>
-                                        <Icon active name='trash' style={styles.buttonIcon} />
-                                    </TouchableOpacity>
-                                )}
-
-                                {!appointment.isCheckedIn() && (
+            <React.Fragment>
+                <Agenda
+                    onRefresh={this.loadDatas}
+                    //displayLoadingIndicator={this.state.isLoadingDatas}
+                    refreshing={this.state.isRefreshingCalendar}
+                    selected={Platform.OS === 'android' ? firstDateOfData : undefined}
+                    items={parsedAppointments}
+                    rowHasChanged={(appointmnet1, appointment2) => {
+                        let hasChanged = JSON.stringify(appointmnet1.getDatas()) !== JSON.stringify(appointment2.getDatas())
+                        //if (hasChanged)
+                        //console.log('rowHasChanged ===> ', { hasChanged, appointmnet1: appointmnet1.getDatas(), appointment2: appointment2.getDatas() })
+                        return hasChanged
+                    }}
+                    renderKnob={() => {
+                        return <Icon success name='drag-horizontal' fontSize={18} type='MaterialCommunityIcons' style={{ color: '#777777' }} />
+                    }}
+                    theme={{
+                        ...calendarTheme,
+                        agendaDayTextColor: primaryColor,
+                        todayTextColor: primaryColor,
+                        agendaDayNumColor: primaryColor,
+                        agendaTodayColor: primaryColor,
+                        agendaKnobColor: '#777777',
+                        dotColor: primaryColor,
+                        selectedDotColor: '#ffffff',
+                        selectedDayBackgroundColor: primaryColor,
+                        textSectionTitleColor: primaryColor,
+                        textMonthFontWeight: 'bold',
+                    }}
+                    renderEmptyData={this.renderEmptyData}
+                    renderItem={appointment => (
+                        <TouchableOpacity
+                            activeOpacity={this.state.isLoadingDatas ? 1 : 0.2}
+                            style={styles.item}
+                            onPress={() => {
+                                if (!this.state.userHasTappedAppointmentRecently) {
+                                    this.goToCheckInScreen(appointment)
+                                }
+                            }}
+                        >
+                            <Body style={styles.itemTextContainer}>
+                                {!appointment.sync && !appointment.syncronizing && (
                                     <TouchableOpacity
-                                        style={[styles.button, styles.bgPrimary]}
-                                        onPress={_ => {
-                                            this.props.navigation.push('AppointmentForm', { appointment, formType: 'edit' })
+                                        onPress={() => {
+                                            this.props.syncAppointmentAction(appointment)
                                         }}
                                     >
-                                        <Icon active name='pencil' style={styles.buttonIcon} type='MaterialCommunityIcons' />
+                                        <Icon name='sync-alert' type='MaterialCommunityIcons' style={styles.warningColor} />
                                     </TouchableOpacity>
                                 )}
+                                {!appointment.sync && appointment.syncronizing && (
+                                    <RotatingIcon name='sync' type='MaterialCommunityIcons' style={styles.warningColor} />
+                                )}
+                                <Text style={styles.itemText}>{limitStr(appointment.clientName, 50)}</Text>
+                            </Body>
 
-                                <TouchableOpacity
-                                    style={[styles.button, styles.bgWarning]}
-                                    onPress={_ => {
-                                        this.props.navigation.push('AppointmentCheckIn', { appointment })
-                                    }}
-                                >
-                                    <Icon active name='file-signature' style={styles.buttonIcon} type='FontAwesome5' />
-                                </TouchableOpacity>
-                            </View>
-
-                            <View style={styles.item}>
-                                <Body style={styles.itemTextContainer}>
-                                    <Text style={styles.itemText}>{getAppointmentTitleLimited(appointment.name)}</Text>
-                                </Body>
-
-                                <Right style={styles.itemIconContainer}>
-                                    {!appointment.isFinished() ? (
-                                        <Text style={styles.itemTextGray}>{getTimeFromDatetime(appointment.datetime)}</Text>
-                                    ) : (
-                                        <Icon success name='check-circle-o' type='FontAwesome' style={styles.successColor} />
-                                    )}
-                                </Right>
-                            </View>
-                        </SwipeRow>
-                    )
-                }}
-            />
+                            <Right style={styles.itemIconContainer}>
+                                {!!appointment.current_step && <Text style={styles.itemTextGray}>{appointment.time}</Text>}
+                                {!appointment.current_step && <Icon success name='check-circle-o' type='FontAwesome' style={styles.successColor} />}
+                            </Right>
+                        </TouchableOpacity>
+                    )}
+                />
+            </React.Fragment>
         )
     }
 }
 
 const mapStateToProps = state => ({
-    appointments: appointmentsSelector(state),
+    appointments: appointmentsWithClientSelector(state),
 })
 const mapDispatchToProps = {
-    fetchAppointments,
+    fetchReasonsAction,
+    fetchAppointmentsAction,
+    fetchClientsAction,
     deleteItemFromDatasetList,
+    syncAppointmentAction,
 }
 AgendaWrapper = withTranslation()(AgendaWrapper)
 export default connect(mapStateToProps, mapDispatchToProps)(withNavigation(AgendaWrapper))

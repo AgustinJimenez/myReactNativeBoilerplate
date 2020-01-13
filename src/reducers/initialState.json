@@ -1,0 +1,28 @@
+{
+    "appointment_structure": {},
+    "appointments": [],
+    "auth": {
+        "token": null,
+        "avatar": null,
+        "username": null,
+        "branch_name": null,
+        "people_out_id": null,
+    },
+    "lang": "es",
+    "hours_before_appointment_notification": 4,
+    "others": {
+        "logs": [],
+        "username": "",
+        "appointmentsAreSynchronizing": false,
+    },
+    "network": {
+        "isConnected": false,
+        "type": null,
+        "isInternetReachable": false,
+        "details": {
+            "ipAddress": null,
+            "isConnectionExpensive": false,
+            "subnet": null
+        }
+    }
+}
