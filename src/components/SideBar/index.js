@@ -1,13 +1,11 @@
 import React from 'react'
 import { Image, Alert, ScrollView, SafeAreaView } from 'react-native'
 import { CardItem, Thumbnail, Body, List, ListItem, Text, Left, Right, Icon, View, Label } from 'native-base'
-import { withNavigation } from 'react-navigation'
 import styles from './styles'
-import sidebar_top_img from '../../assets/images/dls_logo.png'
+import sidebar_top_img from '../../assets/images/dls_logo.jpg'
 import { connect } from 'react-redux'
 import { logoutAction } from '../../actions'
 import { withTranslation } from 'react-i18next'
-import { StackActions, NavigationActions } from 'react-navigation'
 import { authSelector } from '../../selectors/datasetsSelector'
 import capitalize from '../../utils/capitalize'
 import userImage from '../../assets/images/user.png'
@@ -32,6 +30,7 @@ class SideBar extends React.Component {
                     {
                         text: this.props.t('yes'),
                         onPress: () => {
+                            this.props.navigation.closeDrawer()
                             this.props.logoutAction()
                         },
                     },
@@ -79,11 +78,7 @@ class SideBar extends React.Component {
                                     onPress={() => {
                                         if (!!sidebar_route.onPress) sidebar_route.onPress()
                                         else {
-                                            let resetAction = StackActions.reset({
-                                                index: 0,
-                                                actions: [NavigationActions.navigate({ routeName: sidebar_route.route })],
-                                            })
-                                            this.props.navigation.dispatch(resetAction)
+                                            this.props.navigation.navigate(sidebar_route.route)
                                         }
                                     }}
                                 >
@@ -124,6 +119,8 @@ const mapDispatchToProps = {
     logoutAction,
 }
 
-SideBar = withNavigation(SideBar)
 SideBar = withTranslation()(SideBar)
-export default connect(mapStateToProps, mapDispatchToProps)(SideBar)
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps,
+)(SideBar)

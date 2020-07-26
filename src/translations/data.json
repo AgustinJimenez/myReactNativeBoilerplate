@@ -9,7 +9,11 @@
     },
     "data_not_found": {
         "en": "Data not found",
-        "es": "No se encuentran los datos"
+        "es": "No se encuentran los datos, o no se encuentra servicio"
+    },
+    "no_data_found": {
+        "en": "Data not found",
+        "es": "Dato no encontrado"
     },
     "new_appointment": {
         "en": "New Appointment",
@@ -22,6 +26,10 @@
     "invalid_appointment": {
         "en": "Invalid Appointment",
         "es": "Cita Invalida"
+    },
+    "show_map": {
+        "en": "Show map",
+        "es": "Mostrar Mapa"
     },
     "map": {
         "en": "Map",
@@ -78,6 +86,10 @@
     "check_in": {
         "en": "Check In",
         "es": "Check In"
+    },
+    "check": {
+        "en": "Check",
+        "es": "Check"
     },
     "add_new_appointment": {
         "en": "Add new appointment",
@@ -153,7 +165,7 @@
     },
     "settings": {
         "en": "Settings",
-        "es": "Configuraciones"
+        "es": "Configuraciónes"
     },
     "select_lang": {
         "en": "Select Language",
@@ -162,6 +174,10 @@
     "select_client": {
         "en": "Select Client",
         "es": "Seleccionar Cliente"
+    },
+    "select_date": {
+        "en": "Select Date",
+        "es": "Seleccionar Fecha"
     },
     "language": {
         "en": "Language",
@@ -270,7 +286,45 @@
     "app.learnReact": {
         "en": "Learn React.",
         "es": "Aprende React."
+    },
+    "closing_reason": {
+        "en": "Closing Reason",
+        "es": "Razón de cierre"
+    },
+    "closing_note": {
+        "en": "Closing Note",
+        "es": "Nota de cierre"
+    },
+    "output_location": {
+        "en": "Output Location",
+        "es": "Ubicación de salida"
+    },
+    "entry_location": {
+        "en": "Entry Location",
+        "es": "Ubicación de entrada"
+    },
+    "opening_note": {
+        "en": "Opening Note",
+        "es": "Nota de apertura"
+    },
+    "client_ubication": {
+        "en": "Client ubication",
+        "es": "Ubicación de cliente"
+    },
+    "initial_ubication": {
+        "en": "Initial ubication",
+        "es": "Ubicación inicial"
+    },
+    "final_ubication": {
+        "en": "Final ubication",
+        "es": "Ubicación final"
+    },
+    "downloading_appointments": {
+        "en": "Downloading appointmnets",
+        "es": "Descargando citas"
+    },
+    "please_wait": {
+        "en": "Please wait",
+        "es": "Por favor, esperar"
     }
-
-
 }

@@ -1,12 +1,12 @@
 import { call, select, put } from 'redux-saga/effects'
-import { authSelector, networkSelector } from '../selectors/datasetsSelector'
+import { authSelector /* , networkSelector */ } from '../selectors/datasetsSelector'
 import showToast from '../utils/showToast'
-import NavigationService from '../app/NavigationProvider/service'
 import HttpStatus from 'http-status-codes'
 import axios from 'axios'
 import i18n from '../app/i18n'
 import { checkNetworkStatusAction, logoutAction } from '../actions'
 import moment from 'moment'
+import { API_KEY, debug_requests } from '../../env.json'
 
 var connErrMsg = 'Connection Error.'
 
@@ -20,10 +20,10 @@ export default function* request(options: any) {
         error = null,
         message,
         defaultOptions: any = {
-            timeout: 10000,
-            headers: { Authorization: null },
+            timeout: 30000,
+            headers: { Authorization: null, 'Api-Key': API_KEY, 'Content-Type': 'application/json', Accept: 'application/json' },
             method: 'GET',
-            debug: false,
+            debug: debug_requests,
         }
 
     try {
@@ -49,19 +49,25 @@ export default function* request(options: any) {
                 '\n<====================================================================================>\n',
             )
         response = yield call(axios, options)
-        //console.log('HERE ===> ', { response })
         if (!response || !Object.keys(response).length) throw { error: true, data, message: connErrMsg }
-        if (!!response.data) {
+        if (!!response.data.data) {
             data = response.data.data
             error = response.data.error
             message = response.data.message
+        } else if (!!response.data) {
+            data = response.data
+            error = false
+            message = null
         }
     } catch (err) {
-        if (options.debug) console.log('REQUEST ERROR!!!! ===> ', { err })
+        error = true
         if (!!err.response && !!err.response.data) {
+            if (err.response.data.error !== undefined) error = err.response.data.error
             response = err.response
-            data = response.data.data
-            error = response.data.error
+
+            if (!!response && !!response['headers'] && !!response['headers']['content-type'] && response['headers']['content-type'] === 'text/html') data = {}
+            else data = response.data.data
+
             message = response.data.message
         } else if (!!err.code) {
             switch (err.code) {
@@ -72,8 +78,10 @@ export default function* request(options: any) {
                     message = err.message
                     break
             }
-            error = true
+        } else if (!!err.message) {
+            message = err.message
         }
+        if (options.debug) console.log('REQUEST ERROR!!!! ===> ', { err, response, data, message })
     } finally {
         if (options.debug) {
             endTime = moment(new Date())

@@ -6,15 +6,15 @@ import {
     setAppointmentsDatasetAction,
     clearReasonsReducerAction,
     clearClientsReducerAction,
+    setAppointmentStructureDatasetAction,
 } from '../actions'
-import NavigationService from '../app/NavigationProvider/service'
+
 function* logout() {
     yield put(clearAuthAction())
     yield put(setAppointmentsDatasetAction([]))
     yield put(clearReasonsReducerAction())
     yield put(clearClientsReducerAction())
     yield put(clearNotificationsReducerAction())
-    NavigationService.navigate('Login', {})
 }
 
 export default function* logoutSaga() {

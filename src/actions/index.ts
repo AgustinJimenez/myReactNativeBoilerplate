@@ -64,15 +64,16 @@ export const clearClientsReducerAction = () => ({
 export const fetchAppointmentStructureAction = () => ({
     type: FETCH_APPOINTMENT_STRUCTURE_SAGA,
 })
-export const setAppointmentStructureDatasetAction = (data: any) => ({
+export const setAppointmentStructureDatasetAction = (data: Object) => ({
     type: SET_ON_DATASET_REDUCER,
     dataset_name: 'appointment_structure',
     data,
 })
-export const fetchReasonsAction = ({ onFinishCallback, searchName }: any) => ({
+export const fetchReasonsAction = ({ onFinishCallback, searchName, ids }: any) => ({
     type: FETCH_REASONS_SAGAS,
     onFinishCallback,
     searchName,
+    ids,
 })
 export const setReasonsReducerAction = (data: any) => ({
     type: FETCH_REASONS_REDUCER,
@@ -115,7 +116,12 @@ export const clearAuthAction = () => ({
     dataset_name: 'auth',
     data: { token: null },
 })
-export const setLang = (lang_id: string) => ({
+export const setLangReducer = (lang_id: string) => ({
+    type: SET_ON_DATASET_REDUCER,
+    dataset_name: 'lang',
+    data: lang_id,
+})
+export const setLangSaga = (lang_id: string) => ({
     type: CHANGE_LANGUAGE_SAGAS,
     lang_id,
 })

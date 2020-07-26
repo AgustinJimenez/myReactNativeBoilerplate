@@ -1,4 +1,4 @@
-import { API_DOMAIN, API_DOMAIN_TEST } from '../../env'
+import { API_DOMAIN, API_MIDDLEWARE_DOMAIN } from '../../env.json'
 
-export const domain: string = API_DOMAIN
-export const domain_test: string = API_DOMAIN_TEST
+export const api_domain: string = API_DOMAIN
+export const api_middleware_domain: string = API_MIDDLEWARE_DOMAIN

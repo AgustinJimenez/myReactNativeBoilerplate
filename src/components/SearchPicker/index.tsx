@@ -1,31 +1,10 @@
 import React from 'react'
 import { ScrollView, Platform, TouchableOpacity } from 'react-native'
-import {
-    Card,
-    Button,
-    Text,
-    Icon,
-    Header,
-    Title,
-    Grid,
-    List,
-    ListItem,
-    Spinner,
-    Badge,
-    Right,
-    Body,
-    Item,
-    View,
-    CardItem,
-    Container,
-    Left,
-    Label,
-} from 'native-base'
+import { Card, Button, Text, Icon, Header, Title, List, Spinner, Badge, View, CardItem } from 'native-base'
 import SearchBar from 'react-native-search-bar'
 import Modal from 'react-native-modal'
 import { useTranslation } from 'react-i18next'
 import styles, { brandPrimary } from './styles'
-import showToast from '../../utils/showToast'
 
 const SearchPicker = ({ placeholder, title, listItems, onChange, isFetching, selectedValues, onSelectItemList, type = 'single' || 'multiple' }: any) => {
     let { t } = useTranslation()
@@ -43,7 +22,7 @@ const SearchPicker = ({ placeholder, title, listItems, onChange, isFetching, sel
         })
 
     return (
-        <React.Fragment>
+        <>
             <Button
                 style={{ backgroundColor: 'white' }}
                 block
@@ -103,7 +82,7 @@ const SearchPicker = ({ placeholder, title, listItems, onChange, isFetching, sel
                                         if (searchValue.trim().length) return label.toLowerCase().search(searchValue.toLowerCase()) !== -1
                                         else return true
                                     })
-                                    .slice(0, 100)
+                                    .slice(0, 50)
                                     .map(({ label, value }: any, key: number) => {
                                         let isSelected = selectedValues.includes(value)
                                         let iconType = isSelected ? 'AntDesign' : 'Entypo'
@@ -157,7 +136,7 @@ const SearchPicker = ({ placeholder, title, listItems, onChange, isFetching, sel
                         ))}
                 </View>
             )}
-        </React.Fragment>
+        </>
     )
 }
 export default SearchPicker
