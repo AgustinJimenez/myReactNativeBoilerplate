@@ -31,7 +31,7 @@ import {
 } from './types'
 import Appointment from '../models/Appointment'
 
-export const authAction = (params: any, onFinishCallback: Function) => ({
+export const actionAuthSaga = (params: any, onFinishCallback: Function) => ({
     type: AUTH_SAGAS,
     onFinishCallback,
     ...params,

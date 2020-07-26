@@ -7,6 +7,7 @@ export default StyleSheet.create({
     },
     sidebar_top_img: {
         ...app_styles.center,
+        width: '100%',
     },
     listItemIcon: {
         color: 'black',

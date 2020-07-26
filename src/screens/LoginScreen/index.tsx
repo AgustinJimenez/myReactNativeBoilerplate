@@ -2,20 +2,20 @@ import React from 'react'
 import { Image, ImageBackground, KeyboardAvoidingView } from 'react-native'
 import { Form, Container, Content, Card, CardItem, Body, Text, Item, Label, Input, Button, Spinner } from 'native-base'
 import { connect } from 'react-redux'
-import { authAction, setOthersDatasetAction } from '../../actions'
+import { actionAuthSaga, setOthersDatasetAction } from '../../actions'
 import styles from './styles'
 import { withTranslation } from 'react-i18next'
 import { authSelector, othersSelector } from '../../selectors/datasetsSelector'
 /* import JSONTree from 'react-native-json-tree' */
 
 import loginBackgroundImg from '../../assets/images/login.jpg'
-import dlsLogoImg from '../../assets/images/dls_logo.jpg'
+import dlsLogoImg from '../../assets/images/company_logo.png'
 
 class LoginScreen extends React.Component {
-    usernameRef = null
-    passwordRef = null
+    usernameRef: any = null
+    passwordRef: any = null
 
-    state = {
+    state: any = {
         username: null,
         password: 'admin123',
         submiting: false,
@@ -37,8 +37,8 @@ class LoginScreen extends React.Component {
     getUsername = () => this.props.others.username || ''
     getPassword = () => this.state.password || ''
 
-    onPasswordChange = password => this.setState({ password })
-    onUsernameChange = username => this.props.setOthers({ username })
+    onPasswordChange = (password: string) => this.setState({ password })
+    onUsernameChange = (username: string) => this.props.setOthers({ username })
     getParams = () => ({
         name: this.getUsername(),
         password: this.getPassword(),
@@ -115,12 +115,12 @@ class LoginScreen extends React.Component {
     }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state: any) => ({
     auth: authSelector(state),
     others: othersSelector(state),
 })
 const mapDispatchToProps = {
-    authAction,
+    authAction: actionAuthSaga,
     setOthers: setOthersDatasetAction,
 }
 LoginScreen = withTranslation()(LoginScreen)

@@ -1,9 +1,9 @@
 import React from 'react'
 import { Image } from 'react-native'
 import { Container, Spinner } from 'native-base'
-import dlsLogo from '../../assets/images/dls_logo.jpg'
+import dlsLogo from '../../assets/images/company_logo.png'
 import * as Animatable from 'react-native-animatable'
-class LoadingScreen extends React.Component {
+class LoadingScreen extends React.PureComponent {
     // Render any loading content that you like here
 
     render() {

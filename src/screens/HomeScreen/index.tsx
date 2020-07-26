@@ -16,12 +16,9 @@ class HomeScreen extends React.Component {
     }
     agendaRef = null
 
-    componentDidMount() {
-        this.props.navigation.addListener('willFocus', (payload: any) => {})
-    }
     goToForm = () => {
         if (!this.state.userHasTappedFormButtonRecently) {
-            this.props.navigation.navigate('AppointmentForm', {})
+            //this.props.navigation.navigate('AppointmentForm', {})
             this.setState({
                 userHasTappedFormButtonRecently: true,
             })
@@ -38,7 +35,6 @@ class HomeScreen extends React.Component {
         return (
             <Container>
                 <AppHeader trans_id='appointment_schedule' />
-                <Agenda navigation={this.props.navigation} />
                 <Fab active={true} style={styles.fab} position='bottomRight' onPress={this.goToForm}>
                     <Icon name='add' />
                 </Fab>

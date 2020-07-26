@@ -2,7 +2,7 @@ import React from 'react'
 import { Image, Alert, ScrollView, SafeAreaView } from 'react-native'
 import { CardItem, Thumbnail, Body, List, ListItem, Text, Left, Right, Icon, View, Label } from 'native-base'
 import styles from './styles'
-import sidebar_top_img from '../../assets/images/dls_logo.jpg'
+import sidebar_top_img from '../../assets/images/company_logo.png'
 import { connect } from 'react-redux'
 import { logoutAction } from '../../actions'
 import { withTranslation } from 'react-i18next'
@@ -16,7 +16,6 @@ class SideBar extends React.Component {
 
     getSidebarRoutes = () => [
         { title: this.props.t('home'), icon: 'home', route: 'Home' },
-        { title: this.props.t('appointment_notifications'), icon: 'notifications', route: 'Notifications', type: 'MaterialIcons' },
         { title: this.props.t('settings'), icon: 'settings', route: 'Settings' },
         {
             title: this.props.t('logout'),
@@ -41,20 +40,18 @@ class SideBar extends React.Component {
         //{ title: '2 - List Details', route: 'ListDetails' },
     ]
 
-    renderAvatarImage = () => {
-        return <Thumbnail progressiveRenderingEnabled defaultSource={userImage} source={{ uri: this.props.auth.avatar }} />
-    }
-
     render() {
         let routes = this.getSidebarRoutes()
         return (
             <SafeAreaView style={{ flex: 1 }}>
                 <CardItem bordered style={styles.logotop}>
-                    <Image source={sidebar_top_img} style={styles.sidebar_top_img} />
+                    <Image source={sidebar_top_img} style={styles.sidebar_top_img} resizeMode='contain' />
                 </CardItem>
                 <CardItem bordered>
                     <Left>
-                        <View style={styles.avatar}>{this.renderAvatarImage()}</View>
+                        <View style={styles.avatar}>
+                            <Thumbnail progressiveRenderingEnabled defaultSource={userImage} source={{ uri: this.props.auth.avatar }} />
+                        </View>
                         <Body>
                             <Text>{capitalize(this.props.auth.username)}</Text>
                             <Text note>{this.props.auth.branch_name}</Text>
@@ -63,7 +60,7 @@ class SideBar extends React.Component {
                 </CardItem>
                 <ScrollView>
                     <List primary style={styles.list}>
-                        {routes.map((sidebar_route, key) => {
+                        {routes.map((sidebar_route: any, key: number) => {
                             let iconProps = {
                                 type: sidebar_route.type,
                                 name: sidebar_route.icon,
@@ -112,7 +109,7 @@ class SideBar extends React.Component {
     }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state: any) => ({
     auth: authSelector(state),
 })
 const mapDispatchToProps = {
