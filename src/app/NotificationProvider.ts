@@ -7,14 +7,14 @@ import { authSelector } from '../selectors/datasetsSelector'
 
 const runNotifications = (dispatch: any) =>
     PushNotification.configure({
-        requestPermissions: false,
+        //requestPermissions: true,
         onNotification: (notification: any) => {
             //console.log('NOTIFICATION-PROVIDER ===> onNotification', { notification })
             if (notification.userInteraction)
                 dispatch(notificationWasTappedAction(notification, () => notification.finish(PushNotificationIOS.FetchResult.NoData)))
         },
         onRegister: (token: any) => {
-            console.log('PushNotification.configure.onRegister', { token })
+            //console.log('PushNotification.configure.onRegister', { token })
         },
         permissions: {
             alert: true,
@@ -29,6 +29,6 @@ export default (props: any) => {
     var { token } = useSelector(authSelector)
     useEffect(() => {
         if (!!token) runNotifications(dispatch)
-    }, [])
+    }, [token])
     return null
 }

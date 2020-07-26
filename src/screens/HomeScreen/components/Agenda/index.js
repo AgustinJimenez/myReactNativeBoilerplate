@@ -2,7 +2,6 @@ import React from 'react'
 import { Text, View, Icon, Right, Body, Spinner } from 'native-base'
 import { TouchableOpacity, Alert, Platform } from 'react-native'
 import { Agenda, LocaleConfig, calendarTheme } from 'react-native-calendars'
-import { withNavigation } from 'react-navigation'
 //import JSONTree from 'react-native-json-tree'
 import { fetchAppointmentsAction, deleteItemFromDatasetList, fetchClientsAction, syncAppointmentAction, fetchReasonsAction } from '../../../../actions'
 import { appointmentsWithClientSelector } from '../../../../selectors/datasetsSelector'
@@ -14,6 +13,7 @@ import NoDataLabel from '../../../../components/NoDataLabel'
 import limitStr from '../../../../utils/limitStr'
 import { getAppointments, parseAppointmentsForAgenda } from './methods'
 import RotatingIcon from '../../../../components/utils/RotatingIcon'
+import moment from 'moment'
 import { STEPS } from '../../../../constants'
 const setCalendarLanguage = (lang = 'es') => {
     LocaleConfig.locales['es'] = {
@@ -113,19 +113,36 @@ class AgendaWrapper extends React.Component {
 
     goToCheckInScreen = async appointment => {
         await this.setState({ userHasTappedAppointmentRecently: true })
-        this.props.navigation.push('AppointmentSteps', { appointment })
+        this.props.navigation.navigate('AppointmentSteps', { appointment })
         setTimeout(() => {
             this.setState({ userHasTappedAppointmentRecently: false })
         }, 2000)
     }
 
+    getLastDateFromParsedAppointments = parsedAppointments => {
+        if (!Object.keys(parsedAppointments)[0]) return null
+        var now = moment()
+        let dateTimes = Object.keys(parsedAppointments)
+        let datesDiffsFromNow = {}
+        dateTimes.map(s => {
+            let diffFromNow = moment(s).diff(now)
+            diffFromNow = Math.abs(diffFromNow)
+            datesDiffsFromNow[diffFromNow] = s
+        })
+        let minDiffDateTime = Math.min(...Object.keys(datesDiffsFromNow))
+        let closestDateFromNow = datesDiffsFromNow[minDiffDateTime]
+        //console.log('HERE ====> ', { dateTimes, datesDiffsFromNow, now, closestDateFromNow })
+        return closestDateFromNow
+    }
+
     render() {
         let appointments = getAppointments(this.props)
         let parsedAppointments = parseAppointmentsForAgenda(appointments)
-        let firstDateOfData = Object.keys(parsedAppointments)[0]
+        let firstDateOfData = this.getLastDateFromParsedAppointments(parsedAppointments)
+        //console.log('RENDER ===> ', { parsedAppointments, firstDateOfData })
         if (!firstDateOfData) return this.renderNoData()
         return (
-            <React.Fragment>
+            <>
                 <Agenda
                     onRefresh={this.loadDatas}
                     //displayLoadingIndicator={this.state.isLoadingDatas}
@@ -188,7 +205,7 @@ class AgendaWrapper extends React.Component {
                         </TouchableOpacity>
                     )}
                 />
-            </React.Fragment>
+            </>
         )
     }
 }
@@ -204,4 +221,7 @@ const mapDispatchToProps = {
     syncAppointmentAction,
 }
 AgendaWrapper = withTranslation()(AgendaWrapper)
-export default connect(mapStateToProps, mapDispatchToProps)(withNavigation(AgendaWrapper))
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps,
+)(AgendaWrapper)

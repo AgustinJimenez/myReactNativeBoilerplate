@@ -4,7 +4,7 @@ import { setAuthDatasetAction, setAppointmentsDatasetAction, clearReasonsReducer
 import { takeLatest } from 'redux-saga/effects'
 import showToast from '../utils/showToast'
 import { loginRoute, userInfoRoute } from '../api/routes'
-import NavigationService from '../app/NavigationProvider/service'
+
 import request from './request'
 
 export function* auth({ name = null, password = null, onFinishCallback = () => {} }: any) {
@@ -12,6 +12,7 @@ export function* auth({ name = null, password = null, onFinishCallback = () => {
         url: loginRoute,
         params: { name, password },
         method: 'POST',
+        //debug: true,
     })
 
     if (error) {
@@ -31,15 +32,16 @@ export function* auth({ name = null, password = null, onFinishCallback = () => {
     yield put(setAuthDatasetAction(authDatasetData))
     yield showToast(message, { type: 'success' })
 
-    NavigationService.navigate('Home', {})
-
     var { data, error } = yield call(request, {
         url: userInfoRoute,
         params: { q_username: authDatasetData.username },
         method: 'GET',
     })
-    authDatasetData.people_out_id = data['administration/users']['0']['people_id']
-    yield put(setAuthDatasetAction(authDatasetData))
+
+    if (!!data['administration/users'] && !!data['administration/users']['0'] && !!data['administration/users']['0']['people_id']) {
+        authDatasetData.people_out_id = data['administration/users']['0']['people_id']
+        yield put(setAuthDatasetAction(authDatasetData))
+    }
 }
 
 export default function* authSagas() {

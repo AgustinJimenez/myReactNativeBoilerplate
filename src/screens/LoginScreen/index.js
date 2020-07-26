@@ -7,26 +7,20 @@ import styles from './styles'
 import { withTranslation } from 'react-i18next'
 import { authSelector, othersSelector } from '../../selectors/datasetsSelector'
 /* import JSONTree from 'react-native-json-tree' */
-import { API_DOMAIN } from '../../../env'
-import { withNavigation } from 'react-navigation'
 
-const loginBackgroundImg = require('../../assets/images/login.jpg')
-const dlsLogoImg = require('../../assets/images/dls_logo.png')
+import loginBackgroundImg from '../../assets/images/login.jpg'
+import dlsLogoImg from '../../assets/images/dls_logo.jpg'
 
 class LoginScreen extends React.Component {
     usernameRef = null
     passwordRef = null
 
     state = {
-        username: '',
-        password: '',
+        username: null,
+        password: 'admin123',
         submiting: false,
         timer: 1000,
         controlTimeEnabled: true,
-    }
-
-    static navigationOptions = {
-        header: null,
     }
 
     loginButtonIsDisabled = () => {
@@ -54,7 +48,7 @@ class LoginScreen extends React.Component {
         await this.setState({ submiting: true, controlTimeEnabled: false })
         clearTimeout(this.timer)
         this.timer = setTimeout(() => {
-            this.props.authAction(this.getParams(), _ => this.setState({ submiting: false }))
+            this.props.authAction(this.getParams(), () => this.setState({ submiting: false }))
             this.setState(state => {
                 state.timer = state.timer * 1.5
                 state.controlTimeEnabled = true
@@ -73,7 +67,7 @@ class LoginScreen extends React.Component {
                                 <CardItem>
                                     <Body style={styles.center}>
                                         <Image source={dlsLogoImg} style={styles.welcomeImage} />
-                                        <Text /* style={{ fontFamily: 'SpaceMono-Regular' }} */>{this.props.t('crm_system')}</Text>
+                                        <Text /* style={{ fontFamily: 'SpaceMono-Regular' }} */>App System</Text>
                                     </Body>
                                 </CardItem>
                                 <CardItem>
@@ -130,5 +124,7 @@ const mapDispatchToProps = {
     setOthers: setOthersDatasetAction,
 }
 LoginScreen = withTranslation()(LoginScreen)
-LoginScreen = withNavigation(LoginScreen)
-export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen)
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps,
+)(LoginScreen)

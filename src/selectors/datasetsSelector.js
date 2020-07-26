@@ -1,5 +1,4 @@
 import Appointment from '../models/Appointment'
-import Notification from '../models/Notification'
 
 const getDataset = (state, datasetName) => {
     let dataset = state['datasets'][datasetName]

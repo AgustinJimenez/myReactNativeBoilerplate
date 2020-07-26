@@ -12,7 +12,7 @@
     "hours_before_appointment_notification": 4,
     "others": {
         "logs": [],
-        "username": "",
+        "username": "admin",
         "appointmentsAreSynchronizing": false,
     },
     "network": {

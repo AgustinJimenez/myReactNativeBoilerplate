@@ -1,6 +1,6 @@
 import { createStore, applyMiddleware } from 'redux'
 import createSagaMiddleware from 'redux-saga'
-
+import { show_redux_logs } from '../../env.json'
 // Imports: Redux Store
 import { persistStore, persistReducer } from 'redux-persist'
 import storage from '@react-native-community/async-storage'
@@ -28,7 +28,7 @@ const persistedReducer = persistReducer(
 )
 
 let middlewares = [sagaMiddleware /* , customReduxMiddleware */]
-if (process.env.NODE_ENV === `development`) {
+if (show_redux_logs && process.env.NODE_ENV === `development`) {
     const { logger } = require(`redux-logger`)
     middlewares.push(logger)
 }

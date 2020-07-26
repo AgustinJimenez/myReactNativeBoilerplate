@@ -7,9 +7,8 @@ import { langSelector, othersSelector, hoursBeforeAppointmentNotificationSelecto
 import { withTranslation } from 'react-i18next'
 
 class AppointmentNotificationInput extends React.Component {
-
     state = {
-        range: [1, 2, 3, 4, 5, 6, 7, 8]
+        range: [1, 2, 3, 4, 5, 6, 7, 8],
     }
 
     getSelectedValue = () => {
@@ -17,13 +16,14 @@ class AppointmentNotificationInput extends React.Component {
     }
 
     render() {
-
         return (
-            <React.Fragment>
-                <ListItem>
+            <>
+                <ListItem noBorder>
                     <Left>
                         <Text>{this.props.t('appointment_notification') + ':'}</Text>
                     </Left>
+                </ListItem>
+                <ListItem noBorder>
                     <Body>
                         <Select
                             iosHeader='select_hour'
@@ -32,22 +32,20 @@ class AppointmentNotificationInput extends React.Component {
                             onValueChange={hours => {
                                 this.props.setHoursBeforeAppointmentNotification(hours)
                             }}
-                            items={
-                                this.state.range.map((hours, key) => ({
-                                    label: `${hours}  ${this.props.t('hours_before')}`,
-                                    value: hours
-                                }))
-                            }
+                            items={this.state.range.map((hours, key) => ({
+                                label: `${hours}  ${this.props.t('hours_before')}`,
+                                value: hours,
+                            }))}
                         />
                     </Body>
                 </ListItem>
-            </React.Fragment>
+            </>
         )
     }
 }
 const mapStateToProps = state => ({
     hours_before_appointment_notification: hoursBeforeAppointmentNotificationSelector(state),
-    others: othersSelector(state)
+    others: othersSelector(state),
 })
 const mapDispatchToProps = {
     setHoursBeforeAppointmentNotification,
