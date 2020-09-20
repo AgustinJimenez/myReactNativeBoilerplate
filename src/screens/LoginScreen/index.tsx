@@ -5,11 +5,13 @@ import { connect } from 'react-redux'
 import { actionAuthSaga, setOthersDatasetAction } from '../../actions'
 import styles from './styles'
 import { withTranslation } from 'react-i18next'
-import { authSelector, othersSelector } from '../../selectors/datasetsSelector'
 /* import JSONTree from 'react-native-json-tree' */
 
 import loginBackgroundImg from '../../assets/images/login.jpg'
 import dlsLogoImg from '../../assets/images/company_logo.png'
+import datasetReducer from '../../redux/datasetReducer'
+import { datasetSelector } from '../../redux/selectors'
+import { setDatasetToReducer } from '../../redux/actions'
 
 class LoginScreen extends React.Component {
     usernameRef: any = null
@@ -116,15 +118,12 @@ class LoginScreen extends React.Component {
 }
 
 const mapStateToProps = (state: any) => ({
-    auth: authSelector(state),
-    others: othersSelector(state),
+    auth: datasetSelector(state, 'auth'),
+    others: datasetSelector(state, 'others'),
 })
-const mapDispatchToProps = {
-    authAction: actionAuthSaga,
-    setOthers: setOthersDatasetAction,
-}
+const mapDispatchToProps = (dispatch: any) => ({
+    authAction: (data: any, cb: Function) => dispatch(actionAuthSaga(data, cb)),
+    setOthers: (data: any) => dispatch(setDatasetToReducer(data, 'others')),
+})
 LoginScreen = withTranslation()(LoginScreen)
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps,
-)(LoginScreen)
+export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen)

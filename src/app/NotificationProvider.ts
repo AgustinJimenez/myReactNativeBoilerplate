@@ -3,7 +3,7 @@ import PushNotification from 'react-native-push-notification'
 import PushNotificationIOS from '@react-native-community/push-notification-ios'
 import { useDispatch, useSelector } from 'react-redux'
 import { notificationWasTappedAction } from '../actions'
-import { authSelector } from '../selectors/datasetsSelector'
+import { datasetSelector } from '../redux/selectors'
 
 const runNotifications = (dispatch: any) =>
     PushNotification.configure({
@@ -26,7 +26,7 @@ const runNotifications = (dispatch: any) =>
 
 export default (props: any) => {
     var dispatch = useDispatch()
-    var { token } = useSelector(authSelector)
+    var { token } = useSelector(state => datasetSelector(state, 'auth'))
     useEffect(() => {
         if (!!token) runNotifications(dispatch)
     }, [token])

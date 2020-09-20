@@ -6,10 +6,10 @@ import sidebar_top_img from '../../assets/images/company_logo.png'
 import { connect } from 'react-redux'
 import { logoutAction } from '../../actions'
 import { withTranslation } from 'react-i18next'
-import { authSelector } from '../../selectors/datasetsSelector'
 import capitalize from '../../utils/capitalize'
 import userImage from '../../assets/images/user.png'
 import { getVersion, getBuildNumber } from 'react-native-device-info'
+import { datasetSelector } from '../../redux/selectors'
 
 class SideBar extends React.Component {
     state = {}
@@ -110,14 +110,11 @@ class SideBar extends React.Component {
 }
 
 const mapStateToProps = (state: any) => ({
-    auth: authSelector(state),
+    auth: datasetSelector(state, 'auth'),
 })
 const mapDispatchToProps = {
     logoutAction,
 }
 
 SideBar = withTranslation()(SideBar)
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps,
-)(SideBar)
+export default connect(mapStateToProps, mapDispatchToProps)(SideBar)

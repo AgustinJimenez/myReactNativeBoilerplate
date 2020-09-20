@@ -1,13 +1,16 @@
 import React from 'react'
 import { ListItem, Left, Body, Text } from 'native-base'
 import { connect } from 'react-redux'
-import { langSelector } from '../../../selectors/datasetsSelector'
-import { setLangSaga } from '../../../actions'
 import { withTranslation } from 'react-i18next'
 import Select from '../../../components/utils/Select'
+import { datasetSelector } from '../../../redux/selectors'
+import { setDatasetToReducer } from '../../../redux/actions'
 class LangInput extends React.Component {
     state = {
-        langs: [{ label_id: 'english', value: 'en' }, { label_id: 'spanish', value: 'es' }],
+        langs: [
+            { label_id: 'english', value: 'en' },
+            { label_id: 'spanish', value: 'es' },
+        ],
     }
 
     getSelectedLangLabel = () => {
@@ -31,8 +34,8 @@ class LangInput extends React.Component {
                             placeholder={this.getSelectedLangLabel()}
                             selectedValue={this.props.lang}
                             onValueChange={(lang_id: string) => {
-                                this.props.setLangSaga(lang_id)
-                                //this.props.i18n.changeLanguage(lang_id)
+                                this.props.setLang(lang_id)
+                                this.props.i18n.changeLanguage(lang_id)
                             }}
                             items={this.state.langs.map((lang, key) => ({
                                 label: this.props.t(lang.label_id),
@@ -47,13 +50,10 @@ class LangInput extends React.Component {
 }
 
 const mapStateToProps = (state: any) => ({
-    lang: langSelector(state),
+    lang: datasetSelector(state, 'lang'),
 })
-const mapDispatchToProps = {
-    setLangSaga,
-}
+const mapDispatchToProps = (dispatch: any) => ({
+    setLang: (data: any) => dispatch(setDatasetToReducer(data, 'lang')),
+})
 LangInput = withTranslation()(LangInput)
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps,
-)(LangInput)
+export default connect(mapStateToProps, mapDispatchToProps)(LangInput)

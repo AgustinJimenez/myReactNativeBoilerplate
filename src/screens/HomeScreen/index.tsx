@@ -3,7 +3,6 @@ import { Container, Icon, Fab } from 'native-base'
 import styles from './styles'
 import Agenda from './components/Agenda'
 import NotificationProvider from '../../app/NotificationProvider'
-//import { othersSelector } from '../../selectors/datasetsSelector'
 //import JSONTree from 'react-native-json-tree'
 //import { connect } from 'react-redux'
 import PermissionsChecker from '../../app/PermissionsChecker'
@@ -39,22 +38,17 @@ class HomeScreen extends React.Component {
                     <Icon name='add' />
                 </Fab>
                 {/* <JSONTree data={this.state} /> */}
-                <PermissionsChecker />
+                {/* <PermissionsChecker /> */}
                 <NotificationProvider />
             </Container>
         )
     }
 }
 
-const mapStateToProps = (state: any) => ({
-    //others: othersSelector(state),
-})
+const mapStateToProps = (state: any) => ({})
 const mapDispatchToProps = {
-    //setOthers,
+    //setOthers: (data: any) => dispatch(setDatasetToReducer(data, 'others')),
     //syncAppointmentsAction,
 }
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps,
-)(HomeScreen)
+export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen)

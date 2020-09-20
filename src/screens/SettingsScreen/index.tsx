@@ -1,9 +1,9 @@
 import React from 'react'
 import { Container, Content, Form, List, Card } from 'native-base'
 import { connect } from 'react-redux'
-import { othersSelector } from '../../selectors/datasetsSelector'
 import LangInput from './components/LangInput'
 import AppHeader from '../../components/AppHeader'
+import { datasetSelector } from '../../redux/selectors'
 //import JSONTree from 'react-native-json-tree'
 
 class SettingsScreen extends React.Component {
@@ -26,7 +26,7 @@ class SettingsScreen extends React.Component {
 }
 
 const mapStateToProps = (state: any) => ({
-    others: othersSelector(state),
+    others: datasetSelector(state, 'others'),
 })
 
 export default connect(mapStateToProps)(SettingsScreen)

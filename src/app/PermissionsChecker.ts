@@ -38,7 +38,11 @@ const PermissionsChecker = () => {
                     //console.log('This feature is not available (on this device / in this context)')
                     break
                 case RESULTS.DENIED:
-                    await request(p)
+                    try {
+                        await request(p)
+                    } catch (e) {
+                        console.log('HERE ==> ', e)
+                    }
                     break
                 case RESULTS.GRANTED:
                     //console.log('The permission is granted');

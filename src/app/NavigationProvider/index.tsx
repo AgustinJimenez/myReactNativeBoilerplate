@@ -7,13 +7,13 @@ import SideBar from '../../components/SideBar'
 import HomeScreen from '../../screens/HomeScreen'
 import LoginScreen from '../../screens/LoginScreen'
 import SettingsScreen from '../../screens/SettingsScreen'
-import { authSelector } from '../../selectors/datasetsSelector.js'
 import { useSelector } from 'react-redux'
+import { datasetSelector } from '../../redux/selectors'
 
 const Drawer = createDrawerNavigator()
 const Stack = createStackNavigator()
 const NavigationProvider = (props: any) => {
-    let auth = useSelector(authSelector)
+    let auth = useSelector(state => datasetSelector(state, 'auth'))
 
     if (!auth['token'])
         return (

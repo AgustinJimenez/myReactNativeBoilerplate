@@ -1,14 +1,14 @@
 import { select, put, takeLatest } from 'redux-saga/effects'
-import { langSelector } from '../selectors/datasetsSelector'
 import { CHANGE_LANGUAGE_SAGAS } from '../actions/types'
 import { setLangReducer } from '../actions'
 import showToast from '../utils/showToast'
 import i18n from '../app/i18n'
+import { datasetSelector } from '../redux/selectors'
 
 function* changeLanguage({ lang_id, onFinishCallback }: any) {
     yield put(setLangReducer(lang_id))
 
-    let lang = yield select(langSelector)
+    let lang = yield select(state => datasetSelector(state, 'lang'))
 
     i18n.changeLanguage(lang)
 

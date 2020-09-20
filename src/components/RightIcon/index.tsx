@@ -1,11 +1,11 @@
 import React from 'react'
 import { Icon, Button } from 'native-base'
 import { useSelector /* , useDispatch  */ } from 'react-redux'
-import { networkSelector } from '../../selectors/datasetsSelector'
+import { datasetSelector } from '../../redux/selectors'
 
-const RightIcon = props => {
+const RightIcon = (props: any) => {
     //let dispatch = useDispatch()
-    let network = useSelector(networkSelector)
+    let network = useSelector(state => datasetSelector(state, 'network'))
     let iconData = { color: 'white', name: 'wifi', disabled: true }
 
     if (!network.isConnected) {
@@ -14,7 +14,7 @@ const RightIcon = props => {
     }
 
     return (
-        <Button transparent disabled={iconData.disabled} onPress={e => {}}>
+        <Button transparent disabled={iconData.disabled} onPress={() => {}}>
             <Icon
                 type='MaterialCommunityIcons'
                 name={iconData.name}

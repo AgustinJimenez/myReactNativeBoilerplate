@@ -1,5 +1,4 @@
 import { call, select, put } from 'redux-saga/effects'
-import { authSelector /* , networkSelector */ } from '../selectors/datasetsSelector'
 import showToast from '../utils/showToast'
 import HttpStatus from 'http-status-codes'
 import axios from 'axios'
@@ -7,6 +6,7 @@ import i18n from '../app/i18n'
 import { checkNetworkStatusAction, logoutAction } from '../actions'
 import moment from 'moment'
 import { API_KEY, debug_requests } from '../../env.json'
+import { datasetSelector } from '../redux/selectors'
 
 var connErrMsg = 'Connection Error.'
 
@@ -40,7 +40,7 @@ export default function* request(options: any) {
         if (options.debug) startTime = moment(new Date())
 
         yield put(checkNetworkStatusAction())
-        auth = yield select(authSelector)
+        auth = yield select(state => datasetSelector(state, 'auth'))
         if (!!auth.token) defaultOptions.headers.Authorization = `Bearer ${auth.token}`
         if (options.debug)
             console.log(

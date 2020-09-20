@@ -1,12 +1,13 @@
-import { put, call } from 'redux-saga/effects'
+import { put /* , call  */ } from 'redux-saga/effects'
 import { AUTH_SAGAS } from '../actions/types'
-import { setAuthDatasetAction, setAppointmentsDatasetAction, clearReasonsReducerAction, clearClientsReducerAction } from '../actions'
+//import { setAuthDatasetAction, setAppointmentsDatasetAction, clearReasonsReducerAction, clearClientsReducerAction } from '../actions'
 import { takeLatest } from 'redux-saga/effects'
 import showToast from '../utils/showToast'
-import { loginRoute, userInfoRoute } from '../api/routes'
+//import { loginRoute, userInfoRoute } from '../api/routes'
 import { base64 as userImage64 } from '../assets/images/user_image.json'
 
-import request from './request'
+//import request from './request'
+import { setDatasetToReducer } from '../redux/actions'
 
 export function* auth({ name = null, password = null, onFinishCallback = () => {} }: any) {
     /* 
@@ -29,7 +30,7 @@ export function* auth({ name = null, password = null, onFinishCallback = () => {
         username: name,
     }
 
-    yield put(setAuthDatasetAction(authDatasetData))
+    yield put(setDatasetToReducer(authDatasetData, 'auth'))
     yield showToast('hello', { type: 'success' })
 }
 
