@@ -1,5 +1,10 @@
 import { Platform, StyleSheet } from 'react-native'
 import commonColor from './commonColor'
+import { Dimensions } from 'react-native'
+
+const { width } = Dimensions.get('window')
+
+export const scale = (number = 1) => (number / 10) * width
 
 export const colors = commonColor
 export default StyleSheet.create({
@@ -51,4 +56,7 @@ export default StyleSheet.create({
     p0: {
         padding: 0,
     },
+    bold: {
+        fontWeight: 'bold'
+    }
 })

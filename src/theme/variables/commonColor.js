@@ -1,6 +1,10 @@
 import color from 'color'
 
-import { Platform, Dimensions, PixelRatio } from 'react-native'
+import {
+    Platform,
+    Dimensions,
+    PixelRatio
+} from 'react-native'
 
 const deviceHeight = Dimensions.get('window').height
 const deviceWidth = Dimensions.get('window').width
@@ -9,7 +13,9 @@ const platformStyle = undefined
 const isIphoneX = platform === 'ios' && (deviceHeight === 812 || deviceWidth === 812)
 
 const toolbarBtnTextColor = '#fff'
-const brandPrimary = 'rgba(202,41,42,1)'
+const brandPrimary = '#1D1D1B'
+const brandSecondary = '#F9B233'
+
 
 export default {
     platformStyle,
@@ -106,6 +112,7 @@ export default {
 
     // Color
     brandPrimary,
+    brandSecondary,
     brandInfo: brandPrimary, //"#3F57D3",
     brandSuccess: '#5cb85c',
     brandDanger: '#d9534f',

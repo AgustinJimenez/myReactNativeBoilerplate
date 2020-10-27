@@ -251,13 +251,25 @@
         "en": "Username",
         "es": "Nombre de Usuario"
     },
+    "email_or_phone": {
+        "en": "Email or phone",
+        "es": "Email o telefono"
+    },
     "password": {
         "en": "Password",
         "es": "Contraseña"
     },
     "login": {
         "en": "Login",
-        "es": "Login"
+        "es": "Ingresar"
+    },
+    "register": {
+        "en": "Register",
+        "es": "Registrarme"
+    },
+    "im_new": {
+        "en": "I'm new",
+        "es": "Soy usuario nuevo"
     },
     "sure_want_leave": {
         "en": "Are you sure you want to leave?",
