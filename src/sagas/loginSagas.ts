@@ -1,15 +1,15 @@
-import { put /* , call  */ } from 'redux-saga/effects'
-import { AUTH_SAGAS } from '../actions/types'
+import { call, put /* , call  */ } from 'redux-saga/effects'
+import { LOGIN_SAGA } from '../actions/types'
 //import { setAuthDatasetAction, setAppointmentsDatasetAction, clearReasonsReducerAction, clearClientsReducerAction } from '../actions'
 import { takeLatest } from 'redux-saga/effects'
 import showToast from '../utils/showToast'
 //import { loginRoute, userInfoRoute } from '../api/routes'
-import { base64 as userImage64 } from '../assets/images/user_image.json'
-
 //import request from './request'
 import { setDatasetToReducer } from '../redux/actions'
+import sleep from '../utils/sleep'
+import {navigate} from '../app/NavigationProvider/service'
 
-export function* auth({ name = null, password = null, onFinishCallback = () => {} }: any) {
+export function* login({ email = '', password = '' }) {
     /* 
     var { data, error, message } = yield call(request, {
         url: loginRoute,
@@ -24,16 +24,16 @@ export function* auth({ name = null, password = null, onFinishCallback = () => {
     }
     onFinishCallback()
  */
-    let authDatasetData: any = {
-        token: 'ABC123',
-        avatar: userImage64,
-        username: name,
-    }
 
-    yield put(setDatasetToReducer(authDatasetData, 'auth'))
-    yield showToast('hello', { type: 'success' })
+    yield put(setDatasetToReducer(true, 'login_is_loading'))
+    yield call(sleep, 2000)
+    yield put(setDatasetToReducer(false, 'login_is_loading'))
+    console.log('LOGIN SAGA !!!!', {email, password})
+    yield put(setDatasetToReducer('ABC123', 'auth'))
+    yield showToast('Login Success', { type: 'success' })
+    navigate('Home')
 }
 
-export default function* authSagas() {
-    yield takeLatest(AUTH_SAGAS, auth)
+export default function* loginSagas() {
+    yield takeLatest(LOGIN_SAGA, login)
 }

@@ -20,9 +20,9 @@ import { datasetSelector } from '../../redux/selectors'
 const Drawer = createDrawerNavigator()
 const Stack = createStackNavigator()
 const NavigationProvider = (props: any) => {
-    let auth = useSelector(state => datasetSelector(state, 'auth'))
+    let auth_token = useSelector(state => datasetSelector(state, 'auth_token'))
 
-    if (!auth['token'])
+    if (!auth_token)
         return (
             <Stack.Navigator initialRouteName='Login' headerMode='none'>
                 <Stack.Screen name='Login' component={LoginScreen} />

@@ -9,6 +9,7 @@ import reducers from './datasetReducer'
 // Imports: Redux Root Saga
 import sagas from '../sagas'
 import { show_redux_logs } from '../../env.json'
+import AsyncStorage from '@react-native-community/async-storage'
 // Middleware: Redux Sagas
 const sagaMiddleware = createSagaMiddleware()
 // Redux: Store
@@ -37,4 +38,21 @@ const persistor = persistStore(store)
 // Middleware: Redux Saga
 sagaMiddleware.run(sagas)
 
-export { store, persistor }
+
+const persistenceKey = 'navigation'
+const persistNavigationState = async navState => {
+  try {
+    //console.log('persistNavigationState===> ', navState)
+    await AsyncStorage.setItem(persistenceKey, JSON.stringify(navState))
+  } catch (err) {
+    console.log('persistNavigationState ERROR ===> ', err)
+  }
+}
+
+const loadNavigationState = async () => {
+  const jsonString = await AsyncStorage.getItem(persistenceKey)
+  const navState = JSON.parse(jsonString)
+  return navState
+}
+
+export { store, persistor, persistNavigationState, loadNavigationState }

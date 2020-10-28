@@ -16,7 +16,7 @@ import './i18n'
 import NetStatusChecker from './NetStatusChecker'
 import { NavigationContainer } from '@react-navigation/native'
 //import { disableYellowBox, ignoreWarnings } from '../../env.json'
-
+import GlobalFont from 'react-native-global-font'
 let theme = getTheme(variables)
 //console.disableYellowBox = disableYellowBox
 //YellowBox.ignoreWarnings(ignoreWarnings)
@@ -24,6 +24,9 @@ let theme = getTheme(variables)
 const App = () => {
     const [isReady, setIsReady] = React.useState(__DEV__ ? false : true)
     const [initialState, setInitialState] = React.useState()
+    React.useEffect(() => {
+        GlobalFont.applyGlobal('CircularStd-Book')
+    },[])
     React.useEffect(() => {
         const restoreState = async () => {
             try {
