@@ -60,16 +60,11 @@ export const setNetworkStatusAction = (network: any) => ({
 })
 export const setAuthDatasetAction = (data: any) => ({
     type: SET_ON_DATASET_REDUCER,
-    dataset_name: 'auth',
+    dataset_name: 'auth_token',
     data,
 })
 export const logoutAction = () => ({
     type: LOGOUT_SAGA,
-})
-export const clearAuthAction = () => ({
-    type: SET_ON_DATASET_REDUCER,
-    dataset_name: 'auth',
-    data: { token: null },
 })
 export const setLangReducer = (lang_id: string) => ({
     type: SET_ON_DATASET_REDUCER,

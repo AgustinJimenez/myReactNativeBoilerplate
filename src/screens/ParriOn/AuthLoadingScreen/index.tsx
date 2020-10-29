@@ -1,9 +1,10 @@
 import React from 'react'
-import { ImageBackground, Image, StyleSheet } from 'react-native'
+import { ImageBackground, Image, StyleSheet, View, Text } from 'react-native'
 import ImageAtomsBg from '../../../assets/images/atoms_bg.png'
 import ImageLogo from '../../../assets/images/logo.png'
 import commonColor from '../../../theme/variables/commonColor.js'
 import ParriOnContainer from '../../../components/ParriOnContainer'
+import { scale } from '../../../theme/variables/commonStyles'
 
 
 const styles = StyleSheet.create({
@@ -14,13 +15,9 @@ const AuthLoadingScreen = ({}) => {
 
     return (
         <ParriOnContainer>
-            <ImageBackground 
-                source={ImageAtomsBg} 
-                style={styles.bgImage} 
-                resizeMode='stretch'
-            >
-                <Image source={ImageLogo} />
-            </ImageBackground>
+            <View style={{ flexGrow: 1, justifyContent: 'center' }}>
+                <Image source={ImageLogo} style={{ width: scale(3.7), height: scale(7.1), alignSelf: 'center', position: 'absolute', top: scale(5) }} />
+            </View>
         </ParriOnContainer>
     )
 }

@@ -50,11 +50,11 @@ class SideBar extends React.Component {
                 <CardItem bordered>
                     <Left>
                         <View style={styles.avatar}>
-                            <Thumbnail progressiveRenderingEnabled defaultSource={userImage} source={{ uri: this.props.auth.avatar }} />
+                            <Thumbnail progressiveRenderingEnabled defaultSource={userImage} source={{ uri: this.props?.auth?.avatar }} />
                         </View>
                         <Body>
-                            <Text>{capitalize(this.props.auth.username)}</Text>
-                            <Text note>{this.props.auth.branch_name}</Text>
+                            <Text>{capitalize(this.props?.auth?.username)}</Text>
+                            <Text note>{this.props?.auth?.branch_name}</Text>
                         </Body>
                     </Left>
                 </CardItem>

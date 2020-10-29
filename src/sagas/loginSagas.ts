@@ -7,7 +7,7 @@ import showToast from '../utils/showToast'
 //import request from './request'
 import { setDatasetToReducer } from '../redux/actions'
 import sleep from '../utils/sleep'
-import {navigate} from '../app/NavigationProvider/service'
+import * as RootNavigation from '../app/NavigationProvider/service'
 
 export function* login({ email = '', password = '' }) {
     /* 
@@ -29,9 +29,8 @@ export function* login({ email = '', password = '' }) {
     yield call(sleep, 2000)
     yield put(setDatasetToReducer(false, 'login_is_loading'))
     console.log('LOGIN SAGA !!!!', {email, password})
-    yield put(setDatasetToReducer('ABC123', 'auth'))
     yield showToast('Login Success', { type: 'success' })
-    navigate('Home')
+    yield put(setDatasetToReducer('ABC123', 'auth_token'))
 }
 
 export default function* loginSagas() {

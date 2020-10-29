@@ -17,23 +17,22 @@ import SettingsScreen from '../../screens/SettingsScreen'
 import { useSelector } from 'react-redux'
 import { datasetSelector } from '../../redux/selectors'
 
-const Drawer = createDrawerNavigator()
+//const Drawer = createDrawerNavigator()
 const Stack = createStackNavigator()
 const NavigationProvider = (props: any) => {
     let auth_token = useSelector(state => datasetSelector(state, 'auth_token'))
-
     if (!auth_token)
         return (
-            <Stack.Navigator initialRouteName='Login' headerMode='none'>
+            <Stack.Navigator initialRouteName='AuthLoading' headerMode='none'>
                 <Stack.Screen name='Login' component={LoginScreen} />
             </Stack.Navigator>
         )
 
     return (
-        <Drawer.Navigator openByDefault={false} initialRouteName='Home' drawerContent={(props: any) => <SideBar {...props} />}>
-            <Drawer.Screen name='Home' component={HomeScreen} />
-            <Drawer.Screen name='Settings' component={SettingsScreen} />
-        </Drawer.Navigator>
+        <Stack.Navigator /* openByDefault={false} */ initialRouteName='Home' /* drawerContent={(props: any) => <SideBar {...props} />} */>
+            <Stack.Screen name='Home' component={HomeScreen} />
+            <Stack.Screen name='Settings' component={SettingsScreen} />
+        </Stack.Navigator>
     )
 }
 
