@@ -16,7 +16,7 @@ const AuthLoadingScreen = ({}) => {
     return (
         <ParriOnContainer>
             <View style={{ flexGrow: 1, justifyContent: 'center' }}>
-                <Image source={ImageLogo} style={{ width: scale(3.7), height: scale(7.1), alignSelf: 'center', position: 'absolute', top: scale(5) }} />
+                <Image source={ImageLogo} style={{ width: scale(3.7), height: scale(7.1), alignSelf: 'center' }} />
             </View>
         </ParriOnContainer>
     )
