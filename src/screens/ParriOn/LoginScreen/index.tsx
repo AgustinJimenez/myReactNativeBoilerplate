@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
     },
     flame: { alignSelf: 'center', width: 32.61, height: 52.56, position: 'absolute', top: scale(1.2) },
-    formContainer: { flex: 0.8, justifyContent: 'center' },
+    formContainer: { flex: 0.9, justifyContent: 'center' },
     form: { width: '85%', alignSelf: 'center' },
     sigInText: { color: 'black', fontSize: 18 },
     sigInTextDisabled: { color: 'white' },

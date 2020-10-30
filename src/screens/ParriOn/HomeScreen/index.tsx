@@ -1,7 +1,8 @@
 import React from 'react'
-import { Text, TouchableOpacity, View } from 'react-native'
+import { Text, TouchableOpacity, View, Image } from 'react-native'
 import { useDispatch } from 'react-redux'
 import ParriOnContainer from '../../../components/ParriOnContainer'
+import ImageActivaElAsado from '../../../assets/images/activa_el_asado.png'
 import { logoutAction } from '../../../actions'
 import { colors } from '../../../theme/variables/commonStyles'
 import { scale } from '../../../theme/variables/commonStyles'
@@ -15,8 +16,8 @@ const HomeScreen = ({}) => {
 
     return (
         <ParriOnContainer>
+            <Image source={ImageActivaElAsado} resizeMode='contain' style={{ width: scale(8), alignSelf: 'center' }}  />
             <View style={{ flexGrow: 1, alignItems: 'center', justifyContent: 'center' }}>
-                <Text style={{ color: 'white', fontSize: scale(0.6) }}>HomeScreen</Text>
                 <TouchableOpacity
                     onPress={() => logout()}
                     style={{

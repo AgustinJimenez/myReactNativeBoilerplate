@@ -1,5 +1,4 @@
 import React from 'react'
-import { Container } from 'native-base'
 import { ImageBackground, SafeAreaView, StyleSheet } from 'react-native'
 import ImageAtomsBg from '../../assets/images/atoms_bg.png'
 import commonColor from '../../theme/variables/commonColor.js'
