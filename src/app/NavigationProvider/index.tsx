@@ -29,7 +29,7 @@ const NavigationProvider = (props: any) => {
         )
 
     return (
-        <Stack.Navigator /* openByDefault={false} */ initialRouteName='Home' /* drawerContent={(props: any) => <SideBar {...props} />} */>
+        <Stack.Navigator headerMode='none'/* openByDefault={false} */ initialRouteName='Home' /* drawerContent={(props: any) => <SideBar {...props} />} */>
             <Stack.Screen name='Home' component={HomeScreen} />
             <Stack.Screen name='Settings' component={SettingsScreen} />
         </Stack.Navigator>
