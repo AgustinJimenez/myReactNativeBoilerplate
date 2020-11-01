@@ -26,7 +26,7 @@ export function* login({ email = '', password = '' }) {
  */
 
     yield put(setDatasetToReducer(true, 'login_is_loading'))
-    yield call(sleep, 2000)
+    yield call(sleep, 1000)
     yield put(setDatasetToReducer(false, 'login_is_loading'))
     console.log('LOGIN SAGA !!!!', {email, password})
     yield showToast('Login Success', { type: 'success' })

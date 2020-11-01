@@ -259,6 +259,14 @@
         "en": "Password",
         "es": "Contraseña"
     },
+    "for_the_ideal_barbecue": {
+        "en": "for the ideal barbecue",
+        "es": "para el asado ideal"
+    },
+    "so_that_nothing_is_missing": {
+        "en": "so that nothing is missing",
+        "es": "para que no falte nada"
+    },
     "login": {
         "en": "Login",
         "es": "Ingresar"
@@ -276,8 +284,16 @@
         "es": "Esta seguro de que desea salir?"
     },
     "home": {
-        "en": "Home",
-        "es": "Inicio"
+        "en": "home",
+        "es": "inicio"
+    },
+    "products": {
+        "en": "products",
+        "es": "productos"
+    },
+    "config": {
+        "en": "config",
+        "es": "config"
     },
     "logout": {
         "en": "Logout",
