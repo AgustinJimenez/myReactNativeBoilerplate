@@ -243,6 +243,10 @@
         "en": "Select other reason",
         "es": "Seleccionar otro motivo"
     },
+    "available_cuts": {
+        "en": "available cuts",
+        "es": "cortes disponibles"
+    },
     "warning": {
         "en": "Notice",
         "es": "Aviso"

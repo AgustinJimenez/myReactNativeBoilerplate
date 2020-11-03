@@ -11,12 +11,23 @@ export const persistSelector = ({ _persist: any = null }) => {
         }
     )
 }
-export const datasetSelector = (state: any, datasetName: string, { list_format = false } = {}) => {
-    let selected_dataset = getDataset(state, datasetName)
-    //console.log('datasetSelector ===> ', { selected_dataset, datasetName })
-    if (list_format) return Object.keys(selected_dataset).map(id => selected_dataset[id])
-
+export const datasetSelector = (state: any, datasetName: string, { list_format = false, ids = [], id = null } = {}) => {
+    //console.log('datasetSelector start ===> ', { datasetName, list_format, ids, id })
+    let selected_dataset: any = getDataset(state, datasetName)
+    if(!!id)
+      return selected_dataset[id]
+    if(!!ids && ids.length) {
+      let filtereds: any = {}
+      for(let id of ids)
+        if(!!selected_dataset[id]) {
+          filtereds[id] = selected_dataset[id]
+        }
+      selected_dataset = filtereds
+    }
+    //console.log('datasetSelector mid ===> ', { selected_dataset })
+    if (list_format) return Object.keys(selected_dataset || []).map(id => selected_dataset[id])
+  
     return selected_dataset
-}
+  }
 
 
